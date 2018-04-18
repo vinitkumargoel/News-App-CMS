@@ -20,20 +20,25 @@ import RoomConfig from './spokersubviews/RoomConfig';
 
 //component
 class ScrumPoker extends Component {
-  constructor(props){
-    super(props);
-    this.state = this.props.initState;
-  }
 
   render() { 
-    let isMaster = this.props.initState.isMaster; 
-    console.log(this.props.initState); 
+    let isMaster = this.props.initPlayerInfo.isMaster;
     return (
             <div className={styles.spoker}>
               <h1>LBG Scrum poker <small>an agile tool</small></h1>
-               {(this.props.initState.joined)? null :
+               {(this.props.initPlayerInfo.joined)? 
+                <div>
+                  <Route path="/dashboard/spoker/create" render={()=>(<RoomConfig initRoomInfo={this.props.initRoomInfo}  actions={
+                                  {
+                                    joinRoom : this.props.actions.joinRoom
+                                  }
+                                }/>)}/>
+                  <Route path="/dashboard/spoker/join" render={(isMaster)?()=>(<ScrumMaster isMaster={isMaster}/>)
+                                                                     :()=>(<ScrumPlayer isMaster={isMaster}/>)} />
+                </div>
+                :
                     <SPLauncher 
-                        initLaunch={this.state} 
+                        initLaunch={this.props.initPlayerInfo} 
                         actions={
                                   {
                                     joinRoom : this.props.actions.joinRoom,
@@ -42,9 +47,6 @@ class ScrumPoker extends Component {
                                 }
                     />
                 } 
-              <Route path="/dashboard/spoker/create" render={()=>(<RoomConfig />)}/>
-              <Route path="/dashboard/spoker/join" render={(isMaster)?()=>(<ScrumMaster isMaster={isMaster}/>)
-                                                                     :()=>(<ScrumPlayer isMaster={isMaster}/>)} />
             </div>
     );
   }

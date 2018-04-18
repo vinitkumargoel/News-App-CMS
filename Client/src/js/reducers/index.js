@@ -16,7 +16,8 @@ function pokerReducer(state={},action){
     switch(action.type){
         case pokerActions.JOIN_ROOM:
                         action.payload.joined = true;
-                        return Object.assign(newState,state,{playerInfo:action.payload});
+                        let tempState = Object.assign({},state.playerInfo,action.payload);
+                        return Object.assign(newState,state,{playerInfo:tempState});
         case pokerActions.CREATE_ROOM:
                         state.playerInfo.joined = true;
                         state.playerInfo.isMaster = true;

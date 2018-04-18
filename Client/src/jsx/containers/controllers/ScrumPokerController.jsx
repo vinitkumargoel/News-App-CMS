@@ -35,7 +35,6 @@ class SPView extends React.Component {
   }
 
   componentWillReceiveProps(nextProps, prevState){ 
-    console.log(nextProps);
     return nextProps;
   }
 

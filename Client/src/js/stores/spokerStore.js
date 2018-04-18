@@ -7,4 +7,10 @@ export default {
         pwd: "",
         joined: false
     },
+    roomInfo : {
+        roomnum : "",
+        ponintingMethod : "",
+        password : "",
+        isDefault : false
+    }
 };
