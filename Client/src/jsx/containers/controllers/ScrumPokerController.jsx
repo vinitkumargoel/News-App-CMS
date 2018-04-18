@@ -47,7 +47,9 @@ class SPView extends React.Component {
 
   render(){
     return (
-        <ScrumPoker actions={this.mapViewActionsToProps()} initState={this.props.store.playerInfo}/>
+        <ScrumPoker actions={this.mapViewActionsToProps()} 
+                    initPlayerInfo={this.props.store.playerInfo} 
+                    initRoomInfo={this.props.store.roomInfo}/>
     );
   }
 }
