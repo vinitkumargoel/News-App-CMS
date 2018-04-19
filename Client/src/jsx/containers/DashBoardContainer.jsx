@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 
 //custom imports
 import { testAction } from '../../js/actions/actionCreators';
-import base3Converter from '../../js/helpers/converters';
 
 //style imports
 import styles from '../../css/DashBoardStyle.css';

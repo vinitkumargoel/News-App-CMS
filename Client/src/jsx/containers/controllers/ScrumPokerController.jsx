@@ -41,15 +41,16 @@ class SPView extends React.Component {
   mapViewActionsToProps = ()=>{
     return {
       joinRoom : this.props.joinRoom,
-      createRoom : this.props.createRoom
+      createRoom : this.props.createRoom,
+      publishStory : this.props.publishStory
     };
   }
 
   render(){
     return (
         <ScrumPoker actions={this.mapViewActionsToProps()} 
-                    initPlayerInfo={this.props.store.playerInfo} 
-                    initRoomInfo={this.props.store.roomInfo}/>
+                    store={this.props.store} 
+        />
     );
   }
 }
@@ -68,6 +69,10 @@ const mapActionsToProps = (dispatch,ownProps)=>{
         },
         createRoom : (pl) => {
           pl.id = 1;
+          dispatch(spokerAction(pl));
+        },
+        publishStory : (pl) => {
+          pl.id = 2;
           dispatch(spokerAction(pl));
         }
     };

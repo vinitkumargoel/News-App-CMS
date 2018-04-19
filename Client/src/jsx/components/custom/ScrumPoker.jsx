@@ -22,23 +22,27 @@ import RoomConfig from './spokersubviews/RoomConfig';
 class ScrumPoker extends Component {
 
   render() { 
-    let isMaster = this.props.initPlayerInfo.isMaster;
+    let isMaster = this.props.store.playerInfo.isMaster;
+    console.log(this.props.store.storyInfo);
     return (
             <div className={styles.spoker}>
               <h1>LBG Scrum poker <small>an agile tool</small></h1>
-               {(this.props.initPlayerInfo.joined)? 
+               {(this.props.store.playerInfo.joined)? 
                 <div>
-                  <Route path="/dashboard/spoker/create" render={()=>(<RoomConfig initRoomInfo={this.props.initRoomInfo}  actions={
+                  <Route path="/dashboard/spoker/create" render={()=>(<RoomConfig initRoomInfo={this.props.store.roomInfo}  actions={
                                   {
                                     joinRoom : this.props.actions.joinRoom
                                   }
                                 }/>)}/>
-                  <Route path="/dashboard/spoker/join" render={(isMaster)?()=>(<ScrumMaster isMaster={isMaster}/>)
-                                                                     :()=>(<ScrumPlayer isMaster={isMaster}/>)} />
+                  <Route path="/dashboard/spoker/join" render={(isMaster)?()=>(<ScrumMaster isMaster={isMaster} 
+                                                                                            initStoryInfo={this.props.store.storyInfo} 
+                                                                                            actions={{publishStory : this.props.actions.publishStory}}/>)
+                                                                     :()=>(<ScrumPlayer initStoryInfo={this.props.store.storyInfo}
+                                                                     isMaster={isMaster}/>)} />
                 </div>
                 :
                     <SPLauncher 
-                        initLaunch={this.props.initPlayerInfo} 
+                        initLaunch={this.props.store.playerInfo} 
                         actions={
                                   {
                                     joinRoom : this.props.actions.joinRoom,

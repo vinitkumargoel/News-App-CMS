@@ -14,29 +14,48 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 
 //component imports
 import StoryDetails from './StoryDetails';
+import PlayerList from './PlayerList';
 
 //component
 class ScrumPlayer extends Component {
+  constructor(props){
+    super(props);
+    this.state = {pointingMethod:[0,1,2,3,5,8,13,20],selected:""};
+  }
+
+  handleClick = (e)=>{
+    let srcElem = e.target;
+    switch(srcElem.type){
+      case 'radio':
+                    this.setState({selected:srcElem.id});
+                    break;
+      default :
+    }
+  }
 
   render() {
     return (
             <div className={styles.smaster}>
               <h1>Scrum Player Deck</h1>
-              <StoryDetails isMaster={this.props.isMaster}/>
+              <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo}/>
+              <PlayerList />
               <div id="cards" className={styles.cards}>
                 <h3>Story Points<small><em>(modified Fibonacci)</em></small></h3>
-                <input type="radio" /><label>1/2</label>
-                <input type="radio" /><label>1</label>
-                <input type="radio" /><label>2</label>
-                <input type="radio" /><label>3</label>
-                <input type="radio" /><label>5</label>
-                <input type="radio" /><label>8</label>
-                <input type="radio" /><label>13</label>
-                <input type="radio" /><label>20</label>
+                <div className={styles.pointingMethod}>
+                  {
+                    this.state.pointingMethod.map((p,i)=>{
+                      return <div key={i}>
+                                  <input id={i} type="radio" onClick={this.handleClick} checked={this.state.selected === i.toString()} />
+                                  <label>{p}</label>
+                            </div>
+                    })
+                  }
+                </div>
               </div>
-              <label htmlFor="explanation">Explanation : </label>
-              <textarea id="explanation" placeholder="justify your score..."/>
-              <button>Submit</button>
+              <div>
+                <label htmlFor="explanation">Explanation : </label>
+                <textarea id="explanation" placeholder="justify your score..."/>
+              </div>
             </div>
     );
   }

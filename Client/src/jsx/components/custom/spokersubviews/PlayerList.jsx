@@ -21,9 +21,8 @@ class PlayerList extends Component {
   render() {
     return (
             <div className={styles.smaster}>
-                 <hr/>
-                    <h3>Player List</h3>
-                <hr/>
+              <h3>Player List</h3>
+              <hr/>
             </div>
     );
   }

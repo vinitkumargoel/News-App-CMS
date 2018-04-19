@@ -16,6 +16,7 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 import StoryDetails from './StoryDetails';
 import PlayerList from './PlayerList';
 import StoryPointsList from './StoryPointsList';
+import StoryCards from './StoryCards';
 import Conclusion from './Conclusion';
 
 //component
@@ -25,9 +26,10 @@ class ScrumMaster extends Component {
     return (
             <div className={styles.smaster}>
               <h1>Scrum Master Deck</h1>
-              <StoryDetails isMaster={this.props.isMaster}/>
+              <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{publishStory : this.props.actions.publishStory}}/>
               <PlayerList />
               <StoryPointsList />
+              <StoryCards />
               <Conclusion />
             </div>
     );

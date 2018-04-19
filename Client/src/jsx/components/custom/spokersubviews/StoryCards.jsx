@@ -16,18 +16,17 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 
 
 //component
-class StoryPointsList extends Component {
+class StoryCards extends Component {
 
   render() {
     return (
             <div className={styles.smaster}>
-              <h3>Point List</h3>
-              <button>Show</button>
-              <button>Clear</button>
-              <hr />
+                    <h3>Stories Estimated</h3>
+                    <button>Export</button>
+                    <hr/>
             </div>
     );
   }
 }
 
-export default StoryPointsList;
+export default StoryCards;

@@ -206,6 +206,16 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          {
+            test: /\.less$/,
+            loader: "less-loader",
+            options:{
+              env : "development",
+              paths: [
+                        path.resolve(paths.appSrc, "less/")
+                    ]
+            } 
+          }
         ],
       },
       // ** STOP ** Are you adding a new loader?

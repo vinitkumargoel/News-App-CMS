@@ -10,6 +10,8 @@ export function spokerAction(payload){
                         return {type:pokerActions.JOIN_ROOM,payload};
                 case 1:
                         return {type:pokerActions.CREATE_ROOM,payload};
+                case 2:
+                        return {type:pokerActions.PUBLISH_STORY,payload};
                 default :
         }
 }

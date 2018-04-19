@@ -13,15 +13,21 @@ function welcomeReducer(state={},action){
 
 function pokerReducer(state={},action){
     let newState = {};
+    let tempState = {};
     switch(action.type){
         case pokerActions.JOIN_ROOM:
                         action.payload.joined = true;
-                        let tempState = Object.assign({},state.playerInfo,action.payload);
+                        tempState = Object.assign({},state.playerInfo,action.payload);
                         return Object.assign(newState,state,{playerInfo:tempState});
         case pokerActions.CREATE_ROOM:
-                        state.playerInfo.joined = true;
-                        state.playerInfo.isMaster = true;
-                        return Object.assign(newState,state);  
+                        tempState = Object.assign({},state.playerInfo);
+                        tempState.joined = true;
+                        tempState.isMaster = true;
+                        return Object.assign(newState,state,{playerInfo:tempState});  
+        case pokerActions.PUBLISH_STORY:
+        console.log("published story===>",action.payload);
+                        tempState = Object.assign({},state.storyInfo,action.payload);
+                        return Object.assign(newState,state,{storyInfo:tempState});  
         default:
                         return state;
     }

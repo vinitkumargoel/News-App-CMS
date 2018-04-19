@@ -20,23 +20,49 @@ class StoryDetails extends Component {
     constructor(props){
         super(props);
         this.state = {
-                isMaster: this.props.isMaster
+                isMaster: this.props.isMaster,
+                storyID : this.props.initStoryInfo.storyID,
+                epic : this.props.initStoryInfo.epic,
+                description : this.props.initStoryInfo.description
         };
     }
 
-    handleInput = (e) => {
+    handleInput = (e)=>{
+    let srcElem = e.target;
+    switch(srcElem.id){
+      case "storynum":
+                      this.setState({storyID:srcElem.value});
+                      break;
+      case "epic":
+                      this.setState({epic:srcElem.value});
+                      break;
+      case "desc":
+                      this.setState({description:srcElem.value});
+                      break;
+      default :
 
     }
+  }
+
+  handleClick = (e)=>{
+    let srcElem = e.target;
+    switch(srcElem.id){
+      case "publish":
+                      this.props.actions.publishStory(this.state);
+                      break;
+      default :
+
+    }
+  }
 
     render() {
         return (
                 <div className={styles.smaster}>
-                    <hr/>
                     <h3>Story Details</h3>
                     
                     <div className={styles.storynum}>            
                             <label htmlFor="storynum">Story Number : </label>
-                            <input id="storynum" type="text" value={this.state.storynum} placeholder="Enter Story #" 
+                            <input id="storynum" type="text" value={this.state.storyID} placeholder="Enter Story #" 
                             onChange={this.handleInput} disabled={!this.state.isMaster}/>
                     </div>
 
@@ -48,10 +74,10 @@ class StoryDetails extends Component {
 
                     <div className={styles.desc}>            
                             <label htmlFor="desc">Story Description : </label>
-                            <textarea id="desc" type="text" value={this.state.desc} placeholder="Enter Story Description" 
+                            <textarea id="desc" type="text" value={this.state.description} placeholder="Enter Story Description" 
                             onChange={this.handleInput} disabled={!this.state.isMaster}></textarea>
                     </div>
-                    <hr/>
+                    {(!this.state.isMaster)?null:<button id="publish" onClick={this.handleClick}>Publish Story</button>}
                 </div>
         );
     }

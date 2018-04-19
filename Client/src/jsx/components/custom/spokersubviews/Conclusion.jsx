@@ -21,9 +21,30 @@ class Conclusion extends Component {
   render() {
     return (
             <div className={styles.smaster}>
-                 <hr/>
                     <h3>Summary</h3>
-                <hr/>
+                    <h4>Aggregate</h4>
+                    <input type="text" defaultValue="1.61803398875"/>
+                    <input type="checkbox" /><label>edit</label>
+                    <h4>Stats</h4>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                        <tr>
+                          <td>0</td>
+                          <td>1</td>
+                          <td>0</td>
+                        </tr>
+                        <tr>
+                          <td>0</td>
+                          <td>1</td>
+                          <td>0</td>
+                        </tr>
+                      </tbody>
+                    </table>
             </div>
     );
   }

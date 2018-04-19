@@ -12,5 +12,10 @@ export default {
         ponintingMethod : "",
         password : "",
         isDefault : false
+    },
+    storyInfo : {
+        storyID: "",
+        epic: "",
+        description: "No story added yet"
     }
 };

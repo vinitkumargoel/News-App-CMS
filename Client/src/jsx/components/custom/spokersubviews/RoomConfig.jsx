@@ -64,7 +64,7 @@ class RoomConfig extends Component {
                     </div>
 
                     <div className={styles.password}>            
-                                <label htmlFor="password">Room Number : </label>
+                                <label htmlFor="password">Password : </label>
                                 <input id="password" type="password" value={this.state.password} placeholder="Enter password #" 
                                 onChange={this.handleInput} />
                     </div>
