@@ -23,7 +23,6 @@ class ScrumPoker extends Component {
 
   render() { 
     let isMaster = this.props.store.playerInfo.isMaster;
-    console.log(this.props.store.storyInfo);
     return (
             <div className={styles.spoker}>
               <h1>LBG Scrum poker <small>an agile tool</small></h1>
@@ -36,9 +35,13 @@ class ScrumPoker extends Component {
                                 }/>)}/>
                   <Route path="/dashboard/spoker/join" render={(isMaster)?()=>(<ScrumMaster isMaster={isMaster} 
                                                                                             initStoryInfo={this.props.store.storyInfo} 
+                                                                              
                                                                                             actions={{publishStory : this.props.actions.publishStory}}/>)
-                                                                     :()=>(<ScrumPlayer initStoryInfo={this.props.store.storyInfo}
-                                                                     isMaster={isMaster}/>)} />
+                                                                     :()=>(<ScrumPlayer 
+                                                                     initStoryInfo={this.props.store.storyInfo}
+                                                                     isMaster={isMaster}
+                                                                   
+                                                                     />)} />
                 </div>
                 :
                     <SPLauncher 

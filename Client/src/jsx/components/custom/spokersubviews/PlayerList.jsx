@@ -22,6 +22,11 @@ class PlayerList extends Component {
     return (
             <div className={styles.smaster}>
               <h3>Player List</h3>
+              {
+                this.props.playerList.map((p,i)=>{
+                  return <p key={i}>{p}</p>;
+                })
+              }
               <hr/>
             </div>
     );

@@ -30,12 +30,10 @@ class AppView extends Component {
     return (
           <div className={styles.app}>
             <HeaderContainer />
-            <hr/>
             <NavigationContainer />
             <hr/>
-            {(this.props.isFirstVisit)?<Welcome />:null}
-            <Route path="/dashboard" component={DashBoardContainer} >
-            </Route>
+            {(this.props.isFirstVisit)?<Route path="/" component={Welcome} />
+                                      :<Route path="/dashboard" component={DashBoardContainer} />}
             <hr/>
             <FooterContainer />   
           </div>

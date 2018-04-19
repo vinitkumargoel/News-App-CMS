@@ -78,6 +78,7 @@ class StoryDetails extends Component {
                             onChange={this.handleInput} disabled={!this.state.isMaster}></textarea>
                     </div>
                     {(!this.state.isMaster)?null:<button id="publish" onClick={this.handleClick}>Publish Story</button>}
+                    <hr />
                 </div>
         );
     }

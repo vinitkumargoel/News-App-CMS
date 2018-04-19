@@ -19,8 +19,8 @@ class Navigation extends React.Component {
             <div className={styles.nav}>
                 <h3>Navigation</h3>
                 <ul>
-                    <li><Link to="/" onClick={this.props.onClick}>Home</Link></li>
-                    <li><Link to="/dashboard" onClick={this.props.onClick}>DashBoard</Link></li>
+                    <li><Link to="/" onClick={this.props.onClick} replace>Home</Link></li>
+                    <li><Link to="/dashboard" onClick={this.props.onClick} replace>DashBoard</Link></li>
                 </ul>
             </div>
             );

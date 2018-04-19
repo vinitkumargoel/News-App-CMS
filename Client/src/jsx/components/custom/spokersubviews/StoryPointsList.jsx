@@ -22,6 +22,11 @@ class StoryPointsList extends Component {
     return (
             <div className={styles.smaster}>
               <h3>Point List</h3>
+              {
+                this.props.spointList.map((s,i)=>{
+                  return <p key={i}>{s}</p>
+                })
+              }
               <button>Show</button>
               <button>Clear</button>
               <hr />

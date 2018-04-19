@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { NAV_ACTION,pokerActions } from '../actions/actionTypes';
 import { merge } from 'immutable';
+
 function welcomeReducer(state={},action){
     let newState = {};
     switch(action.type){
@@ -25,7 +26,6 @@ function pokerReducer(state={},action){
                         tempState.isMaster = true;
                         return Object.assign(newState,state,{playerInfo:tempState});  
         case pokerActions.PUBLISH_STORY:
-        console.log("published story===>",action.payload);
                         tempState = Object.assign({},state.storyInfo,action.payload);
                         return Object.assign(newState,state,{storyInfo:tempState});  
         default:

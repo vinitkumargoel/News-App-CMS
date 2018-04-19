@@ -6,6 +6,7 @@ import {
   Link
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import io from 'socket.io-client';
 
 //style imports
 import styles from '../../../../css/ScrumPokerStyle.css';
@@ -21,14 +22,33 @@ import Conclusion from './Conclusion';
 
 //component
 class ScrumMaster extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      playerList:[],
+      pointList:[],
+      socket: io('http://10.17.14.226:3002/spoker',{
+                        transports : ['websocket']
+                       }),
+    }
+  }
+
+  componentDidMount(){
+     this.state.socket.on('users',(cls)=>{
+       this.setState({playerList:cls});
+     });
+      this.state.socket.on('points',(pls)=>{
+        this.setState({pointList:pls});
+      });
+  }
 
   render() {
     return (
             <div className={styles.smaster}>
               <h1>Scrum Master Deck</h1>
               <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{publishStory : this.props.actions.publishStory}}/>
-              <PlayerList />
-              <StoryPointsList />
+              <PlayerList playerList={this.state.playerList}/>
+              <StoryPointsList spointList={this.state.pointList}/>
               <StoryCards />
               <Conclusion />
             </div>
