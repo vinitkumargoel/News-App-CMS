@@ -11,4 +11,5 @@ let initState = {
 
 let store = configureStore(initState);
 
+
 export default store;

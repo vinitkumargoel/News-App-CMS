@@ -14,6 +14,7 @@ import { testAction } from '../js/actions/actionCreators';
 
 //style imports
 import styles from '../css/AppStyle.css';
+import 'semantic-ui-css/semantic.min.css';
 
 //container imports
 import HeaderContainer from './containers/HeaderContainer';
@@ -29,13 +30,11 @@ class AppView extends Component {
   render() {
     return (
           <div className={styles.app}>
-            <HeaderContainer />
-            <NavigationContainer />
+             <NavigationContainer />
             <hr/>
             {(this.props.isFirstVisit)?<Route path="/" component={Welcome} />
                                       :<Route path="/dashboard" component={DashBoardContainer} />}
             <hr/>
-            <FooterContainer />   
           </div>
     );
   }
