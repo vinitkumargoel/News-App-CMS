@@ -21,6 +21,7 @@ import HeaderContainer from './containers/HeaderContainer';
 import NavigationContainer from './containers/NavigationContainer';
 import DashBoardContainer from './containers/DashBoardContainer';
 import FooterContainer from './containers/FooterContainer';
+import ScrumPokerController from './containers/controllers/ScrumPokerController';
 
 //component imports
 import Welcome from './components/custom/Welcome';
@@ -30,11 +31,7 @@ class AppView extends Component {
   render() {
     return (
           <div className={styles.app}>
-             <NavigationContainer />
-            <hr/>
-            {(this.props.isFirstVisit)?<Route path="/" component={Welcome} />
-                                      :<Route path="/dashboard" component={DashBoardContainer} />}
-            <hr/>
+             <ScrumPokerController />
           </div>
     );
   }
