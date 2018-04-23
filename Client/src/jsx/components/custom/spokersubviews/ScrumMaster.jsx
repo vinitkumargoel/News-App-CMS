@@ -14,7 +14,7 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 //container imports
 
 //semantic-ui imports
-import { Grid, Segment, Header, GridColumn, Divider } from 'semantic-ui-react';
+import { Grid, Segment, Header, GridColumn, Divider, Button } from 'semantic-ui-react';
 
 //component imports
 import StoryDetails from './StoryDetails';
@@ -22,8 +22,8 @@ import PlayerList from './PlayerList';
 import StoryPointsList from './StoryPointsList';
 import PointCardList from './PointCardList';
 import StoryCards from './StoryCards';
-import Conclusion from './Conclusion';
-
+// import Conclusion from './Conclusion';
+import StatisticalView from "./StatisticalView"
 //component
 class ScrumMaster extends Component {
   constructor(props) {
@@ -56,13 +56,14 @@ class ScrumMaster extends Component {
             <Grid columns="equals">
               <Grid.Column width={12}>
                 <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />
-                <hr/>
+                <hr />
                 <PointCardList spointList={this.state.pointList} />
-                <Conclusion />                
+                <StatisticalView/>
               </Grid.Column>
+
               <Grid.Column width={4}>
                 <PlayerList playerList={this.state.playerList} />
-                <StoryCards />                
+                <StoryCards />
               </Grid.Column>
             </Grid>
           </Segment>
