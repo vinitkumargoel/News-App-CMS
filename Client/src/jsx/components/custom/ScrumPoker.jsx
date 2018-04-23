@@ -18,43 +18,47 @@ import ScrumPlayer from './spokersubviews/ScrumPlayer';
 import SPLauncher from './spokersubviews/SPLauncher';
 import RoomConfig from './spokersubviews/RoomConfig';
 
+//semantic-ui components
+import { Container, Header } from 'semantic-ui-react';
+
 //component
 class ScrumPoker extends Component {
 
-  render() { 
+  render() {
     let isMaster = this.props.store.playerInfo.isMaster;
     return (
-            <div className={styles.spoker}>
-              <h1>LBG Scrum poker <small>an agile tool</small></h1>
-               {(this.props.store.playerInfo.joined)? 
-                <div>
-                  <Route path="/dashboard/spoker/create" render={()=>(<RoomConfig initRoomInfo={this.props.store.roomInfo}  actions={
-                                  {
-                                    joinRoom : this.props.actions.joinRoom
-                                  }
-                                }/>)}/>
-                  <Route path="/dashboard/spoker/join" render={(isMaster)?()=>(<ScrumMaster isMaster={isMaster} 
-                                                                                            initStoryInfo={this.props.store.storyInfo} 
-                                                                              
-                                                                                            actions={{publishStory : this.props.actions.publishStory}}/>)
-                                                                     :()=>(<ScrumPlayer 
-                                                                     initStoryInfo={this.props.store.storyInfo}
-                                                                     isMaster={isMaster}
-                                                                   
-                                                                     />)} />
-                </div>
-                :
-                    <SPLauncher 
-                        initLaunch={this.props.store.playerInfo} 
-                        actions={
-                                  {
-                                    joinRoom : this.props.actions.joinRoom,
-                                    createRoom : this.props.actions.createRoom
-                                  }
-                                }
-                    />
-                } 
-            </div>
+      <Container fluid>
+      <br/>
+        <Header textAlign='center' padded as='h1'>Lloyds Scrum Poker</Header>
+        {(this.props.store.playerInfo.joined) ?
+          <div>
+            <Route path="/dashboard/spoker/create" render={() => (<RoomConfig initRoomInfo={this.props.store.roomInfo} actions={
+              {
+                joinRoom: this.props.actions.joinRoom
+              }
+            } />)} />
+            <Route path="/dashboard/spoker/join" render={(isMaster) ? () => (<ScrumMaster isMaster={isMaster}
+              initStoryInfo={this.props.store.storyInfo}
+
+              actions={{ publishStory: this.props.actions.publishStory }} />)
+              : () => (<ScrumPlayer
+                initStoryInfo={this.props.store.storyInfo}
+                isMaster={isMaster}
+
+              />)} />
+          </div>
+          :
+          <SPLauncher
+            initLaunch={this.props.store.playerInfo}
+            actions={
+              {
+                joinRoom: this.props.actions.joinRoom,
+                createRoom: this.props.actions.createRoom
+              }
+            }
+          />
+        }
+      </Container>
     );
   }
 }

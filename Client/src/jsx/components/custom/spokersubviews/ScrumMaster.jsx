@@ -13,45 +13,62 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 
 //container imports
 
+//semantic-ui imports
+import { Grid, Segment, Header, GridColumn, Divider } from 'semantic-ui-react';
+
 //component imports
 import StoryDetails from './StoryDetails';
 import PlayerList from './PlayerList';
 import StoryPointsList from './StoryPointsList';
+import PointCardList from './PointCardList';
 import StoryCards from './StoryCards';
 import Conclusion from './Conclusion';
 
 //component
 class ScrumMaster extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      playerList:[],
-      pointList:[],
-      socket: io('http://10.17.14.226:3002/spoker',{
-                        transports : ['websocket']
-                       }),
+      playerList: [],
+      pointList: [],
+      socket: io('http://10.17.14.226:3002/spoker', {
+        transports: ['websocket']
+      }),
     }
   }
 
-  componentDidMount(){
-     this.state.socket.on('users',(cls)=>{
-       this.setState({playerList:cls});
-     });
-      this.state.socket.on('points',(pls)=>{
-        this.setState({pointList:pls});
-      });
+  componentDidMount() {
+    this.state.socket.on('users', (cls) => {
+      this.setState({ playerList: cls });
+    });
+    this.state.socket.on('points', (pls) => {
+      this.setState({ pointList: pls });
+    });
   }
 
   render() {
     return (
-            <div className={styles.smaster}>
-              <h1>Scrum Master Deck</h1>
-              <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{publishStory : this.props.actions.publishStory}}/>
-              <PlayerList playerList={this.state.playerList}/>
-              <StoryPointsList spointList={this.state.pointList}/>
-              <StoryCards />
-              <Conclusion />
-            </div>
+      <Grid columns="equals">
+        <Grid.Column width={1} />
+        <Grid.Column width={14}>
+          <Segment>
+            <Header textAlign='center' padded as='h2'>Room name: Security & Fraud</Header>
+            <Grid columns="equals">
+              <Grid.Column width={12}>
+                <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />
+                <hr/>
+                <PointCardList spointList={this.state.pointList} />
+                <Conclusion />                
+              </Grid.Column>
+              <Grid.Column width={4}>
+                <PlayerList playerList={this.state.playerList} />
+                <StoryCards />                
+              </Grid.Column>
+            </Grid>
+          </Segment>
+        </Grid.Column>
+        <Grid.Column width={1} />
+      </Grid>
     );
   }
 }
