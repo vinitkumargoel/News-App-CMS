@@ -6,6 +6,7 @@ import {
     Link
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {pointingMethod} from './common/commonData';
 
 //style imports
 import styles from '../../../../css/ScrumPokerStyle.css';
@@ -57,22 +58,7 @@ class RoomConfig extends Component {
 
     render() {
 
-        const Fib_no = [
-            '1', '2', '3', '4', '5', '6',
-            '7', '8', '9', '10',
-        ]
-        const Exp_no = [
-            '1', '2', '3', '4', '5', '6',
-            '7', '8', '9', '10',
-        ]
-        const Nrml_no = [
-            '1', '2', '3', '4', '5', '6',
-            '7', '8', '9', '10',
-        ]
-        const T_no = [
-            '1', '2', '3', '4', '5', '6',
-            '7', '8', '9', '10',
-        ]
+      
 
 
         return (
@@ -159,7 +145,7 @@ class RoomConfig extends Component {
                                                 checked={this.state.value === 'Fibonacci'}
                                                 onChange={this.handleChange}
                                             />
-                                            {Fib_no.map(fibno => <Label circular color="orange" size='big' key={fibno}>{fibno}</Label>)}
+                                            {pointingMethod.Fib_no.map(fibno => <Label circular color="orange" size='big' key={fibno}>{fibno}</Label>)}
                                         </Form.Field>
                                         <Form.Field>
                                             <Radio
@@ -169,7 +155,7 @@ class RoomConfig extends Component {
                                                 checked={this.state.value === 'Exponential'}
                                                 onChange={this.handleChange}
                                             />
-                                            {Exp_no.map(expno => <Label circular color="teal" size='big' key={expno}>{expno}</Label>)}
+                                            {pointingMethod.Exp_no.map(expno => <Label circular color="teal" size='big' key={expno}>{expno}</Label>)}
                                         </Form.Field>
                                         <Form.Field>
                                             <Radio
@@ -179,7 +165,7 @@ class RoomConfig extends Component {
                                                 checked={this.state.value === 'Normal'}
                                                 onChange={this.handleChange}
                                             />
-                                            {Nrml_no.map(nrmlno => <Label circular color="pink" size='big' key={nrmlno}>{nrmlno}</Label>)}
+                                            {pointingMethod.Nrml_no.map(nrmlno => <Label circular color="pink" size='big' key={nrmlno}>{nrmlno}</Label>)}
                                         </Form.Field>
                                         <Form.Field>
                                             <Radio
@@ -189,25 +175,22 @@ class RoomConfig extends Component {
                                                 checked={this.state.value === 'Tshirt'}
                                                 onChange={this.handleChange}
                                             />
-                                            {T_no.map(tno => <Label circular color="blue" size='big' key={tno}>{tno}</Label>)}
+                                            {pointingMethod.T_no.map(tno => <Label circular color="blue" size='big' key={tno}>{tno}</Label>)}
                                         </Form.Field>
                                     </Form>
-
                                 </Grid.Column>
-
                             </Grid>
-
                             <Grid columns="equals">
                                 <Grid.Column width={6} />
                                 <Grid.Column width={3}>
-                                    <Button color="green">
-                                        <Icon name='plus' />Create
+                                    <Link id="join" className={styles.join} to="/dashboard/spoker/join" onClick={this.handleClick}>
+                                        <Button color="green">
+                                            <Icon name='plus' />Create
                                     </Button>
+                                    </Link>
                                 </Grid.Column>
                                 <Grid.Column />
                             </Grid>
-                            {/* <Link id="join" className={styles.join} to="/dashboard/spoker/join"
-                                onClick={this.handleClick}>Start Session</Link> */}
                         </Container>
                     </Segment>
                 </Grid.Column>

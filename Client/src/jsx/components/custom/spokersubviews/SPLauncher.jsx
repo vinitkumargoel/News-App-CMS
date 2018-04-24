@@ -31,7 +31,7 @@ class SPLauncher extends Component {
     this.state = {
       email: { value: '', type: 'email', error: false }, isMaster: false, joined: false,
       pwd: { value: '', type: 'password', required: true, error: false },
-      roomid: { value: '', type: 'text', required: true, error: false },
+      roomid: { value: '', type: 'number', required: true, error: false },
       usrid: { value: '', type: 'text', required: true, error: false },
       formError: true,
 
@@ -142,7 +142,7 @@ class SPLauncher extends Component {
                     <CLabel required>Session ID</CLabel>
                   </Grid.Column>
                   <Grid.Column width={12}>
-                    <Form.Input error={state.roomid.error} required id="roomid" type='text' value={state.roomid.value} onChange={this.handleInput} placeholder='XXXXX' fluid />
+                    <Form.Input error={state.roomid.error} required id="roomid" type='number' value={state.roomid.value} onChange={this.handleInput} placeholder='XXXXX' fluid />
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns={2} >
