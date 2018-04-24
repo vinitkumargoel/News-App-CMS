@@ -17,6 +17,7 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 import StoryDetails from './StoryDetails';
 import PlayerList from './PlayerList';
 import {pointingMethod} from './common/commonData';
+import SelectPointCardList from './SelectPointCardList';
 
 
 //sematic-ui imports
@@ -66,27 +67,13 @@ class ScrumPlayer extends Component {
             <Grid columns="equals">
               <Grid.Column width={12}>
                 <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} />
-
+                <hr/>
+                <Header textAlign='center' padded as='h3'>Story pointing</Header>
+                <SelectPointCardList/>
               </Grid.Column>
 
               <Grid.Column width={4}>
                 <PlayerList playerList={this.state.playerList} />
-              </Grid.Column>
-
-              <Grid.Column width={16}>
-                <div id="cards" className={styles.cards}>
-                  <h3>Story Points<small><em>(modified Fibonacci)</em></small></h3>
-                  <div className={styles.pointingMethod}>
-                    {
-                      this.state.pointingMethod.map((p, i) => {
-                        return <div key={i}>
-                          <input id={i} type="radio" onClick={this.handleClick} checked={this.state.selected === i.toString()} />
-                          <label>{p}</label>
-                        </div>
-                      })
-                    }
-                  </div>
-                </div>
               </Grid.Column>
             </Grid>
           </Segment>

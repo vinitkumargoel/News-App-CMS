@@ -7,14 +7,14 @@ class SelectPointCard extends Component {
     }
     render() {
         return (
-            <Card style={{ margin: 10 }}>
+            <Card style={{ margin: 10, cursor: 'pointer' }}>
                 <Image size="small" src={this.props.image} />
-                <Card.Content style={{position:"absolute", left: '50%', top:'75%',
-                transform: 'translate(-50%, -50%)', border: 'none', fontSize: '400%' , color: 'black'}}>
+                <Card.Content style={{position:"absolute", left: '50%', top:'70%',
+                transform: 'translate(-50%, -50%)', border: 'none', fontSize: '350%' , color: 'black', }}>
                 {this.props.point}
                 </Card.Content>
             </Card>);
-    }
+    }   
 }
 
 export default SelectPointCard;
