@@ -38,34 +38,33 @@ class SPLauncher extends Component {
     };
 
   }
-  validate = (state = this.state) => {
+  validate = (state) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let valid = Object.keys(state).every((item) => {
       let field = state[item];
       if (field.required == true) {
         if (item == 'pwd' && state.isMaster) {
           let result = field.value.trim() !== '';
-          // this.setState(update(this.state, {
-          //   [item]: { error: { $set: result } },
-          // }))
+          // state[item].error = !result;
           return result;
         }
         else if (item !== 'pwd') {
           let result = field.value.trim() !== '';
-          // this.setState(update(this.state, {
-          //   [item]: { error: { $set: result } },
-          // }))
+          // state[item].error = !result;
           return result;
         }
       }
       else
         if (field.type == 'email' && field.value.trim() != '') {
-          return re.test(field.value.toLowerCase());
+          let result = re.test(field.value.toLowerCase());
+          state[item].error = !result;
+          return result;
         }
 
       return true;
     });
-    return valid;
+    state.formError = !valid;
+    return state;
   }
 
   handleInput = (e, props) => {
@@ -107,8 +106,8 @@ class SPLauncher extends Component {
 
     }
     this.setState((prevState) => {
-      let formError = !this.validate(prevState);
-      return { formError };
+      return this.validate(JSON.parse(JSON.stringify(prevState)));
+      
     })
   }
 
@@ -192,10 +191,12 @@ class SPLauncher extends Component {
 
             <Grid.Column width={5}>
               <h4>Want to create a room?</h4>
-              <Link to="/dashboard/spoker/create">
+              <Grid.Row><Icon name='group' size ='massive'/></Grid.Row>
+              
+              <Grid.Row><Link to="/dashboard/spoker/create">
                 <Button id="create" color='green' onClick={this.handleClick}>
                   <Icon name='plus' color='white' />Create Room</Button>
-              </Link>
+              </Link></Grid.Row>
 
 
             </Grid.Column>
@@ -203,6 +204,7 @@ class SPLauncher extends Component {
           </Grid.Row>
         </Grid>
       </Form >
+
 
       // <div className={'login-wrapper'}>
       //   <h3>Create or Join a Room</h3>
