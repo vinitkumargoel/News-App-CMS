@@ -24,5 +24,5 @@ export const pointingMethod = {
         '7', '8', '9', '10',
     ],
 } 
-export const typesToValidate = ['text','number','password'];
+export const typesToValidate = ['text','number','password','radio'];
 

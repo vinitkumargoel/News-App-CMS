@@ -130,7 +130,7 @@ class SPLauncher extends Component {
     return (
       <Form error={state.formError}>
 
-        <Grid columns={2}>
+        <Grid columns={3}>
           <Grid.Row centered>
             <Grid.Column width={5} >
               <h4>Join a Room</h4>
