@@ -107,7 +107,7 @@ class SPLauncher extends Component {
     }
     this.setState((prevState) => {
       return this.validate(JSON.parse(JSON.stringify(prevState)));
-      
+
     })
   }
 
@@ -177,8 +177,11 @@ class SPLauncher extends Component {
                     error={state.formError}
                     content='Please make sure the values entered are correct'
                   /></Grid.Row>
-                <Grid.Row><Link to="/dashboard/spoker/join">
-                  <Button disabled={state.formError} id="join" color='blue' onClick={this.handleClick}>Join Room</Button></Link></Grid.Row>
+                <Grid.Row>
+                  <Link to={"/dashboard/spoker/join"} style={{pointerEvents:state.formError?'none':'auto'}}>
+                    <Button disabled={state.formError} id="join" color='blue' onClick={this.handleClick}>Join Room</Button>
+                  </Link>
+                </Grid.Row>
 
 
               </Grid>
@@ -191,8 +194,8 @@ class SPLauncher extends Component {
 
             <Grid.Column width={5}>
               <h4>Want to create a room?</h4>
-              <Grid.Row><Icon name='group' size ='massive'/></Grid.Row>
-              
+              <Grid.Row><Icon name='group' size='massive' /></Grid.Row>
+
               <Grid.Row><Link to="/dashboard/spoker/create">
                 <Button id="create" color='green' onClick={this.handleClick}>
                   <Icon name='plus' color='white' />Create Room</Button>

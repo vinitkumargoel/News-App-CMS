@@ -79,48 +79,48 @@ class RoomConfig extends Component {
         }
     }
 
-   
+
 
     render() {
         return (
             <Grid columns='3'>
                 <Grid.Row centered>
                     <Grid.Column width={6}>
-                                <Header textAlign='left' padded as='h3'>Configure Room</Header>
-                                <Form.Field required>
-                                    <Grid columns="equals">
-                                        <Grid.Column width={6} verticalAlign='middle'>
-                                            <label htmlFor="roomnum">Room number : </label>
-                                        </Grid.Column>
-                                        <Grid.Column width={8}>
-                                            <Input id='roomnum' type='number' size="mini" placeholder='123456' onChange={this.handleInput} />
-                                        </Grid.Column>
-                                        <Grid.Column width={6} verticalAlign='middle'>
-                                            <label htmlFor="roomname">Room name : </label>
-                                        </Grid.Column>
-                                        <Grid.Column width={8}>
-                                            <Input id='roomname' type='text' size="mini" placeholder='Cheesy room name' onChange={this.handleInput} />
-                                        </Grid.Column>
-                                        <Grid.Column width={6} verticalAlign='middle'>
-                                            <label htmlFor="adminName">Name : </label>
-                                        </Grid.Column>
-                                        <Grid.Column width={8}>
-                                            <Input id='adminName' type='text' size="mini" placeholder='Your name' onChange={this.handleInput} />
-                                        </Grid.Column>
-                                        <Grid.Column width={6} verticalAlign='middle'>
-                                            <label htmlFor="fileID">File ID : </label>
-                                        </Grid.Column>
-                                        <Grid.Column width={8}>
-                                            <Input id='fileID' type="number" size="mini" placeholder='123456' onChange={this.handleInput} />
-                                        </Grid.Column>
-                                        <Grid.Column width={6} verticalAlign='middle'>
-                                            <label htmlFor="pwd">Password : </label>
-                                        </Grid.Column>
-                                        <Grid.Column width={8}>
-                                            <Input id='pwd' size="mini" type="password" placeholder='XXXX' onChange={this.handleInput} />
-                                        </Grid.Column>
-                                    </Grid>
-                                </Form.Field>
+                        <Header textAlign='left' padded as='h3'>Configure Room</Header>
+                        <Form.Field required>
+                            <Grid columns="equals">
+                                <Grid.Column width={6} verticalAlign='middle'>
+                                    <label htmlFor="roomnum">Room number : </label>
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <Input id='roomnum' type='number' size="mini" placeholder='123456' onChange={this.handleInput} />
+                                </Grid.Column>
+                                <Grid.Column width={6} verticalAlign='middle'>
+                                    <label htmlFor="roomname">Room name : </label>
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <Input id='roomname' type='text' size="mini" placeholder='Cheesy room name' onChange={this.handleInput} />
+                                </Grid.Column>
+                                <Grid.Column width={6} verticalAlign='middle'>
+                                    <label htmlFor="adminName">Name : </label>
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <Input id='adminName' type='text' size="mini" placeholder='Your name' onChange={this.handleInput} />
+                                </Grid.Column>
+                                <Grid.Column width={6} verticalAlign='middle'>
+                                    <label htmlFor="fileID">File ID : </label>
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <Input id='fileID' type="number" size="mini" placeholder='123456' onChange={this.handleInput} />
+                                </Grid.Column>
+                                <Grid.Column width={6} verticalAlign='middle'>
+                                    <label htmlFor="pwd">Password : </label>
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <Input id='pwd' size="mini" type="password" placeholder='XXXX' onChange={this.handleInput} />
+                                </Grid.Column>
+                            </Grid>
+                        </Form.Field>
 
                     </Grid.Column>
                     <Grid.Column width={2} >
@@ -179,19 +179,19 @@ class RoomConfig extends Component {
                         </Form>
                     </Grid.Column>
                 </Grid.Row>
-            <Grid.Row centered>
-                <Message
-                    error={this.state.formError}
-                    content='Please make sure the values entered are correct'
-                />
-            </Grid.Row>
-            <Grid.Row centered>
-                <Link id="join" className={styles.join} to="/dashboard/spoker/join" onClick={this.handleClick}>
-                    <Button disabled = {this.state.formError}color="green">
-                        <Icon name='plus' />Create
+                <Grid.Row centered>
+                    <Message
+                        error={this.state.formError}
+                        content='Please make sure the values entered are correct'
+                    />
+                </Grid.Row>
+                <Grid.Row centered>
+                    <Link to={"/dashboard/spoker/join"} style={{pointerEvents:this.state.formError?'none':'auto'}}>
+                        <Button disabled={this.state.formError} id='join' color="green" onClick={this.handleClick}>
+                            <Icon name='plus' />Create
                                     </Button>
-                </Link>
-            </Grid.Row>
+                    </Link>
+                </Grid.Row>
             </Grid >
 
         );
