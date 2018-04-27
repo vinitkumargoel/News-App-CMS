@@ -21,22 +21,18 @@ import { Button, Image, List, Segment, Header, Icon } from 'semantic-ui-react';
 class PlayerList extends Component {
 
   render() {
-
-    const users = [
-      'Lena', 'Paul', 'Amit', 'Anne', 'Silpa', 'Smith', 'Lisa', 'Meenu', 'Sachin'
-    ]
     return (
       <Segment>
-        <Header textAlign='center' padded as='h2'>Player list</Header>
+        <Header textAlign='center' padded="true" as='h2'>Player list</Header>
         {/* {
           this.props.playerList.map((p, i) => {
             return <p key={i}>{p}</p>;
           })
         } */}
         <List divided verticalAlign='middle'>
-          {users.map(user=>
-          <List.Item>
-            <List.Content key={user} floated='right'>
+          {this.props.playerList.map((user,i) =>
+          <List.Item key={i}>
+            <List.Content floated='right'>
               <Button>Chat</Button>
             </List.Content>
             <Icon name='user' />

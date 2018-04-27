@@ -1,4 +1,4 @@
-import configureStore from '../helpers/index';
+import { storeHelper } from '../helpers/index';
 import spokerStore from './spokerStore';
 
 let initState = {
@@ -9,7 +9,7 @@ let initState = {
     poker: spokerStore
 };
 
-let store = configureStore(initState);
+let store = storeHelper.configureStore(initState);
 
 
 export default store;

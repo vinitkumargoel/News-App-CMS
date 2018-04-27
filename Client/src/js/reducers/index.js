@@ -19,15 +19,25 @@ function pokerReducer(state={},action){
         case pokerActions.JOIN_ROOM:
                         action.payload.joined = true;
                         tempState = Object.assign({},state.playerInfo,action.payload);
-                        return Object.assign(newState,state,{playerInfo:tempState});
+                        return Object.assign(newState,state,{playerInfo:tempState},{from:action.payload.from});
         case pokerActions.CREATE_ROOM:
                         tempState = Object.assign({},state.playerInfo);
                         tempState.joined = true;
                         tempState.isMaster = true;
-                        return Object.assign(newState,state,{playerInfo:tempState});  
+                        return Object.assign(newState,state,{playerInfo:tempState},{from:action.payload.from});  
         case pokerActions.PUBLISH_STORY:
                         tempState = Object.assign({},state.storyInfo,action.payload);
-                        return Object.assign(newState,state,{storyInfo:tempState});  
+                        return Object.assign(newState,state,{storyInfo:tempState},{from:action.payload.from});  
+        case pokerActions.SELECT_POINT:
+                        tempState = Object.assign({},state.playerInfo,action.payload);
+                        return Object.assign(newState,state,{playerInfo:tempState},{from:action.payload.from});  
+        case pokerActions.USER_LIST:
+                        return Object.assign(newState,state,{playerList:action.payload.cls},{from:action.payload.from});
+        case pokerActions.POINT_LIST:
+                        return Object.assign(newState,state,{pointList:action.payload.ps},{from:action.payload.from});
+        case pokerActions.STORY_DETAILS:
+                        return Object.assign(newState,state,{pointList:action.payload.sd},{from:action.payload.from});
+         
         default:
                         return state;
     }

@@ -10,9 +10,12 @@ import {
 import App from './jsx/App';
 import store from './js/stores';
 import registerServiceWorker from './registerServiceWorker';
+import wsHelper from './js/helpers/websocketHelper';
 
 //global vars
 const supportsHistory = 'pushState' in window.history;
+
+wsHelper.serverListener(store);
 
 var containerRef = render(
     <div className={styles.root}>

@@ -14,6 +14,7 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 
 //component imports
 import { languageOptions } from './common/commonData';
+import { updateStoreInput } from './common/utils';
 
 //semantic-ui imports
 import { Container, Header, Segment, Grid, Input, Icon, Checkbox, Dropdown, Label, Radio, Form, Divider, Button } from 'semantic-ui-react';
@@ -23,21 +24,24 @@ class StoryDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMaster: this.props.isMaster,
-      storyID: this.props.initStoryInfo.storyID,
-      epic: this.props.initStoryInfo.epic,
-      description: this.props.initStoryInfo.description
+      storyid: "",
+      epic: "",
+      storyflag : "",
+      description: ""
     };
   }
 
-  handleInput = (e) => {
-    let srcElem = e.target;
+  handleInput = (e,data) => {
+    let srcElem = (data)?data:e.target;
     switch (srcElem.id) {
-      case "storynum":
-        this.setState({ storyID: srcElem.value });
+      case "storyid":
+        this.setState({ storyid: srcElem.value });
         break;
       case "epic":
         this.setState({ epic: srcElem.value });
+        break;
+      case "storyflag":
+        this.setState({ storyflag: data.value });
         break;
       case "desc":
         this.setState({ description: srcElem.value });
@@ -60,16 +64,27 @@ class StoryDetails extends Component {
 
   render() {
     return (
-      <Grid columns="equals">
+      <Grid columns="equal">
         <Grid.Column width={14}>
-          <Header textAlign='left' padded as='h3'>Story details</Header>
+          <Header textAlign='left' padded="true" as='h3'>Story details</Header>
 
-          <Grid columns="equals">
+          <Grid columns="equal">
             <Grid.Column width={3}>
-              <label htmlFor="roomnum">Story number: </label>
+              <label htmlFor="storyid">Story number: </label>
             </Grid.Column>
             <Grid.Column width={8}>
-              <Input size="mini" placeholder='Enter number' defaultValue={this.state.storyID} onChange={this.handleInput} disabled={!this.state.isMaster} />
+              <Input id="storyid" size="mini" placeholder='Enter number' defaultValue={this.state.storyid} onChange={this.handleInput} disabled={!this.props.isMaster} />
+            </Grid.Column>
+            {/* <label htmlFor="storynum">Story Number : </label>
+              <input id="storynum" type="text" value={this.state.storyID} placeholder="Enter Story #"
+                onChange={this.handleInput} disabled={!this.state.isMaster} /> */}
+          </Grid>
+          <Grid columns="equal">
+            <Grid.Column width={3}>
+              <label htmlFor="epic">Epic : </label>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <Input id="epic" size="mini" placeholder='Enter number' defaultValue={this.state.epic} onChange={this.handleInput} disabled={!this.props.isMaster} />
             </Grid.Column>
             {/* <label htmlFor="storynum">Story Number : </label>
               <input id="storynum" type="text" value={this.state.storyID} placeholder="Enter Story #"
@@ -82,36 +97,42 @@ class StoryDetails extends Component {
                 onChange={this.handleInput} disabled={!this.state.isMaster} />
             </div> */}
 
-          <Grid columns="equals">
+          <Grid columns="equal">
             <Grid.Column width={3}>
-              <label htmlFor="roomnum">Story Flag: </label>
+              <label htmlFor="storyflag">Story Flag: </label>
             </Grid.Column>
             <Grid.Column width={9}>
               <Dropdown
                 button
+                id="storyflag"
                 className='icon'
                 floating
                 labeled
+                selection
+                disabled={!this.props.isMaster}
                 icon='flag'
                 options={languageOptions}
                 placeholder='Select choice'
+                defaultValue={this.state.storyflag} 
+                onChange={this.handleInput}
               />
             </Grid.Column>
           </Grid>
 
-          <Grid columns="equals">
+          <Grid columns="equal">
             <Grid.Column width={3}>
-              <label htmlFor="roomnum">Story description: </label>
+              <label htmlFor="desc">Story description: </label>
             </Grid.Column>
             <Grid.Column width={13}>
               <Form>
-                <Form.Field control='textarea' rows='3' />
+                <Form.Field id="desc" disabled={!this.props.isMaster} 
+                defaultValue={this.state.description} onChange={this.handleInput} control='textarea' rows='3' />
               </Form>
             </Grid.Column>
           </Grid>
             <br/>
           <Grid.Row>
-            <Button floated="right" color='blue'>Publish Story</Button>
+            {(this.props.isMaster)?<Button id="publish" onClick={this.handleClick} floated="right" color='blue'>Publish Story</Button>:null}
           </Grid.Row>
 
           {/* <div className={styles.desc}>

@@ -29,7 +29,7 @@ class ScrumPoker extends Component {
     return (
       <Container fluid>
       <br/>
-        <Header textAlign='center' padded as='h1'>Lloyds Scrum Poker</Header>
+        <Header textAlign='center' padded="true" as='h1'>Lloyds Scrum Poker</Header>
         {(this.props.store.playerInfo.joined) ?
           <div>
             <Route path="/dashboard/spoker/create" render={() => (<RoomConfig initRoomInfo={this.props.store.roomInfo} actions={
@@ -38,13 +38,19 @@ class ScrumPoker extends Component {
               }
             } />)} />
             <Route path="/dashboard/spoker/join" render={(isMaster) ? () => (<ScrumMaster isMaster={isMaster}
-              initStoryInfo={this.props.store.storyInfo}
-
-              actions={{ publishStory: this.props.actions.publishStory }} />)
+                                                                                          initStoryInfo={this.props.store.storyInfo}
+                                                                                          initRoomInfo={this.props.store.roomInfo}
+                                                                                          pointList={this.props.store.pointList}
+                                                                                          playerList={this.props.store.playerList}
+                                                                                          actions={{ publishStory: this.props.actions.publishStory }} />)
               : () => (<ScrumPlayer
                 initStoryInfo={this.props.store.storyInfo}
                 isMaster={isMaster}
-
+                initRoomInfo={this.props.store.roomInfo}
+                playerList={this.props.store.playerList}
+                actions={{
+                          selectPoint:this.props.actions.selectPoint
+                        }}
               />)} />
           </div>
           :

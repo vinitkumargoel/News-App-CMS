@@ -4,18 +4,15 @@ import selectVote from '../../../../img/jpg/angry.jpg';
 import SelectPointCard from './SelectPointCard'
 import {pointingMethod} from './common/commonData';
 class SelectPointCardList extends Component {
-  constructor(props) {
-    super(props);
-    }
   render() {
     return (
       <Grid columns={6} padded>
         <Grid.Row>
           {
-            pointingMethod.Fib_no.map((user) => {
+            this.props.pointingMethod.map((p,i) => {
               return (
-                <Grid.Column>
-                  <SelectPointCard point={user} image={selectVote}/>
+                <Grid.Column key={i}>
+                  <SelectPointCard point={p} image={selectVote} actions={this.props.actions}/>
                 </Grid.Column>
               );
             })

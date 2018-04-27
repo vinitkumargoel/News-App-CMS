@@ -29,40 +29,26 @@ class ScrumMaster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerList: [],
-      pointList: [],
-      socket: io('http://10.17.14.226:3002/spoker', {
-        transports: ['websocket']
-      }),
     }
-  }
-
-  componentDidMount() {
-    this.state.socket.on('users', (cls) => {
-      this.setState({ playerList: cls });
-    });
-    this.state.socket.on('points', (pls) => {
-      this.setState({ pointList: pls });
-    });
   }
 
   render() {
     return (
-      <Grid columns="equals">
+      <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
           <Segment>
-            <Header textAlign='center' padded as='h2'>Room name: Security & Fraud</Header>
-            <Grid columns="equals">
+            <Header textAlign='center' padded="true" as='h2'>Room name: Security & Fraud</Header>
+            <Grid columns="equal">
               <Grid.Column width={12}>
                 <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />
                 <hr />
-                <PointCardList spointList={this.state.pointList} />
+                <PointCardList pointList={this.props.pointList} />
                 <StatisticalView/>
               </Grid.Column>
 
               <Grid.Column width={4}>
-                <PlayerList playerList={this.state.playerList} />
+                <PlayerList playerList={this.props.playerList} />
                 <StoryCards />
               </Grid.Column>
             </Grid>

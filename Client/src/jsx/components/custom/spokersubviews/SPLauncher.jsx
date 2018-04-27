@@ -12,7 +12,7 @@ import update from 'immutability-helper';
 // import {
 //   Form, Input, TextArea, Checkbox, Radio, RadioGroup, Dropdown, Select,
 // } from 'formsy-semantic-ui-react';
-
+import { updateStoreInput } from './common/utils';
 
 //style imports
 
@@ -29,15 +29,16 @@ class SPLauncher extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: { value: '', type: 'email', error: false }, isMaster: false, joined: false,
+      email: { value: '', type: 'email', error: false },
+      isMaster: false,
+      joined: false,
       pwd: { value: '', type: 'password', required: true, error: false },
       roomid: { value: '', type: 'number', required: true, error: false },
       usrid: { value: '', type: 'text', required: true, error: false },
-      formError: true,
-
+      formError: true
     };
-
   }
+
   validate = (state) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let valid = Object.keys(state).every((item) => {
@@ -113,12 +114,16 @@ class SPLauncher extends Component {
 
   handleClick = (e) => {
     let srcElem = e.target;
+    let storeChunk = this.props.initLaunch;
+    let currentState = this.state;
     switch (srcElem.id) {
       case "join":
-        this.props.actions.joinRoom(this.state);
+        updateStoreInput(storeChunk, currentState);
+        this.props.actions.joinRoom(storeChunk);
         break;
       case "create":
-        this.props.actions.createRoom(this.state);
+        updateStoreInput(storeChunk, currentState);
+        this.props.actions.createRoom(storeChunk);
         break;
       default:
 
@@ -138,7 +143,7 @@ class SPLauncher extends Component {
 
                 <Grid.Row columns={2}>
                   <Grid.Column width={4} verticalAlign='middle'>
-                    <CLabel required>Session ID</CLabel>
+                    <CLabel required>Room ID</CLabel>
                   </Grid.Column>
                   <Grid.Column width={12}>
                     <Form.Input error={state.roomid.error} required id="roomid" type='number' value={state.roomid.value} onChange={this.handleInput} placeholder='XXXXX' fluid />
@@ -171,7 +176,7 @@ class SPLauncher extends Component {
                   </Grid.Row>
 
                 }
-                <Grid.Row><Form.Checkbox id="isMaster" checked={state.isMaster} fluid label='Join as Admin' onChange={this.handleInput} /></Grid.Row>
+                <Grid.Row><Form.Checkbox id="isMaster" checked={state.isMaster} fluid="true" label='Join as Admin' onChange={this.handleInput} /></Grid.Row>
                 <Grid.Row>
                   <Message
                     error={state.formError}
@@ -198,7 +203,7 @@ class SPLauncher extends Component {
 
               <Grid.Row><Link to="/dashboard/spoker/create">
                 <Button id="create" color='green' onClick={this.handleClick}>
-                  <Icon name='plus' color='white' />Create Room</Button>
+                  <Icon name='plus' color='olive' />Create Room</Button>
               </Link></Grid.Row>
 
 
@@ -207,93 +212,6 @@ class SPLauncher extends Component {
           </Grid.Row>
         </Grid>
       </Form >
-
-
-      // <div className={'login-wrapper'}>
-      //   <h3>Create or Join a Room</h3>
-      //   <div className={'login-section1'}>
-      //     <h4>Join a Room</h4>
-      //     <Form>
-      //       <Form.Field inline>
-      //         <label>Session ID*</label>
-      //         <Input type='text' placeholder='XXXXX' />
-      //       </Form.Field>
-      //       <Form.Field inline>
-      //         <label>Name</label>
-      //         <Input type='text' placeholder='Enter name' />
-      //       </Form.Field>
-
-      //       <Form.Checkbox fluid label='Join as Admin' />
-      //       <Form.Button>Join Room</Form.Button>
-      //     </Form>
-      //     <Divider vertical>Or</Divider>
-      //   </div>
-      //   <div className={'login-section2'}>
-      //     <h4>Want to create a room?</h4>
-      //     <Icon name='group' size='massive' />
-      //     <Form>
-      //       <Form.Field inline>
-      //         <label>Session ID*</label>
-      //         <Input type='text' placeholder='XXXXX' />
-      //       </Form.Field>
-      //       <Form.Field inline>
-      //         <label>Name</label>
-      //         <Input type='text' placeholder='Enter name' />
-      //       </Form.Field>
-
-      //       <Form.Checkbox fluid label='Join as Admin' />
-      //       <Form.Button>Join Room</Form.Button>
-      //     </Form>
-      //   </div>
-      //   <form>
-      //     <div>
-      //       <label htmlFor="roomid">Room Number : </label>
-      //       <Input placeholder='Enter room #' id="roomid" value={this.state.roomid} onChange={this.handleInput}>
-      //         <Icon name='group' size='large' />
-      //         <input />
-      //       </Input>
-      //       <input id="roomid" type="text" value={this.state.roomid} placeholder="Enter room #"
-      //         onChange={this.handleInput} />
-      //     </div>
-      //     <div className={styles.usrid}>
-      //       <label htmlFor="usrid">User Name : </label>
-      //       <Input placeholder='Search...' />
-      //       <input id="usrid" type="text" value={this.state.usrid} placeholder="Enter Username"
-      //         onChange={this.handleInput} />
-      //     </div>
-
-      //     <div className={styles.email}>
-      //       <label htmlFor="email">Email ID : </label>
-      //       <Input placeholder='Search...' />
-      //       <input id="email" type="email" value={this.state.email} placeholder="Enter EmailId"
-      //         onChange={this.handleInput} />
-      //     </div>
-
-      //     {(!this.state.isMaster) ? null :
-      //       <div className={styles.pwd}>
-      //         <label htmlFor="pwd">Password : </label>
-      //         <Input placeholder='Search...' />
-      //         <input id="pwd" type="password" value={this.state.pwd} placeholder="Enter Password"
-      //           onChange={this.handleInput} />
-      //       </div>
-      //     }
-
-      //     <div className={styles.isMaster}>
-      //       <Input placeholder='Search...' />
-      //       <input id="isMaster" type="checkbox" checked={this.state.isMaster}
-      //         onChange={this.handleInput} />
-      //       <label htmlFor="isMaster"><small>join as admin</small></label>
-      //     </div>
-
-      //     <Link id="join" className={styles.join} to="/dashboard/spoker/join"
-      //       onClick={this.handleClick}>Join</Link>
-
-      //     <h6>----OR-----</h6>
-
-      //     <Link id="create" className={styles.create} to="/dashboard/spoker/create"
-      //       onClick={this.handleClick}>Create</Link>
-      //   </form>
-      // </div>
     );
   }
 }

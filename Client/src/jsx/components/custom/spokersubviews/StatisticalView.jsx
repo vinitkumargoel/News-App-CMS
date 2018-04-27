@@ -31,7 +31,7 @@ class StatisticalView extends Component {
                     <span>Average Score : {this.state.averagePoint}</span>
                     <Icon style={{marginLeft:'20px',cursor:'pointer'}} name='edit' onClick={()=>{this.setState({open:true})}}/>
                 </Message>
-                <Header textAlign='center' padded as='h2'>Statistical View</Header>
+                <Header textAlign='center' padded="true" as='h2'>Statistical View</Header>
                 <Grid>
                     <Grid.Column width="8">
                         <Table celled size="small">

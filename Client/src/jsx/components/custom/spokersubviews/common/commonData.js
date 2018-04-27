@@ -3,23 +3,20 @@ export const languageOptions = [
     { key: 'Medium', text: 'Medium', value: 'Medium' },
     { key: 'High', text: 'High', value: 'High' }
 ];
-;
-;
-;
-export const pointingMethod = {
-    T_no: [
+export const pmData = {
+    Tshirt: [
         'XS', 'S', 'M', 'L', 'XL', 'XXL',
         '?'
     ],
-    Fib_no: [
+    Fibonacci: [
         '0', '1', '2', '3', '5', '8',
         '13', '20', '40'
     ],
-    Exp_no: [
+    Exponential: [
         '0', '1', '2', '4', '8', '16',
         '32', '64',
     ],
-    Nrml_no: [
+    Normal: [
         '1', '2', '3', '4', '5', '6',
         '7', '8', '9', '10',
     ],

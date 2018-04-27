@@ -33,3 +33,14 @@ export const validate = (state, changedElem) => {
         })
         return valid;
     }
+
+export const updateStoreInput = (storeChunk, currentState) => {
+    Object.getOwnPropertyNames(storeChunk).map((key) => {
+      if (currentState[key] !== undefined) {
+        if (currentState[key].value === undefined)
+          storeChunk[key] = currentState[key];
+        else
+          storeChunk[key] = currentState[key].value;
+      }
+    });
+  }

@@ -7,19 +7,6 @@ class PointCardList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      "userList": [
-        { userName: "user1", score: 2 },
-        { userName: "user2", score: null },
-        { userName: "user3", score: 6 },
-        { userName: "user4", score: 3 },
-        { userName: "user5", score: null },
-        { userName: "user6", score: 9 },
-        { userName: "user7", score: 2 },
-        { userName: "user8", score: null },
-        { userName: "user9", score: 2 },
-        { userName: "user10", score: 9 },
-        { userName: "user11", score: 2 }
-      ]
     }
   }
   render() {
@@ -28,9 +15,9 @@ class PointCardList extends Component {
         <Grid columns={7} padded>
           <Grid.Row>
             {
-              this.state.userList.map((user) => {
+              this.props.pointList.map((user,i) => {
                 return (
-                  <Grid.Column>
+                  <Grid.Column key={i}>
                     <PointCard displayData={user.userName} score={user.score} image={user.score != null ? votedImg : notVotedImg} />
                   </Grid.Column>
                 );

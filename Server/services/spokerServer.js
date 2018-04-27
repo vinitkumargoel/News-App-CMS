@@ -11,7 +11,7 @@ const io = sockServer({
 });
 
 //listener imports
-const spokerListener = require('./listeners/spokerListener');
+const spokerListener = require('../listeners/spokerListener');
 
 //server bindings
 io.attach(httpServer);

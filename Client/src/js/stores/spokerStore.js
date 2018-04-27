@@ -1,21 +1,29 @@
 export default {
     playerInfo :{
-        roomid: "",
-        isMaster: false,
-        usrid: "",
-        email: "",
-        pwd: "",
-        joined: false
+        isMaster : false,
+        usrid : "",
+        email : "",
+        fileID : "",
+        joined : false,
+        roomid : "",
+        pwd : "",
+        score: ""
     },
     roomInfo : {
         roomnum : "",
-        ponintingMethod : "",
-        password : "",
-        isDefault : false
+        roomname : "",
+        pwd : "",
+        adminName: "",
+        fileID : "",
+        pointingMethod : "Fibonacci"
     },
     storyInfo : {
-        storyID: "",
+        storyid: "",
         epic: "",
-        description: "No story added yet"
-    }
+        description: "No story added yet",
+        storyflag: ""
+    },
+    playerList : [],
+    storyList : [],
+    pointList : [{userName:"Kevin",score:"20"},{userName:"Bob",score:"20"},{userName:"Stuart",score:"20"}]
 };

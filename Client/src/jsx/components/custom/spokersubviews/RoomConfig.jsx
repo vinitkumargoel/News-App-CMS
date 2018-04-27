@@ -6,8 +6,8 @@ import {
     Link
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { pointingMethod, typesToValidate } from './common/commonData';
-import { validate } from './common/utils';
+import { pmData, typesToValidate } from './common/commonData';
+import { validate,updateStoreInput } from './common/utils';
 import update from 'immutability-helper';
 
 
@@ -25,7 +25,6 @@ import { Message, Container, Header, Segment, Grid, Input, Icon, Checkbox, List,
 class RoomConfig extends Component {
     constructor(props) {
         super(props);
-        // this.state = this.props.initRoomInfo;
         this.state = {
             hideList: false,
             isDefault: false,
@@ -44,12 +43,7 @@ class RoomConfig extends Component {
     handleInput = (e, { value: nextValue }) => {
         let srcElem = e.target;
         let key = srcElem.type == 'radio' ? srcElem.name : srcElem.id;
-        switch (key) {
-            case "isDefault":
-                this.setState({ isDefault: srcElem.checked, hideList: !this.state.isDefault });
-                break;
-            default:
-                this.setState((prevState) => {
+        this.setState((prevState) => {
                     let result = update(prevState, {
                         inputFields: {
                             [key]: {
@@ -59,8 +53,7 @@ class RoomConfig extends Component {
                         }
                     });
                     return result;
-                });
-        }
+        });
         this.setState((prevState) => {
             let formError = !validate(JSON.parse(JSON.stringify(prevState)), srcElem.type);
             return { formError };
@@ -70,25 +63,26 @@ class RoomConfig extends Component {
 
     handleClick = (e) => {
         let srcElem = e.target;
+        let storeChunk = this.props.initRoomInfo;
+        let currentState = this.state;
         switch (srcElem.id) {
             case "join":
-                this.props.actions.joinRoom(this.state);
+                updateStoreInput(storeChunk,currentState.inputFields);
+                this.props.actions.joinRoom(storeChunk);
                 break;
             default:
 
         }
     }
 
-
-
     render() {
         return (
             <Grid columns='3'>
                 <Grid.Row centered>
                     <Grid.Column width={6}>
-                        <Header textAlign='left' padded as='h3'>Configure Room</Header>
+                        <Header textAlign='left' padded="true" as='h3'>Configure Room</Header>
                         <Form.Field required>
-                            <Grid columns="equals">
+                            <Grid columns="equal">
                                 <Grid.Column width={6} verticalAlign='middle'>
                                     <label htmlFor="roomnum">Room number : </label>
                                 </Grid.Column>
@@ -127,7 +121,7 @@ class RoomConfig extends Component {
                         <Divider vertical>And</Divider>
                     </Grid.Column>
                     <Grid.Column width={6} >
-                        <Header textAlign='left' padded as='h4'>Select a pointing method</Header>
+                        <Header textAlign='left' padded="true" as='h4'>Select a pointing method</Header>
                         <Form>
                             <Form.Field>
                                 Selected value: <b>{this.state.inputFields.pointingMethod.value}</b>
@@ -141,7 +135,7 @@ class RoomConfig extends Component {
                                     onChange={this.handleInput}
                                     id='Fibonacci'
                                 />
-                                {pointingMethod.Fib_no.map(fibno => <Label circular color="orange" size='big' key={fibno}>{fibno}</Label>)}
+                                {pmData["Fibonacci"].map(fibno => <Label circular color="orange" size='big' key={fibno}>{fibno}</Label>)}
                             </Form.Field>
                             <Form.Field>
                                 <Radio
@@ -152,7 +146,7 @@ class RoomConfig extends Component {
                                     onChange={this.handleInput}
                                     id='Exponential'
                                 />
-                                {pointingMethod.Exp_no.map(expno => <Label circular color="teal" size='big' key={expno}>{expno}</Label>)}
+                                {pmData["Exponential"].map(expno => <Label circular color="teal" size='big' key={expno}>{expno}</Label>)}
                             </Form.Field>
                             <Form.Field>
                                 <Radio
@@ -163,7 +157,7 @@ class RoomConfig extends Component {
                                     onChange={this.handleInput}
                                     id='Normal'
                                 />
-                                {pointingMethod.Nrml_no.map(nrmlno => <Label circular color="pink" size='big' key={nrmlno}>{nrmlno}</Label>)}
+                                {pmData["Normal"].map(nrmlno => <Label circular color="pink" size='big' key={nrmlno}>{nrmlno}</Label>)}
                             </Form.Field>
                             <Form.Field>
                                 <Radio
@@ -174,7 +168,7 @@ class RoomConfig extends Component {
                                     onChange={this.handleInput}
                                     id='Tshirt'
                                 />
-                                {pointingMethod.T_no.map(tno => <Label circular color="blue" size='big' key={tno}>{tno}</Label>)}
+                                {pmData["Tshirt"].map(tno => <Label circular color="blue" size='big' key={tno}>{tno}</Label>)}
                             </Form.Field>
                         </Form>
                     </Grid.Column>
