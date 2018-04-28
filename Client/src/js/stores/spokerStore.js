@@ -25,5 +25,5 @@ export default {
     },
     playerList : [],
     storyList : [],
-    pointList : [{userName:"Kevin",score:"20"},{userName:"Bob",score:"20"},{userName:"Stuart",score:"20"}]
+    pointList : [{userName:"Kevin",score:"10"},{userName:"Bob",score:"2"},{userName:"Stuart",score:"6"},{userName:"Raghav",score:null}]
 };

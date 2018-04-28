@@ -7,12 +7,11 @@ class PointCard extends Component {
     }
     render() {
         return (
-
             <Card style={{ margin: 10 }}>
                 <Image size="small" src={this.props.image} />
                 <Card.Content>
                     <Card.Description>
-                        {this.props.displayData}
+                        <b>{this.props.displayData}</b>
                     </Card.Description>
                 </Card.Content>
             </Card>);
