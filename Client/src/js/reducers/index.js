@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { NAV_ACTION,pokerActions } from '../actions/actionTypes';
 import { merge } from 'immutable';
+import update from 'immutability-helper';
 
 function welcomeReducer(state={},action){
     let newState = {};
@@ -15,6 +16,7 @@ function welcomeReducer(state={},action){
 function pokerReducer(state={},action){
     let newState = {};
     let tempState = {};
+    let from='';
     switch(action.type){
         case pokerActions.JOIN_ROOM:
                         action.payload.joined = true;
@@ -26,8 +28,14 @@ function pokerReducer(state={},action){
                         tempState.isMaster = true;
                         return Object.assign(newState,state,{playerInfo:tempState},{from:action.payload.from});  
         case pokerActions.PUBLISH_STORY:
-                        tempState = Object.assign({},state.storyInfo,action.payload);
-                        return Object.assign(newState,state,{storyInfo:tempState},{from:action.payload.from});  
+                        from = action.payload.from;
+                        tempState = update(state,{
+                            storyInfo:{$set:action.payload},
+                            from:{$set:from}
+                        })
+                        // tempState = Object.assign({},state.storyInfo,action.payload);
+                        // return Object.assign(newState,state,{storyInfo:tempState},{from:action.payload.from});  
+                        return tempState;
         case pokerActions.SELECT_POINT:
                         tempState = Object.assign({},state.playerInfo,action.payload);
                         return Object.assign(newState,state,{playerInfo:tempState},{from:action.payload.from});  

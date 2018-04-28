@@ -9,16 +9,16 @@ class PointCardList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      'showVotes':'false'
+      'showVotes': 'false'
     }
-    this.handleShowVotes=this.handleShowVotes.bind(this);
-    this.handleClearVotes=this.handleClearVotes.bind(this);
+    this.handleShowVotes = this.handleShowVotes.bind(this);
+    this.handleClearVotes = this.handleClearVotes.bind(this);
   }
-  handleShowVotes(){
-    this.setState({'showVotes':'true'});
+  handleShowVotes() {
+    this.setState({ 'showVotes': 'true' });
   }
-  handleClearVotes(){
-    this.setState({'showVotes':'false'});
+  handleClearVotes() {
+    this.setState({ 'showVotes': 'false' });
   }
   render() {
     return (
@@ -26,23 +26,60 @@ class PointCardList extends Component {
         <Grid columns={7} padded>
           <Grid.Row>
             {
-              this.props.pointList.map((user,i) => {
+              this.props.pointList.map((user, i) => {
                 return (
                   <Grid.Column key={i}>
-                    {this.state.showVotes =="false"?<PointCard showvotes={this.state.showVotes} displayData={user.userName} score={user.score} image={user.score != null ? votedImg : notVotedImg} />:<PointScoreCard point={user.score} image={angryImage} actions={()=>{}} displayData={user.userName}/>}
+                    <div class="flip-container" style={{
+                      perspective: '1000px', width: '80px',
+                      height: '200px'
+                    }} >
+                      <div class="flipper" style={{
+                        transition: '0.6s',
+                        transformStyle: 'preserve-3d',
+                        position: 'relative',
+                        transform: this.state.showVotes == "false"?'rotateY(0deg)':'rotateY(180deg)'
+                      }}>
+                        <div class="front" style={{
+                          width: '80px',
+                          height: '200px',
+                          backfaceVisibility: 'hidden',
+                          position: 'absolute',
+                          top: '0',
+                          left: '0',
+                          zIndex: '2',
+                          /* for firefox 31 */
+                          transform: 'rotateY(0deg)'
+                        }}>
+                          <PointCard  displayData={user.userName}
+                            score={user.score} image={user.score != null ? votedImg : notVotedImg} />
+                        </div>
+                        <div class="back" style={{
+                          width: '80px',
+                          height: '200px',
+                          backfaceVisibility: 'hidden',
+                          position: 'absolute',
+                          top: '0',
+                          left: '0',
+                          transform: 'rotateY(180deg)'
+                        }} >
+                          <PointScoreCard point={user.score}
+                            image={angryImage} actions={() => { }} displayData={user.userName} />
+                        </div>
+                      </div>
+                    </div>
                   </Grid.Column>
                 );
               })
             }
           </Grid.Row>
         </Grid>
-       <Grid>
-         <Grid.Column width={5}></Grid.Column>
-          <Grid.Column  floated='right' width={5}>
+        <Grid>
+          <Grid.Column width={5}></Grid.Column>
+          <Grid.Column floated='right' width={5}>
             <Button primary onClick={this.handleShowVotes} >Show Votes</Button>
             <Button secondary onClick={this.handleClearVotes}>Clear votes</Button>
           </Grid.Column>
-      </Grid>
+        </Grid>
       </div>);
   }
 }

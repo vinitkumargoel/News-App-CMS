@@ -6,6 +6,7 @@ import {
   Link
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import update from 'immutability-helper';
 
 //style imports
 import styles from '../../../../css/ScrumPokerStyle.css';
@@ -14,48 +15,58 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 
 //component imports
 import { languageOptions } from './common/commonData';
-import { updateStoreInput } from './common/utils';
+import { updateStoreInput, validate } from './common/utils';
+
 
 //semantic-ui imports
-import { Container, Header, Segment, Grid, Input, Icon, Checkbox, Dropdown, Label, Radio, Form, Divider, Button } from 'semantic-ui-react';
+import { Container, Message, Header, Segment, Grid, Input, Icon, Checkbox, Dropdown, TextArea, Label, Radio, Form, Divider, Button } from 'semantic-ui-react';
 
 //component
 class StoryDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      storyid: "",
-      epic: "",
-      storyflag : "",
-      description: ""
+      inputFields: {
+        storyID:{ value: '', type: 'number', required: true, error: false, show: true },
+        storyflag: { value: '', type: 'select', required: true, error: false, show: true },
+        epic: { value: '', type: 'text', required: true, error: false, show: true },
+        desc: { value: '', type: 'text', required: true, error: false, show: true },
+      },
+      storyList:[],
+      formError: true,
     };
+    
   }
 
-  handleInput = (e,data) => {
-    let srcElem = (data)?data:e.target;
-    switch (srcElem.id) {
-      case "storyid":
-        this.setState({ storyid: srcElem.value });
-        break;
-      case "epic":
-        this.setState({ epic: srcElem.value });
-        break;
-      case "storyflag":
-        this.setState({ storyflag: data.value });
-        break;
-      case "desc":
-        this.setState({ description: srcElem.value });
-        break;
-      default:
+  handleInput = (e, data) => {
+    let srcElem = data;
+    let key = srcElem.id;
+    this.setState((prevState) => {
+      let result = update(prevState, {
+        inputFields: {
+          [key]: {
+            value:
+            { $set: srcElem.value }
+          }
+        }
+      });
+      return result;
+    });
+    this.setState((prevState) => {
+      let formError = !validate(JSON.parse(JSON.stringify(prevState)), srcElem.type);
+      return { formError };
 
-    }
+    })
   }
 
   handleClick = (e) => {
     let srcElem = e.target;
+    let state = this.state;
     switch (srcElem.id) {
       case "publish":
-        this.props.actions.publishStory(this.state);
+        let data = {};
+        Object.keys(state.inputFields).forEach((item) => { data[item] = state.inputFields[item].value });
+        this.props.actions.publishStory(data);
         break;
       default:
 
@@ -70,33 +81,23 @@ class StoryDetails extends Component {
 
           <Grid columns="equal">
             <Grid.Column width={3}>
-              <label htmlFor="storyid">Story number: </label>
+              <label htmlFor="storyid">Story ID: </label>
             </Grid.Column>
             <Grid.Column width={8}>
-              <Input id="storyid" size="mini" placeholder='Enter number' defaultValue={this.state.storyid} onChange={this.handleInput} disabled={!this.props.isMaster} />
+              <Input id="storyID" type='number' value={this.state.inputFields.storyID.value} size="mini" placeholder='Enter number' onChange={this.handleInput} disabled={!this.props.isMaster} />
             </Grid.Column>
-            {/* <label htmlFor="storynum">Story Number : </label>
-              <input id="storynum" type="text" value={this.state.storyID} placeholder="Enter Story #"
-                onChange={this.handleInput} disabled={!this.state.isMaster} /> */}
+
           </Grid>
           <Grid columns="equal">
             <Grid.Column width={3}>
               <label htmlFor="epic">Epic : </label>
             </Grid.Column>
             <Grid.Column width={8}>
-              <Input id="epic" size="mini" placeholder='Enter number' defaultValue={this.state.epic} onChange={this.handleInput} disabled={!this.props.isMaster} />
+              <Input value={this.state.inputFields.epic.value} type='text' id="epic" size="mini" placeholder='Enter epic name'
+                onChange={this.handleInput} disabled={!this.props.isMaster} />
             </Grid.Column>
-            {/* <label htmlFor="storynum">Story Number : </label>
-              <input id="storynum" type="text" value={this.state.storyID} placeholder="Enter Story #"
-                onChange={this.handleInput} disabled={!this.state.isMaster} /> */}
+
           </Grid>
-
-          {/* <div className={styles.epic}>
-              <label htmlFor="epic">Epic : </label>
-              <input id="epic" type="text" value={this.state.epic} placeholder="Enter epic #"
-                onChange={this.handleInput} disabled={!this.state.isMaster} />
-            </div> */}
-
           <Grid columns="equal">
             <Grid.Column width={3}>
               <label htmlFor="storyflag">Story Flag: </label>
@@ -104,6 +105,7 @@ class StoryDetails extends Component {
             <Grid.Column width={9}>
               <Dropdown
                 button
+                value={this.state.inputFields.storyflag.value}
                 id="storyflag"
                 className='icon'
                 floating
@@ -113,7 +115,6 @@ class StoryDetails extends Component {
                 icon='flag'
                 options={languageOptions}
                 placeholder='Select choice'
-                defaultValue={this.state.storyflag} 
                 onChange={this.handleInput}
               />
             </Grid.Column>
@@ -125,22 +126,22 @@ class StoryDetails extends Component {
             </Grid.Column>
             <Grid.Column width={13}>
               <Form>
-                <Form.Field id="desc" disabled={!this.props.isMaster} 
-                defaultValue={this.state.description} onChange={this.handleInput} control='textarea' rows='3' />
+                <TextArea rows={3} value={this.state.inputFields.desc.value} id="desc" placeholder='Tell us more' disabled={!this.props.isMaster} onChange={this.handleInput} />
               </Form>
             </Grid.Column>
           </Grid>
-            <br/>
-          <Grid.Row>
-            {(this.props.isMaster)?<Button id="publish" onClick={this.handleClick} floated="right" color='blue'>Publish Story</Button>:null}
+          <br />
+          <Grid.Row centered>
+            <Message
+              error={this.state.formError}
+              content='Please make sure the values entered are correct'
+            />
           </Grid.Row>
+          <br />
 
-          {/* <div className={styles.desc}>
-              <label htmlFor="desc">Story Description : </label>
-              <textarea id="desc" type="text" value={this.state.description} placeholder="Enter Story Description"
-                onChange={this.handleInput} disabled={!this.state.isMaster}></textarea>
-            </div> */}
-          {/* {(!this.state.isMaster) ? null : <button id="publish" onClick={this.handleClick}>Publish Story</button>} */}
+          <Grid.Row>
+            {(this.props.isMaster) ? <Button id="publish" disabled={this.state.formError} onClick={this.handleClick} floated="right" color='blue'>Publish Story</Button> : null}
+          </Grid.Row>
         </Grid.Column>
       </Grid>
     );

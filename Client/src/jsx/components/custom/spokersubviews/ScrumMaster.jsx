@@ -38,13 +38,13 @@ class ScrumMaster extends Component {
         <Grid.Column width={1} />
         <Grid.Column width={14}>
           <Segment>
-            <Header textAlign='center' padded="true" as='h2'>Room name: Security & Fraud</Header>
+            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname+' room'}</Header>
             <Grid columns="equal">
               <Grid.Column width={12}>
-                <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />
+                <StoryDetails  isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />
                 <hr />
                 <PointCardList pointList={this.props.pointList} />
-                <StatisticalView/>
+                <StatisticalView roomInfo={this.props.roomInfo} />
               </Grid.Column>
 
               <Grid.Column width={4}>

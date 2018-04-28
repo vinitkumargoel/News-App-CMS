@@ -39,7 +39,7 @@ class ScrumPoker extends Component {
             } />)} />
             <Route path="/dashboard/spoker/join" render={(isMaster) ? () => (<ScrumMaster isMaster={isMaster}
                                                                                           initStoryInfo={this.props.store.storyInfo}
-                                                                                          initRoomInfo={this.props.store.roomInfo}
+                                                                                          roomInfo={this.props.store.roomInfo}
                                                                                           pointList={this.props.store.pointList}
                                                                                           playerList={this.props.store.playerList}
                                                                                           actions={{ publishStory: this.props.actions.publishStory }} />)

@@ -21,5 +21,5 @@ export const pmData = {
         '7', '8', '9', '10',
     ],
 } 
-export const typesToValidate = ['text','number','password','radio'];
+export const typesToValidate = ['text','number','password','radio','select'];
 
