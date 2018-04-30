@@ -23,7 +23,7 @@ class PlayerList extends Component {
   render() {
     return (
       <Segment>
-        <Header textAlign='center' padded="true" as='h2'>Player list</Header>
+        <Header textAlign='center' padded="true" as='h2'>Team</Header>
         {/* {
           this.props.playerList.map((p, i) => {
             return <p key={i}>{p}</p>;

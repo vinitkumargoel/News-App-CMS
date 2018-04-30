@@ -5,7 +5,7 @@ const wsHelper = {
     currentState : {},
     init: function(store){
         this.quit = store.subscribe(this.storeListener.bind(this,store));
-        this.socket = io('http://10.17.14.226:3002/spoker',{
+        this.socket = io('http://10.16.24.101:3002/spoker',{
                 transports: ['websocket']
         });
         this.serverListener.bind(this);
@@ -29,7 +29,7 @@ const wsHelper = {
                             this.socket.emit('storyinfo',this.currentState.poker.storyInfo);
                             break;
             case 'local3':
-                            this.socket.emit('point',this.currentState.poker.playerInfo);
+                            this.socket.emit('point',{userName:this.currentState.poker.playerInfo.usrid,score:this.currentState.poker.playerInfo.score});
                             break;
         } 
     },
@@ -39,6 +39,7 @@ const wsHelper = {
             store.dispatch({type:pokerActions.PLAYER_LIST,payload});
         });
         this.socket.on('points', (ps) => {
+            console.log(ps);
             let payload={ps,from:'server'};
             store.dispatch({type:pokerActions.POINT_LIST,payload});
         });
@@ -52,7 +53,7 @@ const wsHelper = {
         });
         this.socket.on('pm', (pm) => {
             let payload={pointingMethod:pm,from:'server'};
-            store.dispatch({type:pokerActions.ROOM_NUM,payload});
+            store.dispatch({type:pokerActions.P_M,payload});
         });
     }
 }

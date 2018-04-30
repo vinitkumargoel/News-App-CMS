@@ -50,9 +50,12 @@ function pokerReducer(state={},action){
         case pokerActions.POINT_LIST:
                         return Object.assign(newState,state,{pointList:action.payload.ps},{from:action.payload.from});
         case pokerActions.STORY_DETAILS:
-                        return Object.assign(newState,state,{pointList:action.payload.sd},{from:action.payload.from});
+                        return Object.assign(newState,state,{storyInfo:action.payload.sd},{from:action.payload.from});
         case pokerActions.ROOM_NUM:
                         tempState = Object.assign({},state.roomInfo,{roomnum:action.payload.roomnum});
+                        return Object.assign(newState,state,{roomInfo:tempState},{from:action.payload.from});
+        case pokerActions.P_M:
+                        tempState = Object.assign({},state.roomInfo,{pointingMethod:action.payload.pointingMethod});
                         return Object.assign(newState,state,{roomInfo:tempState},{from:action.payload.from});
         default:
                         return state;

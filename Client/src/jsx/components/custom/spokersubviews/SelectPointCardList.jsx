@@ -5,17 +5,18 @@ import SelectPointCard from './SelectPointCard'
 import {pointingMethod} from './common/commonData';
 class SelectPointCardList extends Component {
   render() {
+    let pointsList = this.props.pointingMethod;
     return (
       <Grid columns={6} padded>
         <Grid.Row>
           {
-            this.props.pointingMethod.map((p,i) => {
+            (pointsList)?(pointsList.map((p,i) => {
               return (
                 <Grid.Column key={i}>
                   <SelectPointCard point={p} image={selectVote} actions={this.props.actions}/>
                 </Grid.Column>
               );
-            })
+            })):null
           }
         </Grid.Row>
       </Grid>);

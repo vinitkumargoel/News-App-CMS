@@ -26,7 +26,7 @@ class PointCardList extends Component {
         <Grid columns={7} padded>
           <Grid.Row>
             {
-              this.props.pointList.map((user, i) => {
+             this.props.pointList.length>0? this.props.pointList.map((user, i) => {
                 return (
                   <Grid.Column key={i}>
                     <div className="flip-container" style={{
@@ -68,14 +68,14 @@ class PointCardList extends Component {
                       </div>
                     </div>
                   </Grid.Column>
-                );
-              })
+                )
+              }):null
             }
           </Grid.Row>
         </Grid>
         <Grid>
           <Grid.Column width={5}></Grid.Column>
-          <Grid.Column floated='right' width={5}>
+          <Grid.Column floated='right' width={7}>
             <Button primary onClick={this.handleShowVotes} >Show Votes</Button>
             <Button secondary onClick={this.handleClearVotes}>Clear votes</Button>
           </Grid.Column>

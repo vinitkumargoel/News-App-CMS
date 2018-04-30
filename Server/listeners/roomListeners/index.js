@@ -13,7 +13,7 @@ module.exports = function(socket,ns){
         console.log(pi);
         spokerClients.set(socket.id,pi.usrid);
         socket.join(pi.roomid,()=>{
-            socket.emit('players',Array.from(spokerClients.values()));
+            ns.emit('players',Array.from(spokerClients.values()));
             socket.emit('pm',roominfo.pointingMethod);
         });
     });
@@ -22,11 +22,11 @@ module.exports = function(socket,ns){
         console.log(ri);
         roominfo = ri;
         spokerClients.set(socket.id,ri.adminName);
-        socket.emit('players',Array.from(spokerClients.values()));
+        ns.emit('players',Array.from(spokerClients.values()));
     });
 
     socket.on('storyinfo',(si)=>{
-        console.log(si);
+        ns.emit('story',si);
     });
 
     socket.on('point',(p)=>{
@@ -41,5 +41,11 @@ module.exports = function(socket,ns){
 
     socket.on('clear',(ri)=>{
         pointList = new Map();
+    });
+
+    socket.on('disconnect',()=>{
+        pointList.delete(socket.id);
+        spokerClients.delete(socket.id);
+        ns.emit('players',Array.from(spokerClients.values()));
     });
 }

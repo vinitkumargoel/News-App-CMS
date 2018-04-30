@@ -8,6 +8,7 @@ export const pokerActions = {
     STORY_DETAILS : "STORY_DETAILS",
     POINT_LIST : "POINT_LIST",
     STORY_LIST : "STORY_LIST",
-    ROOM_NUM : "ROOM_NUM"
+    ROOM_NUM : "ROOM_NUM",
+    P_M : "P_M"
 };
 

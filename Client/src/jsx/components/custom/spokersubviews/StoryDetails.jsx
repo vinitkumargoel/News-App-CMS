@@ -84,7 +84,8 @@ class StoryDetails extends Component {
               <label htmlFor="storyid">Story ID: </label>
             </Grid.Column>
             <Grid.Column width={8}>
-              <Input id="storyID" type='number' value={this.state.inputFields.storyID.value} size="mini" placeholder='Enter number' onChange={this.handleInput} disabled={!this.props.isMaster} />
+              {(!this.props.isMaster)?<label id="storyID">{this.props.initStoryInfo.storyID}</label>
+              :<Input id="storyID" type='number' value={this.state.inputFields.storyID.value} size="mini" placeholder='Enter number' onChange={this.handleInput} disabled={!this.props.isMaster} />}
             </Grid.Column>
 
           </Grid>
@@ -93,8 +94,9 @@ class StoryDetails extends Component {
               <label htmlFor="epic">Epic : </label>
             </Grid.Column>
             <Grid.Column width={8}>
+              {(!this.props.isMaster)?<label id="epic">{this.props.initStoryInfo.epic}</label>:
               <Input value={this.state.inputFields.epic.value} type='text' id="epic" size="mini" placeholder='Enter epic name'
-                onChange={this.handleInput} disabled={!this.props.isMaster} />
+                onChange={this.handleInput} disabled={!this.props.isMaster} />}
             </Grid.Column>
 
           </Grid>
@@ -103,6 +105,7 @@ class StoryDetails extends Component {
               <label htmlFor="storyflag">Story Flag: </label>
             </Grid.Column>
             <Grid.Column width={9}>
+              {(!this.props.isMaster)?<label id="storyflag">{this.props.initStoryInfo.storyflag}</label>:
               <Dropdown
                 button
                 value={this.state.inputFields.storyflag.value}
@@ -116,7 +119,7 @@ class StoryDetails extends Component {
                 options={languageOptions}
                 placeholder='Select choice'
                 onChange={this.handleInput}
-              />
+              />}
             </Grid.Column>
           </Grid>
 
@@ -125,17 +128,18 @@ class StoryDetails extends Component {
               <label htmlFor="desc">Story description: </label>
             </Grid.Column>
             <Grid.Column width={13}>
+              {(!this.props.isMaster)?<label id="desc">{this.props.initStoryInfo.desc}</label>:
               <Form>
                 <TextArea rows={3} value={this.state.inputFields.desc.value} id="desc" placeholder='Tell us more' disabled={!this.props.isMaster} onChange={this.handleInput} />
-              </Form>
+              </Form>}
             </Grid.Column>
           </Grid>
           <br />
           <Grid.Row centered>
-            <Message
+            {(this.props.isMaster) ?<Message
               error={this.state.formError}
               content='Please make sure the values entered are correct'
-            />
+            />:null}
           </Grid.Row>
           <br />
 

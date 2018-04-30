@@ -26,5 +26,5 @@ export default {
     },
     playerList : [],
     storyList : [],
-    pointList : [{userName:"",score:null}]
+    pointList : []
 };
