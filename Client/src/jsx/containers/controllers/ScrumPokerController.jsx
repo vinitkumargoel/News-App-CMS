@@ -55,25 +55,24 @@ const mapActionsToProps = (dispatch,ownProps)=>{
     return {
         joinRoom : (pl)=>{  
             pl.id = 0;
-            pl.from = "local";  
+            pl.from = "local0";  
             dispatch(spokerAction(pl));         
         },
         createRoom : (pl) => {
           pl.id = 1;
-          pl.from = "local";
+          pl.from = "local1";
           dispatch(spokerAction(pl));
         },
         publishStory : (pl) => {
           pl.id = 2;
-          pl.from = "local";
+          pl.from = "local2";
           dispatch(spokerAction(pl));
         },
         selectPoint : (pl) => {
           pl.id = 3;
-          pl.from = "local";
+          pl.from = "local3";
           dispatch(spokerAction(pl));
         }
-
     };
 }
 

@@ -2,6 +2,7 @@ import io from 'socket.io-client';
 import { NAV_ACTION,pokerActions } from '../actions/actionTypes';
 
 const wsHelper = {
+    currentState : {},
     init: function(store){
         this.quit = store.subscribe(this.storeListener.bind(this,store));
         this.socket = io('http://10.17.14.226:3002/spoker',{
@@ -12,15 +13,30 @@ const wsHelper = {
     quit: new Function(),
     socket:{},
     storeListener : function(store){
-        let state = store.getState();
-        console.log(state);
-        state.poker.from !== 'server' && this.socket.emit('store',state.poker);
+        this.currentState = store.getState();
+        switch(this.currentState.poker.from){
+            case 'local0':
+                            if(this.currentState.poker.playerInfo.isMaster){
+                                this.socket.emit('roominfo',this.currentState.poker.roomInfo);
+                            }else{
+                                this.socket.emit('playerinfo',this.currentState.poker.playerInfo);
+                            }
+                            break;
+            case 'local1':
+                            this.socket.emit('createroom',Date.now());
+                            break;
+            case 'local2':
+                            this.socket.emit('storyinfo',this.currentState.poker.storyInfo);
+                            break;
+            case 'local3':
+                            this.socket.emit('point',this.currentState.poker.playerInfo);
+                            break;
+        } 
     },
     serverListener : function(store){
-        this.socket.on('users', (cls) => {
+        this.socket.on('players', (cls) => {
             let payload={cls,from:'server'};
-            console.log(cls);
-            store.dispatch({type:pokerActions.USER_LIST,payload});
+            store.dispatch({type:pokerActions.PLAYER_LIST,payload});
         });
         this.socket.on('points', (ps) => {
             let payload={ps,from:'server'};
@@ -29,6 +45,14 @@ const wsHelper = {
         this.socket.on('story', (sd) => {
             let payload={sd,from:'server'};
             store.dispatch({type:pokerActions.STORY_DETAILS,payload});
+        });
+        this.socket.on('roomid', (roomid) => {
+            let payload={roomnum:roomid,from:'server'};
+            store.dispatch({type:pokerActions.ROOM_NUM,payload});
+        });
+        this.socket.on('pm', (pm) => {
+            let payload={pointingMethod:pm,from:'server'};
+            store.dispatch({type:pokerActions.ROOM_NUM,payload});
         });
     }
 }

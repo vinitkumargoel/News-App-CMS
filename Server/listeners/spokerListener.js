@@ -7,10 +7,6 @@ const spokerListener = function(spokerNS,socket){
 
     roomListener(socket,spokerNS);
 
-    socket.on('joinroom',(room)=>{
-        roomListener(socket,spokerNS);
-    });
-
     socket.on('disconnect',()=>{
         
     });

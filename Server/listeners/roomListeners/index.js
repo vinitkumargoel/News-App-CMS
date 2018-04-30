@@ -1,27 +1,36 @@
 const spokerClients = new Map();
 const pointList = new Map(); 
+var roominfo = {};
 
 module.exports = function(socket,ns){
-    socket.on('createroom',()=>{
+    socket.on('createroom',(room)=>{
         socket.join(room,()=>{
-
+            ns.emit('roomid',room);
         });
     });
 
-    socket.on('store',(store)=>{
-        console.log(store);
-        ns.emit('users',Array.from(spokerClients.values()));
-    });
-
-    socket.on('usrinfo',(ui)=>{
-        spokerClients.set(socket.id,ui.usrid);
+    socket.on('playerinfo',(pi)=>{
+        console.log(pi);
+        spokerClients.set(socket.id,pi.usrid);
+        socket.join(pi.roomid,()=>{
+            socket.emit('players',Array.from(spokerClients.values()));
+            socket.emit('pm',roominfo.pointingMethod);
+        });
     });
 
     socket.on('roominfo',(ri)=>{
+        console.log(ri);
+        roominfo = ri;
         spokerClients.set(socket.id,ri.adminName);
+        socket.emit('players',Array.from(spokerClients.values()));
+    });
+
+    socket.on('storyinfo',(si)=>{
+        console.log(si);
     });
 
     socket.on('point',(p)=>{
+        console.log(p);
         let points = [];
         pointList.set(socket.id,p);
         pointList.forEach((value, key, map)=>{
@@ -30,12 +39,7 @@ module.exports = function(socket,ns){
         ns.emit('points',points);
     });
 
-    socket.on('point',(p)=>{
-        let points = [];
-        pointList.set(socket.id,p);
-        pointList.forEach((value, key, map)=>{
-            points.push(value);
-        })
-        ns.emit('points',points);
+    socket.on('clear',(ri)=>{
+        pointList = new Map();
     });
 }

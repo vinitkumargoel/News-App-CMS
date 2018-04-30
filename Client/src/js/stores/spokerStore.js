@@ -1,4 +1,5 @@
 export default {
+    from:"",
     playerInfo :{
         isMaster : false,
         usrid : "",
@@ -15,15 +16,15 @@ export default {
         pwd : "",
         adminName: "",
         fileID : "",
-        pointingMethod : "Fibonacci"
+        pointingMethod : ""
     },
     storyInfo : {
         storyid: "",
         epic: "",
-        description: "No story added yet",
+        description: "",
         storyflag: ""
     },
     playerList : [],
     storyList : [],
-    pointList : [{userName:"Kevin",score:"10"},{userName:"Bob",score:"2"},{userName:"Stuart",score:"6"},{userName:"Raghav",score:null}]
+    pointList : [{userName:"",score:null}]
 };

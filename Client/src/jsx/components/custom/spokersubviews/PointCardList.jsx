@@ -29,17 +29,17 @@ class PointCardList extends Component {
               this.props.pointList.map((user, i) => {
                 return (
                   <Grid.Column key={i}>
-                    <div class="flip-container" style={{
+                    <div className="flip-container" style={{
                       perspective: '1000px', width: '80px',
                       height: '200px'
                     }} >
-                      <div class="flipper" style={{
+                      <div className="flipper" style={{
                         transition: '0.6s',
                         transformStyle: 'preserve-3d',
                         position: 'relative',
                         transform: this.state.showVotes == "false"?'rotateY(0deg)':'rotateY(180deg)'
                       }}>
-                        <div class="front" style={{
+                        <div className="front" style={{
                           width: '80px',
                           height: '200px',
                           backfaceVisibility: 'hidden',
@@ -53,7 +53,7 @@ class PointCardList extends Component {
                           <PointCard  displayData={user.userName}
                             score={user.score} image={user.score != null ? votedImg : notVotedImg} />
                         </div>
-                        <div class="back" style={{
+                        <div className="back" style={{
                           width: '80px',
                           height: '200px',
                           backfaceVisibility: 'hidden',

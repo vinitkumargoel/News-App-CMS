@@ -30,7 +30,6 @@ class RoomConfig extends Component {
             isDefault: false,
             inputFields: {
                 pointingMethod: { value: '', type: 'radio', required: true, error: false, show: true },
-                roomnum: { value: '', type: 'number', required: true, error: false, show: true },
                 roomname: { value: '', type: 'text', required: true, error: false, show: true },
                 adminName: { value: '', type: 'text', required: true, error: false, show: true },
                 fileID: { value: '', type: 'number', required: true, error: false, show: true },
@@ -87,7 +86,7 @@ class RoomConfig extends Component {
                                     <label htmlFor="roomnum">Room number : </label>
                                 </Grid.Column>
                                 <Grid.Column width={8}>
-                                    <Input id='roomnum' type='number' size="mini" placeholder='123456' onChange={this.handleInput} />
+                                    <label id='roomnum' type='number' size="mini">{this.props.initRoomInfo.roomnum} </label>
                                 </Grid.Column>
                                 <Grid.Column width={6} verticalAlign='middle'>
                                     <label htmlFor="roomname">Room name : </label>
