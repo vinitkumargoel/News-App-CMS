@@ -18,11 +18,6 @@ class SelectPointCard extends Component {
                 transform: 'translate(-50%, -50%)', border: 'none', fontSize: '350%' , color: 'black', }}>
                 {this.props.point}
                 </Card.Content>
-                <Card.Content>
-                    <Card.Description>
-                        {this.props.displayData}
-                    </Card.Description>
-                </Card.Content>
             </Card>);
     }   
 }
