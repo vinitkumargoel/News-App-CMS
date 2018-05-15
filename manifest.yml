@@ -1,6 +1,5 @@
 applications:
--path :
-  memory: 256M
+- memory: 256M
   name: scrum-poker
-  host: lucifer
+  host: lucifer-lime
   buildpack: sdk-for-nodejs
