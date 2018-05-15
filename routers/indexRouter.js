@@ -6,7 +6,7 @@ const iR = express.Router();
 const iMW = require('../middlewares/indexMW');
 
 //general middlewares
-iR.use(iMW.test('localhost:3002'));
+iR.use(iMW.test('localhost:3003'));
 
 //routes
 iR.post('/welcome',iMW.welcome);

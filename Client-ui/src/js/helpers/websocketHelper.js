@@ -1,11 +1,13 @@
 import io from 'socket.io-client';
 import { NAV_ACTION,pokerActions } from '../actions/actionTypes';
 
+const socket_domain = window.location.host;
+
 const wsHelper = {
     currentState : {},
     init: function(store){
         this.quit = store.subscribe(this.storeListener.bind(this,store));
-        this.socket = io('http://10.16.24.101:3002/spoker',{
+        this.socket = io(socket_domain+'/spoker',{
                 transports: ['websocket']
         });
         this.serverListener.bind(this);
