@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { NAV_ACTION,pokerActions } from '../actions/actionTypes';
-import { merge } from 'immutable';
 import update from 'immutability-helper';
 
 function welcomeReducer(state={},action){

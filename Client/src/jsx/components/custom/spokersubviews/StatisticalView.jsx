@@ -5,33 +5,49 @@ import { pmData } from './common/commonData';
 import update from 'immutability-helper';
 import { updateStoreInput, validate } from './common/utils';
 
+let plNew = {};
+
 class StatisticalView extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props.pointList);
         this.state = {
             inputFields: {
                 pointInput: { value: '', type: 'select', required: false, error: false, show: true },
             },
-            pointsCount: {
-                "1": 4,
-                "2": 6,
-                "3": 7,
-                "4": 5,
-                "5": 9,
-                "6": 5
-            },
+            pointsCount: this.props.pointList.map((item)=>{
+                return item.score;
+            }),
             votingDetails: {
-                "Highest story point": 3,
-                "Least story Point": 1,
-                "Average story Point": 4,
-                "People voted": 9,
-                "People who didn't vote": 5
+                "Highest story point": 0,
+                "Least story Point": 0,
+                "Average story Point": 0,
+                "People voted": 0,
+                "People who didn't vote": 0
             },
             averagePoint: 8,
             open: false,
             formError:true
         }
+        console.log(this.state.pointsCount);
     }
+
+    //this should be removed
+    componentWillReceiveProps(newProps,prevState){
+        console.log(newProps.pointList);
+        let pc = this.calculateFrequency(newProps.pointList.map((item)=>{
+            return item.score;
+        }));
+        this.setState({pointsCount: pc});
+    }
+
+    calculateFrequency = (pl)=>{
+        pl.map((p)=>{
+            plNew[p] = (plNew[p])?++plNew[p]:1;
+        });
+        return plNew;
+    }
+
     handleClick = (e, data) => {
         if (e.target.innerText.trim() === 'Cancel') {
             this.setState({ open: false });
@@ -68,7 +84,7 @@ class StatisticalView extends Component {
 
     }
     render() {
-        const pointOptions = pmData[this.props.roomInfo.pointingMethod].map((item) =>
+        const pointOptions = this.props.pointList.map((item) =>
             ({ key: item, text: item, value: item }));
         return (
             <div>
@@ -87,9 +103,9 @@ class StatisticalView extends Component {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                {Object.keys(this.state.pointsCount).map((key) => {
+                                {Object.getOwnPropertyNames(this.state.pointsCount).map((key,i) => {
                                     return (
-                                        <Table.Row key={key}>
+                                        <Table.Row key={i}>
                                             <Table.Cell>{key}</Table.Cell>
                                             <Table.Cell>{this.state.pointsCount[key]}</Table.Cell>
                                         </Table.Row>)

@@ -1,15 +1,9 @@
-const roomListener = require('./roomListeners');
+const { spokerRoomListener } = require('./roomListeners');
+const { Session } = require('../utils').sessionUtil;
+
 const spokerListener = function(spokerNS,socket){
-    spokerNS.clients((err,clients)=>{
-        if(err) throw err;
-        console.log(clients);
-    });
-
-    roomListener(socket,spokerNS);
-
-    socket.on('disconnect',()=>{
-        
-    });
+    let session = new Session();
+    spokerRoomListener(spokerNS,socket,session);
 }
 
 module.exports = spokerListener;

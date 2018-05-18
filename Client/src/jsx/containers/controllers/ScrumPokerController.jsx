@@ -69,6 +69,7 @@ const mapActionsToProps = (dispatch,ownProps)=>{
           dispatch(spokerAction(pl));
         },
         selectPoint : (pl) => {
+          console.log("selected point ====> ",pl);
           pl.id = 3;
           pl.from = "local3";
           dispatch(spokerAction(pl));

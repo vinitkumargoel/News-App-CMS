@@ -6,13 +6,9 @@ class PointScoreCard extends Component {
         super(props);
     }
 
-    handleClick = (e)=>{
-        this.props.actions.selectPoint({score:e.target.innerHTML});
-    }
-
     render() {
         return (
-            <Card id={this.props.point} style={{ margin: 10, cursor: 'pointer' }} onClick={this.handleClick} >
+            <Card id={this.props.point} style={{ margin: 10, cursor: 'pointer' }} >
                 <Image size="small" src={this.props.image} />
                 <Card.Content style={{position:"absolute", left: '45%', top:'52%',
                 transform: 'translate(-50%, -50%)', border: 'none', fontSize: '250%' , color: 'black', }}>

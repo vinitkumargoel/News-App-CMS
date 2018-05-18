@@ -1,21 +1,30 @@
-const app = require('express')();
+const express = require('express');
+const path = require('path');
+const app = express();
 const httpServer = require('http').Server(app);
-const PORT = 3002;
 const sockServer =  require('socket.io');
-const io = sockServer({
-	serveClient : false,
+var socketRedis = require('socket.io-redis');
+const { config } = require('../utils');
+
+/* --------- WEBSOCKET API --------- */
+//socket server config
+const redisAdapter = socketRedis({
+									key : 'spoker',
+									host : config.globalConfig.hosts.REDIS,
+									port : config.globalConfig.ports.REDIS
+								});
+
+const io = sockServer(httpServer,{
+	serveClient : true,
 	pingInterval : 5000,
 	pingTimeout : 5000,
 	cookie : false,
 	transports : ['websocket'],
+	adapter : redisAdapter
 });
 
 //listener imports
-const spokerListener = require('../listeners/spokerListener');
-
-//server bindings
-io.attach(httpServer);
-io.attach(PORT);
+const { spokerListener } = require('../listeners');
 
 //generate custom socketids
 let sid = 0;
@@ -27,7 +36,22 @@ io.engine.generateId = (req) => {
 const spokerNS = io.of('/spoker');
 
 //initiate connection
-spokerNS.on('connection', spokerListener.bind(this,spokerNS));
+spokerNS.on('connection', (socket)=>{
+	spokerListener(spokerNS,socket);
+});
+
+/* --------- WEBSOCKET API --------- */
 
 
+/* --------- HTTP API --------- */
+
+//api middlewares
+app.use(express.static(path.join(config.CLIENT_ROOTPATH,'/build/'),{index:['index.html']}));
+
+//api server config
+httpServer.listen(config.globalConfig.ports.HTTP,()=>{
+	console.log("http server is listening on port ",config.globalConfig.ports.HTTP);
+});
+
+/* --------- HTTP API --------- */
 

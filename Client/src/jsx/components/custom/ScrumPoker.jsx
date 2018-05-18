@@ -25,7 +25,6 @@ import { Container, Header } from 'semantic-ui-react';
 class ScrumPoker extends Component {
 
   render() {
-    console.log(this.props.store.roomInfo);
     let isMaster = this.props.store.playerInfo.isMaster;
     return (
       <Container fluid>

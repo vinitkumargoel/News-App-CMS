@@ -1,12 +1,14 @@
 import io from 'socket.io-client';
 import { NAV_ACTION,pokerActions } from '../actions/actionTypes';
 
+
 const wsHelper = {
     currentState : {},
     init: function(store){
         this.quit = store.subscribe(this.storeListener.bind(this,store));
-        this.socket = io('http://10.16.24.101:3002/spoker',{
-                transports: ['websocket']
+        this.socket = io(window.location.host+'/spoker',{
+                transports: ['websocket'],
+
         });
         this.serverListener.bind(this);
     },
@@ -39,7 +41,6 @@ const wsHelper = {
             store.dispatch({type:pokerActions.PLAYER_LIST,payload});
         });
         this.socket.on('points', (ps) => {
-            console.log(ps);
             let payload={ps,from:'server'};
             store.dispatch({type:pokerActions.POINT_LIST,payload});
         });
