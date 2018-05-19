@@ -136,10 +136,10 @@ class StoryDetails extends Component {
           </Grid>
           <br />
           <Grid.Row centered>
-            {(this.props.isMaster) ?<Message
+            {(this.props.isMaster&&this.state.formError) &&<Message
               error={this.state.formError}
               content='Please make sure the values entered are correct'
-            />:null}
+            />}
           </Grid.Row>
           <br />
 

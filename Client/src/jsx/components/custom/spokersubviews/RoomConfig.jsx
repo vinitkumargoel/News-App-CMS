@@ -190,10 +190,10 @@ class RoomConfig extends Component {
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row centered>
-                    <Message
+                {this.state.formError&&<Message
                         error={this.state.formError}
                         content='Please make sure the values entered are correct'
-                    />
+                    />}
                 </Grid.Row>
                 <Grid.Row centered>
                     <Link to={"/dashboard/spoker/join"} style={{ pointerEvents: this.state.formError ? 'none' : 'auto' }}>

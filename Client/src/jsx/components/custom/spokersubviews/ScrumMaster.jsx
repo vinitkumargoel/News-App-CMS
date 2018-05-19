@@ -44,7 +44,7 @@ class ScrumMaster extends Component {
                 <StoryDetails  isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />
                 <hr />
                 <PointCardList pointList={this.props.pointList} />
-                <StatisticalView pointList={this.props.pointList} />
+                <StatisticalView roomInfo={this.props.roomInfo} pointList={this.props.pointList} />
               </Grid.Column>
 
               <Grid.Column width={4}>
