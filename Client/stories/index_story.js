@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import SelectPointCard from '../src/jsx/components/custom/spokersubviews/SelectPointCard.jsx'
 import selectVote from '../src/img/jpg/angry.jpg';
 let actions = {
-    selectPoint: (obj) => { action('clicked')(obj) }
+    selectPoint:(obj)=>{action('Clicked')(obj)}
 };
  
 storiesOf('SelectPointCard', module)
