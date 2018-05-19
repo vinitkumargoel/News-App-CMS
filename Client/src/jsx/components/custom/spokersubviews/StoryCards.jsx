@@ -12,19 +12,35 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 
 //container imports
 
-//component imports
-
+//semantic-ui imports
+import { Grid,Button, Image, List, Segment, Header, Icon } from 'semantic-ui-react';
 
 //component
 class StoryCards extends Component {
 
   render() {
     return (
-            <div className={styles.smaster}>
-                    <h3>Stories Estimated</h3>
-                    <button>Export</button>
-                    <hr/>
-            </div>
+      <Segment >
+      <Grid textAlign='center'>
+        <Grid.Row >
+          <Header  padded="true" as='h3'>Stories Estimated</Header>
+        </Grid.Row>
+        <Grid.Row style={{ minWidth: '200px', minHeight: '362px', maxHeight: '362px', overflowY: 'auto' }}>
+          <List divided verticalAlign='middle'>
+            {this.props.playerList.map((user, i) =>
+              <List.Item key={i}>
+                <List.Content floated='right'>
+                  <Button>Chat</Button>
+                </List.Content>
+                <Icon name='user' />
+                <List.Content>
+                  {user}
+                </List.Content>
+              </List.Item>)}
+          </List>
+        </Grid.Row>
+      </Grid>
+    </Segment>
     );
   }
 }
