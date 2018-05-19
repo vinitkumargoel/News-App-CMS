@@ -1,5 +1,6 @@
 //core imports
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {
     BrowserRouter as Router,
     Route,
@@ -7,7 +8,7 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { pmData, typesToValidate } from './common/commonData';
-import { validate,updateStoreInput } from './common/utils';
+import { validate, updateStoreInput } from './common/utils';
 import update from 'immutability-helper';
 
 
@@ -25,6 +26,7 @@ import { Message, Container, Header, Segment, Grid, Input, Icon, Checkbox, List,
 class RoomConfig extends Component {
     constructor(props) {
         super(props);
+        this.pageRefs = {};
         this.state = {
             hideList: false,
             isDefault: false,
@@ -43,15 +45,15 @@ class RoomConfig extends Component {
         let srcElem = e.target;
         let key = srcElem.type == 'radio' ? srcElem.name : srcElem.id;
         this.setState((prevState) => {
-                    let result = update(prevState, {
-                        inputFields: {
-                            [key]: {
-                                value:
-                                { $set: srcElem.value }
-                            }
-                        }
-                    });
-                    return result;
+            let result = update(prevState, {
+                inputFields: {
+                    [key]: {
+                        value:
+                            { $set: srcElem.value }
+                    }
+                }
+            });
+            return result;
         });
         this.setState((prevState) => {
             let formError = !validate(JSON.parse(JSON.stringify(prevState)), srcElem.type);
@@ -66,7 +68,7 @@ class RoomConfig extends Component {
         let currentState = this.state;
         switch (srcElem.id) {
             case "join":
-                updateStoreInput(storeChunk,currentState.inputFields);
+                updateStoreInput(storeChunk, currentState.inputFields);
                 this.props.actions.joinRoom(storeChunk);
                 break;
             default:
@@ -74,6 +76,16 @@ class RoomConfig extends Component {
         }
     }
 
+    handleCopy = (refName, tag) => {
+        let elem = ReactDOM.findDOMNode(this.pageRefs[refName]);
+        elem = elem && elem.querySelector(tag);
+        elem.focus();
+        elem.select();
+        document.execCommand("copy");
+    }
+    setRef = (ref) => {
+        this.pageRefs.roomNum = ref;
+    }
     render() {
         return (
             <Grid columns='3'>
@@ -86,7 +98,12 @@ class RoomConfig extends Component {
                                     <label htmlFor="roomnum">Room number : </label>
                                 </Grid.Column>
                                 <Grid.Column width={8}>
-                                    <label id='roomnum' type='number' size="mini">{this.props.initRoomInfo.roomnum} </label>
+                                    <Input
+                                        ref={this.setRef}
+                                        size="mini"
+                                        action={{ color: 'teal', icon: 'copy', onClick: this.handleCopy.bind(this, 'roomNum', 'input') }}
+                                        value={this.props.initRoomInfo.roomnum}
+                                    />
                                 </Grid.Column>
                                 <Grid.Column width={6} verticalAlign='middle'>
                                     <label htmlFor="roomname">Room name : </label>
@@ -179,7 +196,7 @@ class RoomConfig extends Component {
                     />
                 </Grid.Row>
                 <Grid.Row centered>
-                    <Link to={"/dashboard/spoker/join"} style={{pointerEvents:this.state.formError?'none':'auto'}}>
+                    <Link to={"/dashboard/spoker/join"} style={{ pointerEvents: this.state.formError ? 'none' : 'auto' }}>
                         <Button disabled={this.state.formError} id='join' color="green" onClick={this.handleClick}>
                             <Icon name='plus' />Create
                                     </Button>
