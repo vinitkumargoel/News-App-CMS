@@ -68,7 +68,7 @@ class StatisticalView extends Component {
         values.sort((a, b) => a - b);
         let lowMiddle = Math.floor((values.length - 1) / 2);
         let highMiddle = Math.ceil((values.length - 1) / 2);
-        let median = (parseInt(values[lowMiddle]) + parseInt(values[highMiddle])) / 2;
+        let median = Math.ceil((parseInt(values[lowMiddle]) + parseInt(values[highMiddle])) / 2);
         
         votingDetails.peopleVoted=values.length;
         votingDetails.peopleNotVoted=(this.props.playerList.length-1)-newProps.pointList.length;

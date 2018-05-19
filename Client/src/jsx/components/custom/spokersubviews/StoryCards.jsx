@@ -25,20 +25,6 @@ class StoryCards extends Component {
         <Grid.Row >
           <Header  padded="true" as='h3'>Stories Estimated</Header>
         </Grid.Row>
-        <Grid.Row style={{ minWidth: '200px', minHeight: '362px', maxHeight: '362px', overflowY: 'auto' }}>
-          <List divided verticalAlign='middle'>
-            {this.props.playerList.map((user, i) =>
-              <List.Item key={i}>
-                <List.Content floated='right'>
-                  <Button>Chat</Button>
-                </List.Content>
-                <Icon name='user' />
-                <List.Content>
-                  {user}
-                </List.Content>
-              </List.Item>)}
-          </List>
-        </Grid.Row>
       </Grid>
     </Segment>
     );
