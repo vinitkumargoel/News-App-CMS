@@ -56,8 +56,8 @@ class SPLauncher extends Component {
         }
       }
       else
-        if (field.type == 'email' && field.value.trim() != '') {
-          let result = re.test(field.value.toLowerCase());
+        if (field.type == 'email') {
+          let result = field.value.trim() === ''?true:re.test(field.value.toLowerCase());
           state[item].error = !result;
           return result;
         }
@@ -178,10 +178,10 @@ class SPLauncher extends Component {
                 }
                 <Grid.Row><Form.Checkbox id="isMaster" checked={state.isMaster} fluid="true" label='Join as Admin' onChange={this.handleInput} /></Grid.Row>
                 <Grid.Row>
-                  <Message
+                  {state.formError&&<Message
                     error={state.formError}
                     content='Please make sure the values entered are correct'
-                  /></Grid.Row>
+                  />}</Grid.Row>
                 <Grid.Row>
                   <Link to={"/dashboard/spoker/join"} style={{pointerEvents:state.formError?'none':'auto'}}>
                     <Button disabled={state.formError} id="join" color='blue' onClick={this.handleClick}>Join Room</Button>

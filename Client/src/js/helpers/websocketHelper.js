@@ -1,7 +1,16 @@
 import io from 'socket.io-client';
 import { NAV_ACTION,pokerActions } from '../actions/actionTypes';
 
-
+const getRandomNumber = function() {
+	let x = Date.now().toString();
+	let result = '';
+	for (let i = 0; i < x.length; i++) {
+		i % 2 === 0 && (result += x.charAt(i));
+	}
+	console.log(result, ' after the shrink');
+	result = +result + Math.floor(Math.random() * 10000);
+	return result;
+}
 const wsHelper = {
     currentState : {},
     init: function(store){
@@ -25,7 +34,7 @@ const wsHelper = {
                             }
                             break;
             case 'local1':
-                            this.socket.emit('createroom',Date.now());
+                            this.socket.emit('createroom',getRandomNumber());
                             break;
             case 'local2':
                             this.socket.emit('storyinfo',this.currentState.poker.storyInfo);

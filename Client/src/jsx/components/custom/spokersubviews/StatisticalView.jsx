@@ -120,7 +120,7 @@ class StatisticalView extends Component {
 
     }
     render() {
-        const pointOptions = this.props.pointList.map((item) =>
+        const pointOptions = pmData[this.props.roomInfo.pointingMethod].map((item) =>
             ({ key: item, text: item, value: item }));
         return (
             <div>
