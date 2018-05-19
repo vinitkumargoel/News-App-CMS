@@ -15,17 +15,23 @@ class StatisticalView extends Component {
             inputFields: {
                 pointInput: { value: '', type: 'select', required: false, error: false, show: true },
             },
-            pointsCount: this.props.pointList.map((item)=>{
-                return item.score;
-            }),
-            votingDetails: {
-                "Highest story point": 0,
-                "Least story Point": 0,
-                "Average story Point": 0,
-                "People voted": 0,
-                "People who didn't vote": 0
+            pointsCount:[],
+            lowestStoryPoint:0,
+            votingDetailsMetadata:{
+                highestStoryPoint: "Highest story point",
+                lowestStoryPoint:"Least story Point",
+                averageStoryPoint:"Average story Point",
+                peopleVoted:"People voted",
+                peopleNotVoted:"People who didn't vote"
             },
-            averagePoint: 8,
+            votingDetails: {
+                highestStoryPoint:0,
+                lowestStoryPoint:0,
+                averageStoryPoint:0,
+                peopleVoted:0,
+                peopleNotVoted:0
+            },
+            averageStoryPoint: 8,
             open: false,
             formError:true
         }
@@ -35,10 +41,40 @@ class StatisticalView extends Component {
     //this should be removed
     componentWillReceiveProps(newProps,prevState){
         console.log(newProps.pointList);
-        let pc = this.calculateFrequency(newProps.pointList.map((item)=>{
-            return item.score;
-        }));
-        this.setState({pointsCount: pc});
+        let pointsCount=[];
+        newProps.pointList.forEach((element) => {
+            console.log("element is", element);
+            if(pointsCount[element.score] ==undefined){
+                pointsCount[element.score]=1;
+            }
+            else{
+                pointsCount[element.score]=pointsCount[element.score]+1;
+            }
+
+        });
+        console.log("points count is", pointsCount);
+        
+        let values=[];
+        for(let point in pointsCount){
+            values.push(point);
+        }
+
+        console.log("valuesfffcvf",values);
+
+        let votingDetails=this.state.votingDetails;
+        votingDetails.highestStoryPoint=Math.max(...values);
+        votingDetails.lowestStoryPoint=Math.min(...values);
+
+        values.sort((a, b) => a - b);
+        let lowMiddle = Math.floor((values.length - 1) / 2);
+        let highMiddle = Math.ceil((values.length - 1) / 2);
+        let median = (parseInt(values[lowMiddle]) + parseInt(values[highMiddle])) / 2;
+        
+        votingDetails.peopleVoted=values.length;
+        votingDetails.peopleNotVoted=(this.props.playerList.length-1)-newProps.pointList.length;
+        votingDetails.averageStoryPoint=median;
+        this.setState({pointsCount,votingDetails});
+
     }
 
     calculateFrequency = (pl)=>{
@@ -54,7 +90,7 @@ class StatisticalView extends Component {
         }
         else if(e.target.innerText.trim()==='Submit'){
 
-            this.setState({ open: false, averagePoint: this.state.inputFields.pointInput.value });
+            this.setState({ open: false, averageStoryPoint: this.state.inputFields.pointInput.value });
         }
         else{
             this.setState({ open: true });
@@ -89,7 +125,7 @@ class StatisticalView extends Component {
         return (
             <div>
                 <Message color='orange' style={{ textAlign: 'center', marginTop: '10px' }}>
-                    <span>Average Score : {this.state.averagePoint}</span>
+                    <span>Average Score : {this.state.votingDetails.averageStoryPoint}</span>
                     <Icon style={{ marginLeft: '20px', cursor: 'pointer' }} name='edit' onClick={this.handleClick} />
                 </Message>
                 <Header textAlign='center' padded="true" as='h2'>Statistical View</Header>
@@ -119,7 +155,7 @@ class StatisticalView extends Component {
                                 {Object.keys(this.state.votingDetails).map((key) => {
                                     return (
                                         <Table.Row key={key}>
-                                            <Table.Cell><b>{key}</b></Table.Cell>
+                                            <Table.Cell><b>{this.state.votingDetailsMetadata[key]}</b></Table.Cell>
                                             <Table.Cell>{this.state.votingDetails[key]}</Table.Cell>
                                         </Table.Row>)
                                 })}
