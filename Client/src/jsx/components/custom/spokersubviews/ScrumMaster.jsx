@@ -42,9 +42,7 @@ class ScrumMaster extends Component {
         <Grid.Column width={1} />
         <Grid.Column width={14}>
           <Segment>
-            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname+' Room '}</Header>
-            <Header textAlign='left' padded="true" as='h2'>{'Room Id '+this.props.roomInfo.roomnum}</Header>
-            
+            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname+' Room'}</Header>
             <Grid columns="equal">
               <Grid.Column width={12}>
                 <StoryDetails  isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />

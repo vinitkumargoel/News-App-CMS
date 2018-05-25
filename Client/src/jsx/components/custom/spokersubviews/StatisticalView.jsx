@@ -35,13 +35,12 @@ class StatisticalView extends Component {
             formError:true
         }
         console.log(this.state.pointsCount);
-        //this.handleClick=this.handleClick.bind(this);
     }
-   
+
 
     //this is to be changed
     componentDidMount(){
-        
+        alert("hedhbjbj")
         console.log(this.props.pointList);
         let pointsCount=[];
         this.props.pointList.forEach((element) => {
@@ -84,7 +83,7 @@ class StatisticalView extends Component {
     
     
     //this should be removed
-    componentWillReceiveProps(newProps,prevState){
+    componentWillReceiveßßProps(newProps,prevState){
         console.log(newProps.pointList);
         let pointsCount=[];
         newProps.pointList.forEach((element) => {
@@ -131,13 +130,12 @@ class StatisticalView extends Component {
     }
 
     handleClick = (e, data) => {
-        let votingDetails=this.state.votingDetails;
         if (e.target.innerText.trim() === 'Cancel') {
             this.setState({ open: false });
         }
         else if(e.target.innerText.trim()==='Submit'){
-            votingDetails.averageStoryPoint=this.state.inputFields.pointInput.value?this.state.inputFields.pointInput.value:votingDetails.averageStoryPoint;
-            this.setState({ open: false, votingDetails});
+
+            this.setState({ open: false, averageStoryPoint: this.state.inputFields.pointInput.value });
         }
         else{
             this.setState({ open: true });
