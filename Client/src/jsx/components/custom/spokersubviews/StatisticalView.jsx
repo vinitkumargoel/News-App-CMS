@@ -31,13 +31,58 @@ class StatisticalView extends Component {
                 peopleVoted:0,
                 peopleNotVoted:0
             },
-            averageStoryPoint: 8,
             open: false,
             formError:true
         }
         console.log(this.state.pointsCount);
+        //this.handleClick=this.handleClick.bind(this);
+    }
+   
+
+    //this is to be changed
+    componentDidMount(){
+        
+        console.log(this.props.pointList);
+        let pointsCount=[];
+        this.props.pointList.forEach((element) => {
+            console.log("element is", element);
+            if(pointsCount[element.score] ==undefined){
+                pointsCount[element.score]=1;
+            }
+            else{
+                pointsCount[element.score]=pointsCount[element.score]+1;
+            } 
+               
+            
+        });
+        console.log("points count is", pointsCount);
+        
+        let values=[];
+        for(let point in pointsCount){
+            values.push(point);
+        }
+
+        console.log("valuesfffcvf",values);
+
+        let votingDetails=this.state.votingDetails;
+        votingDetails.highestStoryPoint=Math.max(...values);
+        votingDetails.lowestStoryPoint=Math.min(...values);
+
+        values.sort((a, b) => a - b);
+        let lowMiddle = Math.floor((values.length - 1) / 2);
+        let highMiddle = Math.ceil((values.length - 1) / 2);
+        let median = Math.ceil((parseInt(values[lowMiddle]) + parseInt(values[highMiddle])) / 2);
+        
+        votingDetails.peopleVoted=values.length;
+        votingDetails.peopleNotVoted=(this.props.playerList.length-1)-this.props.pointList.length;
+        votingDetails.averageStoryPoint=median;
+        this.setState({pointsCount,votingDetails});
+
     }
 
+    
+    
+    
     //this should be removed
     componentWillReceiveProps(newProps,prevState){
         console.log(newProps.pointList);
@@ -49,8 +94,9 @@ class StatisticalView extends Component {
             }
             else{
                 pointsCount[element.score]=pointsCount[element.score]+1;
-            }
-
+            } 
+               
+            
         });
         console.log("points count is", pointsCount);
         
@@ -85,12 +131,13 @@ class StatisticalView extends Component {
     }
 
     handleClick = (e, data) => {
+        let votingDetails=this.state.votingDetails;
         if (e.target.innerText.trim() === 'Cancel') {
             this.setState({ open: false });
         }
         else if(e.target.innerText.trim()==='Submit'){
-
-            this.setState({ open: false, averageStoryPoint: this.state.inputFields.pointInput.value });
+            votingDetails.averageStoryPoint=this.state.inputFields.pointInput.value?this.state.inputFields.pointInput.value:votingDetails.averageStoryPoint;
+            this.setState({ open: false, votingDetails});
         }
         else{
             this.setState({ open: true });
@@ -128,7 +175,7 @@ class StatisticalView extends Component {
                     <span>Average Score : {this.state.votingDetails.averageStoryPoint}</span>
                     <Icon style={{ marginLeft: '20px', cursor: 'pointer' }} name='edit' onClick={this.handleClick} />
                 </Message>
-                <Header textAlign='center' padded="true" as='h2'>Statistical View</Header>
+                <Header textAlign='left' padded="true" as='h2'>Statistical View</Header>
                 <Grid>
                     <Grid.Column width="8">
                         <Table celled size="small">

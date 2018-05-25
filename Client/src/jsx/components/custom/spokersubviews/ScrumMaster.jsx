@@ -29,22 +29,30 @@ class ScrumMaster extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showVotes:'false'
     }
+    this.toggleShowVotes=this.toggleShowVotes.bind(this);
   }
-
+  toggleShowVotes(value){
+        this.setState({showVotes:value})
+  }
   render() {
     return (
       <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
           <Segment>
-            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname+' room'}</Header>
+            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname+' Room '}</Header>
+            <Header textAlign='left' padded="true" as='h2'>{'Room Id '+this.props.roomInfo.roomnum}</Header>
+            
             <Grid columns="equal">
               <Grid.Column width={12}>
                 <StoryDetails  isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />
-                <hr />
-                <PointCardList pointList={this.props.pointList} />
-                <StatisticalView pointList={this.props.pointList} roomInfo={this.props.roomInfo} playerList={this.props.playerList} />
+                <hr/>
+                <div>
+                  <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} />
+                  {this.state.showVotes=='true'?<StatisticalView pointList={this.props.pointList} roomInfo={this.props.roomInfo} playerList={this.props.playerList} />:null}
+                </div>
               </Grid.Column>
 
               <Grid.Column width={4}>
