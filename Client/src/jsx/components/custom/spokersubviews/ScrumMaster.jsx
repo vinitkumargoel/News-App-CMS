@@ -7,11 +7,13 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
+import { connect } from 'react-redux';
 
-//style imports
-import styles from '../../../../css/ScrumPokerStyle.css';
 
 //container imports
+import { setPublish } from '../../../../js/actions/actionCreators/index';
+import { spokerAction } from '../../../../js/actions/actionCreators';
+
 
 //semantic-ui imports
 import { Grid, Segment, Header, GridColumn, Divider, Button } from 'semantic-ui-react';
@@ -22,34 +24,51 @@ import PlayerList from './PlayerList';
 import StoryPointsList from './StoryPointsList';
 import PointCardList from './PointCardList';
 import StoryCards from './StoryCards';
-// import Conclusion from './Conclusion';
-import StatisticalView from "./StatisticalView"
+import PublishStoryCard from './PublishStoryCard.jsx';
+import StatisticalView from "./StatisticalView";
 //component
-class ScrumMaster extends Component {
+export class ScrumMaster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showVotes:'false'
+      showVotes: 'false' //put to store
     }
-    this.toggleShowVotes=this.toggleShowVotes.bind(this);
+    this.toggleShowVotes = this.toggleShowVotes.bind(this);
   }
-  toggleShowVotes(value){
-        this.setState({showVotes:value})
+  toggleShowVotes(value) {
+    this.setState({ showVotes: value })
   }
+  closePublish() {
+    this.props.setPublish(false);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.publish && (this.props.publish !== prevProps.publish)) {
+      window.setTimeout(function () {  this.props.setPublish(false) }.bind(this), 8000)
+    }
+
+  }
+
   render() {
     return (
       <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
           <Segment>
-            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname+' Room'}</Header>
+            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname + ' Room'}</Header>
             <Grid columns="equal">
               <Grid.Column width={12}>
-                <StoryDetails  isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} actions={{ publishStory: this.props.actions.publishStory }} />
-                <hr/>
+                <StoryDetails
+                  isMaster={this.props.isMaster}
+                  setPublish={this.props.setPublish}
+                  initStoryInfo={this.props.initStoryInfo}
+                  actions={{ publishStory: this.props.publishStory }}
+                />
+                <hr />
+                {this.props.publish && (<PublishStoryCard closeAction={this.closePublish.bind(this)}
+                  initStoryInfo={this.props.initStoryInfo} />)}
                 <div>
                   <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} />
-                  {this.state.showVotes=='true'?<StatisticalView pointList={this.props.pointList} roomInfo={this.props.roomInfo} playerList={this.props.playerList} />:null}
+                  {this.state.showVotes === 'true' ? <StatisticalView pointList={this.props.pointList} roomInfo={this.props.roomInfo} playerList={this.props.playerList} /> : null}
                 </div>
               </Grid.Column>
 
@@ -66,4 +85,32 @@ class ScrumMaster extends Component {
   }
 }
 
-export default ScrumMaster;
+
+const mapStateToProps = state => {
+  let ScrumMaster = state.configData.ScrumMaster;
+
+  return {
+    publish: ScrumMaster.showPublish,
+    isMaster: state.poker.playerInfo.isMaster,
+    initStoryInfo: state.poker.storyInfo,
+    roomInfo: state.poker.roomInfo,
+    pointList: state.poker.pointList,
+    playerList: state.poker.playerList,
+
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  setPublish: bool => dispatch(setPublish(bool)),
+  publishStory: (pl) => {
+    pl.id = 2;
+    pl.from = "local2";
+    dispatch(spokerAction(pl));
+  }
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScrumMaster)
+

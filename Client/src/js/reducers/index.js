@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { NAV_ACTION,pokerActions } from '../actions/actionTypes';
 import update from 'immutability-helper';
+import {configDataReducer} from './configDataReducer/configDataReducer';
 
 function welcomeReducer(state={},action){
     let newState = {};
@@ -64,5 +65,6 @@ function pokerReducer(state={},action){
 //write your own root reducer
 export default combineReducers({
     welcome:welcomeReducer,
-    poker:pokerReducer
+    poker:pokerReducer,
+    configData:configDataReducer,
 });

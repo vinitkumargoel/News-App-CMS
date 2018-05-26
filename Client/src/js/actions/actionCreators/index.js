@@ -1,4 +1,4 @@
-import { NAV_ACTION,pokerActions } from '../actionTypes';
+import { NAV_ACTION,pokerActions,configDataActions } from '../actionTypes';
 import wsHelper from '../../helpers/websocketHelper';
 
 export function navAction(payload){
@@ -26,3 +26,4 @@ export function spokerAction(payload){
                 default :
         }
 }
+export const setPublish = (bool)=>({type:configDataActions.SET_PUBLISH,payload:bool});

@@ -11,4 +11,7 @@ export const pokerActions = {
     ROOM_NUM : "ROOM_NUM",
     P_M : "P_M"
 };
+export const configDataActions = {
+    SET_PUBLISH:"SET_PUBLISH_STORY_CARD_VISIBILITY",
+}
 
