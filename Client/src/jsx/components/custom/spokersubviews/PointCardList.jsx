@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Icon, Image, Grid, Button } from 'semantic-ui-react'
+import { Card, Icon, Image, Grid, Button, Header} from 'semantic-ui-react'
 import votedImg from '../../../../img/png/selectedMinion.png';
 import notVotedImg from '../../../../img/jpg/minioncard.jpg';
 import angryImage from '../../../../img/jpg/angry.jpg';
@@ -16,13 +16,16 @@ class PointCardList extends Component {
   }
   handleShowVotes() {
     this.setState({ 'showVotes': 'true' });
+    this.props.toggleShowVotes('true');
   }
   handleClearVotes() {
     this.setState({ 'showVotes': 'false' });
+    this.props.toggleShowVotes('false');
   }
   render() {
     return (
       <div>
+        <Header textAlign='left' padded="true" as='h2'>Story Points</Header>
         <Grid columns={7} padded>
           <Grid.Row>
             {
@@ -69,15 +72,18 @@ class PointCardList extends Component {
                     </div>
                   </Grid.Column>
                 )
-              }):null
+              }): 
+              <Card id={this.props.point} style={{ margin: 10 }} >
+                <Image size="small" src={notVotedImg} />
+              </Card>
             }
           </Grid.Row>
         </Grid>
         <Grid>
           <Grid.Column width={5}></Grid.Column>
           <Grid.Column floated='right' width={7}>
-            <Button primary onClick={this.handleShowVotes} >Show Votes</Button>
-            <Button secondary onClick={this.handleClearVotes}>Clear votes</Button>
+            <Button primary disabled={this.props.pointList.length<=0} onClick={this.handleShowVotes} >Show Votes</Button>
+            <Button secondary  disabled={this.props.pointList.length<=0} onClick={this.handleClearVotes}>Clear votes</Button>
           </Grid.Column>
         </Grid>
       </div>);

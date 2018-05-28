@@ -15,36 +15,37 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 //component imports
 
 //semantic-ui imports
-import { Grid,Button, Image, List, Segment, Header, Icon } from 'semantic-ui-react';
+import { Grid, Button, Image, List, Segment, Header, Icon } from 'semantic-ui-react';
 
 //component
 class PlayerList extends Component {
 
   render() {
-
     return (
 
       <Segment >
         <Grid textAlign='center'>
           <Grid.Row >
-            <Header  padded="true" as='h2'>Team</Header>
-            {/* {
-          this.props.playerList.map((p, i) => {
-            return <p key={i}>{p}</p>;
-          })
-        } */}
+            <Header padded="true" as='h2'>Team</Header>
           </Grid.Row>
-          <Grid.Row style={{ minWidth: '200px', minHeight: '362px', maxHeight: '362px', overflowY: 'auto' }}>
+          <Grid.Row style={{ minWidth: '200px', minHeight: '350px', maxHeight: '350px', overflowY: 'auto' }}>
             <List divided verticalAlign='middle'>
               {this.props.playerList.map((user, i) =>
                 <List.Item key={i}>
-                  <List.Content floated='right'>
-                    <Button>Chat</Button>
+                  <List.Content >
+                    <Grid>
+                      <Grid.Column width={8} verticalAlign='middle'>
+                        <Icon name='user' inline />
+                        {user}
+                      </Grid.Column>
+                      <Grid.Column width={8}>
+                        <Button inline >Chat</Button>
+                      </Grid.Column>
+                    </Grid>
                   </List.Content>
-                  <Icon name='user' />
-                  <List.Content>
-                    {user}
-                  </List.Content>
+
+
+
                 </List.Item>)}
             </List>
           </Grid.Row>
