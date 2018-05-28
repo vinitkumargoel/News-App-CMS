@@ -11,9 +11,6 @@ import PropTypes from 'prop-types';
 //custom imports
 import { spokerAction } from '../../../js/actions/actionCreators';
 
-//style imports
-import styles from '../../../css/ScrumPokerStyle.css';
-
 //component imports
 import ScrumPoker from '../../components/custom/ScrumPoker';
 
@@ -61,11 +58,6 @@ const mapActionsToProps = (dispatch,ownProps)=>{
         createRoom : (pl) => {
           pl.id = 1;
           pl.from = "local1";
-          dispatch(spokerAction(pl));
-        },
-        publishStory : (pl) => {
-          pl.id = 2;
-          pl.from = "local2";
           dispatch(spokerAction(pl));
         },
         selectPoint : (pl) => {

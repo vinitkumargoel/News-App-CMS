@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Icon, Image, Grid, Button, Header} from 'semantic-ui-react'
+import { Card, Icon, Image, Grid, Button, Header, Step } from 'semantic-ui-react'
 import votedImg from '../../../../img/png/selectedMinion.png';
 import notVotedImg from '../../../../img/jpg/minioncard.jpg';
 import angryImage from '../../../../img/jpg/angry.jpg';
@@ -25,11 +25,11 @@ class PointCardList extends Component {
   render() {
     return (
       <div>
-        <Header textAlign='left' padded="true" as='h2'>Story Points</Header>
+        <Header textAlign='left' padded="true" as='h3' style={{ marginTop: '14px' }}>Story Points</Header>
         <Grid columns={7} padded>
           <Grid.Row>
             {
-             this.props.pointList.length>0? this.props.pointList.map((user, i) => {
+              this.props.pointList.length > 0 ? this.props.pointList.map((user, i) => {
                 return (
                   <Grid.Column key={i}>
                     <div className="flip-container" style={{
@@ -40,7 +40,7 @@ class PointCardList extends Component {
                         transition: '0.6s',
                         transformStyle: 'preserve-3d',
                         position: 'relative',
-                        transform: this.state.showVotes == "false"?'rotateY(0deg)':'rotateY(180deg)'
+                        transform: this.state.showVotes == "false" ? 'rotateY(0deg)' : 'rotateY(180deg)'
                       }}>
                         <div className="front" style={{
                           width: '80px',
@@ -53,7 +53,7 @@ class PointCardList extends Component {
                           /* for firefox 31 */
                           transform: 'rotateY(0deg)'
                         }}>
-                          <PointCard  displayData={user.userName}
+                          <PointCard displayData={user.userName}
                             score={user.score} image={user.score != null ? votedImg : notVotedImg} />
                         </div>
                         <div className="back" style={{
@@ -72,18 +72,36 @@ class PointCardList extends Component {
                     </div>
                   </Grid.Column>
                 )
-              }): 
-              <Card id={this.props.point} style={{ margin: 10 }} >
-                <Image size="small" src={notVotedImg} />
-              </Card>
+              }) :
+                <Step.Group widths={3}>
+                  <Step disabled>
+                    <Icon name='idea' />
+                    <Step.Content>
+                      <Step.Title>They think</Step.Title>
+                    </Step.Content>
+                  </Step>
+                  <Step disabled>
+                    <Icon name='protect' />
+                    <Step.Content>
+                      <Step.Title>They decide</Step.Title>
+                    </Step.Content>
+                  </Step>
+                  <Step disabled>
+                    <Icon name='hand pointer' />
+                    <Step.Content>
+                      <Step.Title>They vote</Step.Title>
+                    </Step.Content>
+                  </Step>
+                </Step.Group>
             }
           </Grid.Row>
         </Grid>
         <Grid>
-          <Grid.Column width={5}></Grid.Column>
-          <Grid.Column floated='right' width={7}>
-            <Button primary disabled={this.props.pointList.length<=0} onClick={this.handleShowVotes} >Show Votes</Button>
-            <Button secondary  disabled={this.props.pointList.length<=0} onClick={this.handleClearVotes}>Clear votes</Button>
+          <Grid.Column width={8}></Grid.Column>
+          <Grid.Column width={2}></Grid.Column>                    
+          <Grid.Column floated='right' width={6}>
+            <Button primary disabled={this.props.pointList.length <= 0} onClick={this.handleShowVotes} style={{ marginRight: '30px !important' }}>Show Votes</Button>
+            <Button secondary disabled={this.props.pointList.length <= 0} onClick={this.handleClearVotes}>Clear votes</Button>
           </Grid.Column>
         </Grid>
       </div>);
