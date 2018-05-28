@@ -23,7 +23,58 @@ class StoryCards extends Component {
     super(props);
     this.state = {
       open: false,
-      story: {}
+      story: {},
+      storyList: [{
+        storyID: '221',
+        epic: 'MBNA',
+        storyflag: 'Medium',
+        desc: 'This is regarding the blah blah blah ipsem lorem',
+        size: 'L',
+        highestStoryPoint: 4,
+        leastStoryPoint: 5,
+        topVotedPoint:3,
+        averageStoryPoint: 6,
+        peopleVoted: 4,
+        peopleNotVoted: 2,
+    }, {
+        storyID: '222',
+        epic: 'MBNA',
+        storyflag: 'Medium',
+        desc: 'This issdf regarding the blah blah blah ipsem lorem',
+        size: 'M',
+        highestStoryPoint: 4,
+        leastStoryPoint: 5,
+        topVotedPoint:3,
+        averageStoryPoint: 6,
+        peopleVoted: 4,
+        peopleNotVoted: 2,
+    }, {
+        storyID: '223',
+        epic: 'MBNA',
+        storyflag: 'Medium',
+        desc: 'This is fdgregarding the blah blah blah ipsem lorem',
+        size: 'XL',
+        highestStoryPoint: 4,
+        leastStoryPoint: 5,
+        averageStoryPoint: 6,
+        topVotedPoint:3,
+        peopleVoted: 4,
+        peopleNotVoted: 2,
+    
+    }, {
+        storyID: '224',
+        epic: 'MBNA',
+        storyflag: 'Medium',
+        desc: 'This issdf regarding the blah blah blah ipsem lorem',
+        size: 'XXL',
+        highestStoryPoint: 4,
+        leastStoryPoint: 5,
+        topVotedPoint:3,
+        averageStoryPoint: 6,
+        peopleVoted: 4,
+        peopleNotVoted: 2,
+    
+    }]
     };
     this.userRefs = {};
     
@@ -63,8 +114,10 @@ class StoryCards extends Component {
      
           </Grid.Row>
           <Grid.Row onScroll={this.scrollHandler} style={{overflowY:'auto', minHeight: '600px', maxHeight: '600px'}}>
-          
-          {this.props.storyList.map((story,index) => (
+          {/* {this.props.storyList.length == undefined} ? (
+              <p>No Stories discussed yet</p>
+            ) : ( */}
+          {this.state.storyList.map((story,index) => (
             <Card fluid key={index} style={{marginRight:'1%',marginLeft:'1%'}}>
               <Card.Content>
                 <Card.Header>
@@ -85,6 +138,7 @@ class StoryCards extends Component {
                 </div>
               </Card.Content>
             </Card>))}
+            {/* ); */}
             </Grid.Row>
         </Grid>
         <TempModal open={this.state.open} remainingProps={{basic:false}}>
