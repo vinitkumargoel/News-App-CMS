@@ -1,9 +1,0 @@
-.background-effect-custom{
-    animation-name:ripple;
-    animation-duration:3s;
-}
-@keyframes ripple {
-    from {
-        
-    }
-}
