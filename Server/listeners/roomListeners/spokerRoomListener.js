@@ -3,6 +3,7 @@ var sessions = {};
 module.exports = function(ns,socket,session){
 
     socket.on('createroom',(room)=>{
+        console.log(room);
         socket.join(room,()=>{
             ns.to(room).emit('roomid',room);
             session.id = room;
@@ -11,6 +12,7 @@ module.exports = function(ns,socket,session){
     });
 
     socket.on('playerinfo',(pi)=>{   
+        console.log(pi);
         if(sessions[pi.roomid] === undefined){
             console.log("no such room");
         }
@@ -26,12 +28,24 @@ module.exports = function(ns,socket,session){
     });
 
     socket.on('roominfo',(ri)=>{
-        session.roomInfo = ri;
-        session.playerList.set(socket.id,ri.adminName);
-        ns.to(session.id).emit('players',Array.from(session.playerList.values()));
+        console.log(ri);
+        if(!ri.isMaster){
+            session.roomInfo = ri;
+            session.playerList.set(socket.id,ri.adminName);
+            ns.to(session.id).emit('players',Array.from(session.playerList.values()));
+        } else {
+            socket.join(ri.roomid,()=>{
+                session = sessions[ri.roomid];
+                ns.to(socket.id).emit('store',session);
+                ns.to(session.id).emit('players',Array.from(session.playerList.values()));
+                ns.emit('points',session.pointList);
+            });
+        }
+        
     });
 
     socket.on('storyinfo',(si)=>{
+        console.log(si);
         session.storyInfo = si;
         ns.to(session.id).emit('story',si);
     });
@@ -54,6 +68,7 @@ module.exports = function(ns,socket,session){
         session.pointList.delete(socket.id);
         session.playerList.delete(socket.id);
         ns.emit('players',Array.from(session.playerList.values()));
+        ns.emit('points',session.pointList);
     });
     
 }

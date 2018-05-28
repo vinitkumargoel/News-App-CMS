@@ -26,11 +26,9 @@ class ScrumPoker extends Component {
 
   render() {
     let isMaster = this.props.store.playerInfo.isMaster;
-    console.log("is Master=====>",isMaster);
-    
     return (
       <Container fluid>
-      <br/>
+        <br />
         <Header textAlign='center' padded="true" as='h1'>Lloyds Scrum Poker</Header>
         {(this.props.store.playerInfo.joined) ?
           <div>
@@ -40,19 +38,20 @@ class ScrumPoker extends Component {
               }
             } />)} />
             <Route path="/dashboard/spoker/join" render={(isMaster) ? () => (<ScrumMaster isMaster={isMaster}
-                                                                                          initStoryInfo={this.props.store.storyInfo}
-                                                                                          roomInfo={this.props.store.roomInfo}
-                                                                                          pointList={this.props.store.pointList}
-                                                                                          playerList={this.props.store.playerList}
-                                                                                          actions={{ publishStory: this.props.actions.publishStory }} />)
+              initStoryInfo={this.props.store.storyInfo}
+              roomInfo={this.props.store.roomInfo}
+              pointList={this.props.store.pointList}
+              playerList={this.props.store.playerList}
+              actions={{ publishStory: this.props.actions.publishStory }} />)
               : () => (<ScrumPlayer
+                playerInfo={this.props.store.playerInfo}
                 initStoryInfo={this.props.store.storyInfo}
                 isMaster={isMaster}
                 initRoomInfo={this.props.store.roomInfo}
                 playerList={this.props.store.playerList}
                 actions={{
-                          selectPoint:this.props.actions.selectPoint
-                        }}
+                  selectPoint: this.props.actions.selectPoint
+                }}
               />)} />
           </div>
           :

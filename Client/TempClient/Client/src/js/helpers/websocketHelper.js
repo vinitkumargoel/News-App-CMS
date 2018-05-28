@@ -7,6 +7,7 @@ const getRandomNumber = function() {
 	for (let i = 0; i < x.length; i++) {
 		i % 2 === 0 && (result += x.charAt(i));
 	}
+	console.log(result, ' after the shrink');
 	result = +result + Math.floor(Math.random() * 10000);
 	return result;
 }
@@ -22,17 +23,13 @@ const wsHelper = {
     },
     quit: new Function(),
     socket:{},
-    storeListener : function(store){ 
+    storeListener : function(store){
         this.currentState = store.getState();
         switch(this.currentState.poker.from){
             case 'local0':
                             if(this.currentState.poker.playerInfo.isMaster){
-                                if(this.currentState.poker.playerInfo.pwd === ""){
-                                    this.socket.emit('roominfo',this.currentState.poker.roomInfo);
-                                } else {
-                                    this.socket.emit('roominfo',this.currentState.poker.playerInfo);
-                                }
-                            } else {
+                                this.socket.emit('roominfo',this.currentState.poker.roomInfo);
+                            }else{
                                 this.socket.emit('playerinfo',this.currentState.poker.playerInfo);
                             }
                             break;
@@ -67,12 +64,6 @@ const wsHelper = {
         this.socket.on('pm', (pm) => {
             let payload={pointingMethod:pm,from:'server'};
             store.dispatch({type:pokerActions.P_M,payload});
-        });
-
-        this.socket.on('store',(ns)=>{
-            console.log("admin store ===> ",ns);
-            ns.from = 'server';
-            store.dispatch({type:pokerActions.JOINED_AS_ADMIN,payload:ns});
         });
     }
 }

@@ -18,10 +18,8 @@ function pokerReducer(state={},action){
     let from='';
     switch(action.type){
         case pokerActions.JOIN_ROOM:
-                        console.log(action);
                         if(state.playerInfo.isMaster){
-                            action.payload.joined = true;
-                            tempState = Object.assign({},state.playerInfo,{roomid:action.payload.roomid});
+                            tempState = Object.assign({},state.playerInfo,{roomid:state.roomInfo.roomnum});
                             return Object.assign(newState,state,{playerInfo:tempState},{from:action.payload.from});
                         }
                         else{
@@ -47,7 +45,6 @@ function pokerReducer(state={},action){
                         tempState = Object.assign({},state.playerInfo,action.payload);
                         return Object.assign(newState,state,{playerInfo:tempState},{from:action.payload.from});  
         case pokerActions.PLAYER_LIST:
-        
                         return Object.assign(newState,state,{playerList:action.payload.cls},{from:action.payload.from});
         case pokerActions.POINT_LIST:
                         return Object.assign(newState,state,{pointList:action.payload.ps},{from:action.payload.from});
@@ -59,10 +56,6 @@ function pokerReducer(state={},action){
         case pokerActions.P_M:
                         tempState = Object.assign({},state.roomInfo,{pointingMethod:action.payload.pointingMethod});
                         return Object.assign(newState,state,{roomInfo:tempState},{from:action.payload.from});
-
-        case pokerActions.JOINED_AS_ADMIN:
-                        return Object.assign(newState,state,action.payload);
-        
         default:
                         return state;
     }
