@@ -1,5 +1,4 @@
 export default {
-    from:"",
     playerInfo :{
         isMaster : false,
         usrid : "",
@@ -16,7 +15,7 @@ export default {
         pwd : "",
         adminName: "",
         fileID : "",
-        pointingMethod : ""
+        pointingMethod : "Normal"
     },
     storyInfo : {
         storyid: "",

@@ -9,6 +9,7 @@ export function spokerAction(payload){
         switch(payload.id){
                 case 0:
                         return function(dispatch,getState){
+                                console.log(payload);
                                 return dispatch({type:pokerActions.JOIN_ROOM,payload});
                         };
                 case 1:

@@ -5,8 +5,6 @@ import { pmData } from './common/commonData';
 import update from 'immutability-helper';
 import { updateStoreInput, validate } from './common/utils';
 
-let plNew = {};
-
 class StatisticalView extends Component {
     constructor(props) {
         super(props);
@@ -83,8 +81,8 @@ class StatisticalView extends Component {
     
     //this should be removed
     componentWillReceiveßßProps(newProps,prevState){
-        //console.log(newProps.pointList);
-        let pointsCount=[];
+        console.log(newProps.pointList);
+        let pointsCount={};
         newProps.pointList.forEach((element) => {
             //console.log("element is", element);
             if(pointsCount[element.score] ==undefined){
@@ -99,7 +97,7 @@ class StatisticalView extends Component {
         //console.log("points count is", pointsCount);
         
         let values=[];
-        for(let point in pointsCount){
+        for(let point in pointsCount.values()){
             values.push(point);
         }
 
@@ -119,13 +117,6 @@ class StatisticalView extends Component {
         votingDetails.averageStoryPoint=median;
         this.setState({pointsCount,votingDetails});
 
-    }
-
-    calculateFrequency = (pl)=>{
-        pl.map((p)=>{
-            plNew[p] = (plNew[p])?++plNew[p]:1;
-        });
-        return plNew;
     }
 
     handleClick = (e, data) => {
@@ -185,11 +176,11 @@ class StatisticalView extends Component {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                {Object.getOwnPropertyNames(this.state.pointsCount).map((key,i) => {
+                                {this.state.pointsCount.map((val,i) => {
                                     return (
                                         <Table.Row key={i}>
-                                            <Table.Cell>{key}</Table.Cell>
-                                            <Table.Cell>{this.state.pointsCount[key]}</Table.Cell>
+                                            <Table.Cell>{val}</Table.Cell>
+                                            <Table.Cell>{this.state.pointsCount[i]}</Table.Cell>
                                         </Table.Row>)
                                 })}
                             </Table.Body>
