@@ -30,7 +30,7 @@ class ScrumPoker extends Component {
     
     return (
       <Container fluid>
-      <br/>
+        <br />
         <Header textAlign='center' padded="true" as='h1'>Lloyds Scrum Poker</Header>
         {(this.props.store.playerInfo.joined) ?
           <div>
@@ -41,13 +41,14 @@ class ScrumPoker extends Component {
             } />)} />
             <Route path="/dashboard/spoker/join" render={(isMaster) ? () => (<ScrumMaster  />)
               : () => (<ScrumPlayer
+                playerInfo={this.props.store.playerInfo}
                 initStoryInfo={this.props.store.storyInfo}
                 isMaster={isMaster}
                 initRoomInfo={this.props.store.roomInfo}
                 playerList={this.props.store.playerList}
                 actions={{
-                          selectPoint:this.props.actions.selectPoint
-                        }}
+                  selectPoint: this.props.actions.selectPoint
+                }}
               />)} />
           </div>
           :
