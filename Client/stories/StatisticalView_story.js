@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import StatisticalView from '../src/jsx/components/custom/spokersubviews/StatisticalView'
 let actions = {
-    selectPoint:(obj)=>{action('Clicked')(obj)}
+    submitStory:(obj)=>{action('Clicked')(obj)}
 };
 let pointList = [{
 score:1,
@@ -29,6 +29,12 @@ let roomInfo={
     id:0,
     from:'local0'
 };
+let initStoryInfo = {
+    storyID:'121',
+    storyflag:'Low',
+    epic:'MBNA',
+    desc:'blah blah ipsem lorem blah blah',
+}
 let playerList = ['ravi','apurva','rohit'];
 storiesOf('StatisticalView', module)
     .addDecorator(story => (
@@ -40,6 +46,9 @@ storiesOf('StatisticalView', module)
     ))
     .add('initial', () => (
 
-        <StatisticalView pointList={pointList} roomInfo={roomInfo} playerList={playerList}
-         actions={actions} />
+        <StatisticalView
+        initStoryInfo={initStoryInfo}
+         pointList={pointList} roomInfo={roomInfo} playerList={playerList}
+         actions={actions}
+         submitStory={actions.submitStory} />
     ))
