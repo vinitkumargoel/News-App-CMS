@@ -27,13 +27,15 @@ const wsHelper = {
         switch(this.currentState.poker.from){
             case 'local0':
                             if(this.currentState.poker.playerInfo.isMaster){
-                                if(this.currentState.poker.playerInfo.pwd === ""){
-                                    this.socket.emit('roominfo',this.currentState.poker.roomInfo);
-                                } else {
-                                    this.socket.emit('roominfo',this.currentState.poker.playerInfo);
+                                if(this.currentState.poker.roomInfo.roomnum.length === 0){
+                                    let pl = {room : this.currentState.poker.playerInfo.roomid,
+                                              password : this.currentState.poker.playerInfo.pwd};
+                                    this.socket.emit('joinroom',pl);
+                                }else{
+                                    this.socket.emit('joinroom',this.currentState.poker.roomInfo);
                                 }
-                            } else {
-                                this.socket.emit('playerinfo',this.currentState.poker.playerInfo);
+                            }else{
+                                this.socket.emit('joinroom',this.currentState.poker.playerInfo);
                             }
                             break;
             case 'local1':
@@ -64,15 +66,17 @@ const wsHelper = {
             let payload={roomnum:roomid,from:'server'};
             store.dispatch({type:pokerActions.ROOM_NUM,payload});
         });
-        this.socket.on('pm', (pm) => {
-            let payload={pointingMethod:pm,from:'server'};
+        this.socket.on('roominfo', (ri) => {
+            let payload={ri,from:'server'};
             store.dispatch({type:pokerActions.P_M,payload});
         });
-
         this.socket.on('store',(ns)=>{
             console.log("admin store ===> ",ns);
             ns.from = 'server';
             store.dispatch({type:pokerActions.JOINED_AS_ADMIN,payload:ns});
+        });
+        this.socket.on('err',(err)=>{
+            alert(err);
         });
     }
 }

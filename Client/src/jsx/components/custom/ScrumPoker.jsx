@@ -26,7 +26,7 @@ class ScrumPoker extends Component {
 
   render() {
     let isMaster = this.props.store.playerInfo.isMaster;
-    console.log("is Master=====>",isMaster);
+    console.log("roominfo=====>",this.props.store.roomInfo);
     
     return (
       <Container fluid>
