@@ -53,7 +53,7 @@ class ScrumPlayer extends Component {
                 <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} />
                 <hr/>
                 <Header textAlign='center' padded="true" as='h3'>Story pointing</Header>
-                <SelectPointCardList pointingMethod={pmData[this.props.initRoomInfo.pointingMethod]} actions={this.props.actions}/>
+                <SelectPointCardList playerInfo = {this.props.playerInfo} pointingMethod={pmData[this.props.initRoomInfo.pointingMethod]} actions={this.props.actions}/>
               </Grid.Column>
 
               <Grid.Column width={4}>
