@@ -10,7 +10,7 @@ let plNew = {};
 class StatisticalView extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.pointList);
+        //console.log(this.props.pointList);
         this.state = {
             inputFields: {
                 pointInput: { value: '', type: 'select', required: false, error: false, show: true },
@@ -34,17 +34,16 @@ class StatisticalView extends Component {
             open: false,
             formError:true
         }
-        console.log(this.state.pointsCount);
+        //console.log(this.state.pointsCount);
     }
 
 
     //this is to be changed
     componentDidMount(){
-        alert("hedhbjbj")
-        console.log(this.props.pointList);
+        //console.log(this.props.pointList);
         let pointsCount=[];
         this.props.pointList.forEach((element) => {
-            console.log("element is", element);
+            //console.log("element is", element);
             if(pointsCount[element.score] ==undefined){
                 pointsCount[element.score]=1;
             }
@@ -54,14 +53,14 @@ class StatisticalView extends Component {
                
             
         });
-        console.log("points count is", pointsCount);
+        //console.log("points count is", pointsCount);
         
         let values=[];
         for(let point in pointsCount){
             values.push(point);
         }
 
-        console.log("valuesfffcvf",values);
+        //console.log("valuesfffcvf",values);
 
         let votingDetails=this.state.votingDetails;
         votingDetails.highestStoryPoint=Math.max(...values);
@@ -84,10 +83,10 @@ class StatisticalView extends Component {
     
     //this should be removed
     componentWillReceiveßßProps(newProps,prevState){
-        console.log(newProps.pointList);
+        //console.log(newProps.pointList);
         let pointsCount=[];
         newProps.pointList.forEach((element) => {
-            console.log("element is", element);
+            //console.log("element is", element);
             if(pointsCount[element.score] ==undefined){
                 pointsCount[element.score]=1;
             }
@@ -97,14 +96,14 @@ class StatisticalView extends Component {
                
             
         });
-        console.log("points count is", pointsCount);
+        //console.log("points count is", pointsCount);
         
         let values=[];
         for(let point in pointsCount){
             values.push(point);
         }
 
-        console.log("valuesfffcvf",values);
+        //console.log("valuesfffcvf",values);
 
         let votingDetails=this.state.votingDetails;
         votingDetails.highestStoryPoint=Math.max(...values);
@@ -130,12 +129,14 @@ class StatisticalView extends Component {
     }
 
     handleClick = (e, data) => {
+        let votingDetails=this.state.votingDetails;
+        
         if (e.target.innerText.trim() === 'Cancel') {
             this.setState({ open: false });
         }
         else if(e.target.innerText.trim()==='Submit'){
-
-            this.setState({ open: false, averageStoryPoint: this.state.inputFields.pointInput.value });
+            votingDetails.averageStoryPoint=this.state.inputFields.pointInput.value;
+            this.setState({ open: false, votingDetails });
         }
         else{
             this.setState({ open: true });
