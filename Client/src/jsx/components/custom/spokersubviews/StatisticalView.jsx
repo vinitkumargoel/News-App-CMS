@@ -39,7 +39,7 @@ class StatisticalView extends Component {
     //this is to be changed
     componentDidMount(){
         //console.log(this.props.pointList);
-        let pointsCount=[];
+        let pointsCount={};
         this.props.pointList.forEach((element) => {
             //console.log("element is", element);
             if(pointsCount[element.score] ==undefined){
@@ -51,12 +51,14 @@ class StatisticalView extends Component {
                
             
         });
-        //console.log("points count is", pointsCount);
+        console.log("points count is", pointsCount);
         
         let values=[];
         for(let point in pointsCount){
             values.push(point);
         }
+
+        
 
         //console.log("valuesfffcvf",values);
 
@@ -80,7 +82,7 @@ class StatisticalView extends Component {
     
     
     //this should be removed
-    componentWillReceiveßßProps(newProps,prevState){
+    componentWillReceiveProps(newProps,prevState){
         console.log(newProps.pointList);
         let pointsCount={};
         newProps.pointList.forEach((element) => {
@@ -94,10 +96,10 @@ class StatisticalView extends Component {
                
             
         });
-        //console.log("points count is", pointsCount);
+        console.log("points count is", pointsCount);
         
         let values=[];
-        for(let point in pointsCount.values()){
+        for(let point in pointsCount){
             values.push(point);
         }
 
@@ -176,11 +178,11 @@ class StatisticalView extends Component {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                {this.state.pointsCount.map((val,i) => {
+                                {Object.getOwnPropertyNames(this.state.pointsCount).map((val,i) => {
                                     return (
                                         <Table.Row key={i}>
                                             <Table.Cell>{val}</Table.Cell>
-                                            <Table.Cell>{this.state.pointsCount[i]}</Table.Cell>
+                                            <Table.Cell>{this.state.pointsCount[val]}</Table.Cell>
                                         </Table.Row>)
                                 })}
                             </Table.Body>

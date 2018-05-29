@@ -47,7 +47,6 @@ export class ScrumMaster extends Component {
     }
 
   }
-
   render() {
     return (
       <Grid columns="equal">
