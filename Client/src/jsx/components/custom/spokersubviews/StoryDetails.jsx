@@ -27,15 +27,24 @@ class StoryDetails extends Component {
     super(props);
     this.state = {
       inputFields: {
-        storyID:{ value: '', type: 'number', required: true, error: false, show: true },
-        storyflag: { value: '', type: 'select', required: true, error: false, show: true },
-        epic: { value: '', type: 'text', required: true, error: false, show: true },
-        desc: { value: '', type: 'text', required: true, error: false, show: true },
+        storyID:{ value: this.props.initStoryInfo.storyID, type: 'number', required: true, error: false, show: true },
+        storyflag: { value: this.props.initStoryInfo.storyflag, type: 'select', required: true, error: false, show: true },
+        epic: { value: this.props.initStoryInfo.epic, type: 'text', required: true, error: false, show: true },
+        desc: { value: this.props.initStoryInfo.desc, type: 'text', required: true, error: false, show: true },
       },
       storyList:[],
       formError: true,
     };
     
+  }
+
+  componentWillReceiveProps(nextProps,currentState){
+    this.setState({inputFields: {
+      storyID:{ value: nextProps.initStoryInfo.storyID, type: 'number', required: true, error: false, show: true },
+      storyflag: { value: nextProps.initStoryInfo.storyflag, type: 'select', required: true, error: false, show: true },
+      epic: { value: nextProps.initStoryInfo.epic, type: 'text', required: true, error: false, show: true },
+      desc: { value: nextProps.initStoryInfo.desc, type: 'text', required: true, error: false, show: true },
+    }}) 
   }
 
   handleInput = (e, data) => {

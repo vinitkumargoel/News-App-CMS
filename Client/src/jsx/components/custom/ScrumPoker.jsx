@@ -46,7 +46,7 @@ class ScrumPoker extends Component {
                                              : () => (<ScrumPlayer
                                                           initStoryInfo={this.props.store.storyInfo}
                                                           isMaster={isMaster}
-                                                          nitRoomInfo={this.props.store.roomInfo}
+                                                          initRoomInfo={this.props.store.roomInfo}
                                                           playerList={this.props.store.playerList}
                                                           actions={{
                                                               selectPoint: this.props.actions.selectPoint

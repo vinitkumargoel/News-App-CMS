@@ -29,7 +29,9 @@ const wsHelper = {
                             if(this.currentState.poker.playerInfo.isMaster){
                                 if(this.currentState.poker.roomInfo.roomnum.length === 0){
                                     let pl = {room : this.currentState.poker.playerInfo.roomid,
-                                              password : this.currentState.poker.playerInfo.pwd};
+                                              password : this.currentState.poker.playerInfo.pwd,
+                                              usrname : this.currentState.poker.playerInfo.usrid
+                                            };
                                     this.socket.emit('joinroom',pl);
                                 }else{
                                     this.socket.emit('joinroom',this.currentState.poker.roomInfo);
