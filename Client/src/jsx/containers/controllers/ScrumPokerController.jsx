@@ -29,7 +29,8 @@ class SPView extends React.Component {
       joinRoom : this.props.joinRoom,
       createRoom : this.props.createRoom,
       publishStory : this.props.publishStory,
-      selectPoint : this.props.selectPoint
+      selectPoint : this.props.selectPoint,
+      clearPoints : this.props.clearPoints
     };
   }
 
@@ -61,9 +62,13 @@ const mapActionsToProps = (dispatch,ownProps)=>{
           dispatch(spokerAction(pl));
         },
         selectPoint : (pl) => {
-          console.log("selected point ====> ",pl);
           pl.id = 3;
           pl.from = "local3";
+          dispatch(spokerAction(pl));
+        },
+        clearPoints : (pl)=>{
+          pl.id = 4;
+          pl.from = "local4";
           dispatch(spokerAction(pl));
         }
     };

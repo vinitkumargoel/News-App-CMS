@@ -49,6 +49,9 @@ const wsHelper = {
             case 'local3':
                             this.socket.emit('point',{userName:this.currentState.poker.playerInfo.usrid,score:this.currentState.poker.playerInfo.score});
                             break;
+            case 'local4':
+                            this.socket.emit('clear',"clear point list");
+                            break;
         } 
     },
     serverListener : function(store){
@@ -58,6 +61,7 @@ const wsHelper = {
         });
         this.socket.on('points', (ps) => {
             let payload={ps,from:'server'};
+            payload.clearVotes = true;
             store.dispatch({type:pokerActions.POINT_LIST,payload});
         });
         this.socket.on('story', (sd) => {

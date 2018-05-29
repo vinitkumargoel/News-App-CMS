@@ -62,7 +62,7 @@ class StoryCards extends Component {
             <Header padded="true" as='h3' >Stories Estimated</Header>
 
           </Grid.Row>
-          <Grid.Row onScroll={this.scrollHandler} style={{ overflowY: 'auto', minHeight: '600px', maxHeight: '600px' }}>
+          <Grid.Row onScroll={this.scrollHandler} style={{ overflowY: 'auto', maxHeight: '600px' }}>
             {this.props.storyList.length <= 0 ?
               <p>No Stories discussed yet</p>
               :

@@ -17,7 +17,7 @@ module.exports = function(ns,socket,session){
 
     socket.on('clear',(ri)=>{
         session.pointList = new Map();
-        ns.emit('points',Array.from(session.pointList.values()));
+        ns.to(session.id).emit('points',Array.from(session.pointList.values()));
     });
 
     socket.on('disconnect',()=>{

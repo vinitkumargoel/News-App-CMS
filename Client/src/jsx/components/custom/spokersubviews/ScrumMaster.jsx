@@ -68,16 +68,17 @@ export class ScrumMaster extends Component {
                 {this.props.publish && (<PublishStoryCard closeAction={this.closePublish.bind(this)}
                   initStoryInfo={this.props.initStoryInfo} />)}
                 <div>
-                  <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} />
+                  <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} actions={{clearPoints:this.props.actions.clearPoints}}/>
                   {this.state.showVotes === 'true' ? <StatisticalView initStoryInfo={this.props.initStoryInfo} 
                   pointList={this.props.pointList} roomInfo={this.props.roomInfo}
-                  submitStory={this.props.submitStory} playerList={this.props.playerList} /> : null}
+                  submitStory={this.props.submitStory} playerList={this.props.playerList} 
+                  /> : null}
                 </div>
               </Grid.Column>
 
               <Grid.Column width={4}>
                 <PlayerList playerList={this.props.playerList} />
-                <StoryCards storyList={this.props.storyList} />
+                <StoryCards sizingMethod={this.props.roomInfo.pointingMethod} storyList={this.props.storyList} />
               </Grid.Column>
             </Grid>
           </Segment>

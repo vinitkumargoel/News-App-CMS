@@ -55,7 +55,8 @@ function pokerReducer(state = {}, action) {
 
             return Object.assign(newState, state, { playerList: action.payload.cls }, { from: action.payload.from });
         case pokerActions.POINT_LIST:
-            return Object.assign(newState, state, { pointList: action.payload.ps }, { from: action.payload.from });
+                        tempState = Object.assign({},state.playerInfo,{score:""});
+                        return Object.assign(newState,state,{pointList:action.payload.ps},{from:action.payload.from},{playerInfo:tempState});
         case pokerActions.STORY_DETAILS:
             return Object.assign(newState, state, { storyInfo: action.payload.sd }, { from: action.payload.from });
         case pokerActions.ROOM_NUM:
@@ -65,7 +66,9 @@ function pokerReducer(state = {}, action) {
             tempState = Object.assign({}, state.roomInfo, action.payload.ri);
             return Object.assign(newState, state, { roomInfo: tempState }, { from: action.payload.from });
         case pokerActions.JOINED_AS_ADMIN:
-            return Object.assign(newState, state, action.payload);
+                        return Object.assign(newState,state,action.payload); 
+        case pokerActions.CLEAR_POINTS:
+                        return Object.assign(newState,state,{from:action.payload.from}); 
         default:
             return state;
     }

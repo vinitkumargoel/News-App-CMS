@@ -23,7 +23,11 @@ export function spokerAction(payload) {
                         return function (dispatch, getState) {
                                 return dispatch({ type: pokerActions.SELECT_POINT, payload });
                         };
-                default:
+                case 4:
+                        return function(dispatch,getState){
+                                return dispatch({type:pokerActions.CLEAR_POINTS,payload});
+                        };
+                default :
         }
 }
 export const setPublish = (bool) => ({ type: configDataActions.SET_PUBLISH, payload: bool });
