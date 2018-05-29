@@ -16,13 +16,15 @@ const spokerListener = function(spokerNS,socket){
         console.log(pi);
         if(pi.room){
             let session = sessions[pi.room];
-            let sessionCopy = Object.assign({},session);
-            sessionCopy.playerList = Array.from(session.playerList.values());
-            sessionCopy.pointList = Array.from(session.pointList.values());
             if(session.roomInfo.pwd === pi.password){
-                session.master = socket.id;
-                socket.emit('store',sessionCopy);
-                spokerRoomListener(spokerNS,socket,session);
+                let sessionCopy = Object.assign({},session);
+                sessionCopy.playerList = Array.from(session.playerList.values());
+                sessionCopy.pointList = Array.from(session.pointList.values());
+                socket.join(pi.room,()=>{
+                    session.master = socket.id;
+                    socket.emit('store',sessionCopy);
+                    spokerRoomListener(spokerNS,socket,session);
+                });
             }
             else {
                 socket.emit('err',"You are not the admin!");
