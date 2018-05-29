@@ -17,13 +17,14 @@ module.exports = function(ns,socket,session){
 
     socket.on('clear',(ri)=>{
         session.pointList = new Map();
+        ns.emit('points',Array.from(session.pointList.values()));
     });
 
     socket.on('disconnect',()=>{
         session.pointList.delete(socket.id);
         session.playerList.delete(socket.id);
         ns.emit('players',Array.from(session.playerList.values()));
-        ns.emit('points',session.pointList);
+        ns.emit('points',Array.from(session.pointList.values()));
     });
 
 }
