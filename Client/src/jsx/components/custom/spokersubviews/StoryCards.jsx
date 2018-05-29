@@ -23,7 +23,7 @@ class StoryCards extends Component {
     super(props);
     this.state = {
       open: false,
-      story: {},
+      story: null,
     };
     this.userRefs = {};
 
@@ -77,7 +77,7 @@ class StoryCards extends Component {
                 </Card.Meta>
                     <Card.Description>
                       <strong>{` ${story.epic} `} </strong>Epic<br />
-                      <strong>{` ${story.size} `} </strong> Size
+                      <strong>{` ${story.averageStoryPoint} `} </strong> Size
                     {/* <strong>{` - ${story.desc} `}</strong> has been published for voting. */}
                     </Card.Description>
                   </Card.Content>
@@ -90,7 +90,7 @@ class StoryCards extends Component {
             }
           </Grid.Row>
         </Grid>
-        <TempModal open={this.state.open} remainingProps={{ basic: false }}>
+        {this.state.story !== null && (<TempModal open={this.state.open} remainingProps={{ basic: false }}>
           <Header icon='info' content={`Details of the story - ${this.state.story.storyID}`} />
           <Modal.Content>
             <Header as='h3'>
@@ -104,7 +104,7 @@ class StoryCards extends Component {
                   Priority <strong>{` : ${this.state.story.storyflag} `}</strong>
                 </Grid.Column>
                 <Grid.Column>
-                  Size <strong>{` : ${this.state.story.size} `}</strong>
+                  Size <strong>{` : ${this.state.story.averageStoryPoint} `}</strong>
                   <br />
                   Sizing Method <strong>{` : ${this.props.sizingMethod} `}</strong>
                 </Grid.Column>
@@ -114,12 +114,11 @@ class StoryCards extends Component {
                 <Grid.Column>
                   Highest Story Point <strong>{` : ${this.state.story.highestStoryPoint} `}</strong>
                   <br />
-                  Least Story Point <strong>{` : ${this.state.story.leastStoryPoint} `}</strong>
+                  Least Story Point <strong>{` : ${this.state.story.lowestStoryPoint} `}</strong>
                 </Grid.Column>
                 <Grid.Column>
-                  Average Story Point <strong>{` : ${this.state.story.averageStoryPoint} `}</strong>
+                  Top Voted Point <strong>{` : ${this.state.story.topVotedPoint.join(', ')} `}</strong>
                   <br />
-                  Top Voted Point <strong>{` : ${this.state.story.topVotedPoint} `}</strong>
                 </Grid.Column>
 
               </Grid.Row>
@@ -141,7 +140,7 @@ class StoryCards extends Component {
               </Button>
 
           </Modal.Actions>
-        </TempModal>
+        </TempModal>)}
       </Segment>
     );
   }

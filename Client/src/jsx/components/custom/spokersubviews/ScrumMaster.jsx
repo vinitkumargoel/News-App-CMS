@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 
 //container imports
-import { setPublish } from '../../../../js/actions/actionCreators/index';
+import { setPublish,submitStory } from '../../../../js/actions/actionCreators/index';
 import { spokerAction } from '../../../../js/actions/actionCreators';
 
 
@@ -69,7 +69,9 @@ export class ScrumMaster extends Component {
                   initStoryInfo={this.props.initStoryInfo} />)}
                 <div>
                   <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} />
-                  {this.state.showVotes === 'true' ? <StatisticalView pointList={this.props.pointList} roomInfo={this.props.roomInfo} playerList={this.props.playerList} /> : null}
+                  {this.state.showVotes === 'true' ? <StatisticalView initStoryInfo={this.props.initStoryInfo} 
+                  pointList={this.props.pointList} roomInfo={this.props.roomInfo}
+                  submitStory={this.props.submitStory} playerList={this.props.playerList} /> : null}
                 </div>
               </Grid.Column>
 
@@ -107,7 +109,8 @@ const mapDispatchToProps = dispatch => ({
     pl.id = 2;
     pl.from = "local2";
     dispatch(spokerAction(pl));
-  }
+  },
+  submitStory:storyDetails => dispatch(submitStory(storyDetails))
 })
 
 export default connect(
