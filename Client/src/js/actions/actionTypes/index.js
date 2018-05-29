@@ -12,7 +12,8 @@ export const pokerActions = {
     ROOM_NUM : "ROOM_NUM",
     P_M : "P_M",
     JOINED_AS_ADMIN : "JOINED_AS_ADMIN",
-    CLEAR_POINTS : "CLEAR_POINTS"
+    CLEAR_POINTS : "CLEAR_POINTS",
+    RESET_ROOM : "RESET_ROOM"
 };
 export const configDataActions = {
     SET_PUBLISH:"SET_PUBLISH_STORY_CARD_VISIBILITY",

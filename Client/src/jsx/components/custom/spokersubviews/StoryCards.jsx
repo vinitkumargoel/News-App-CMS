@@ -32,12 +32,10 @@ class StoryCards extends Component {
     this.setState((prevState) => ({ open: !prevState.open }));
   }
   openModal = function (story) {
-    console.log('wokring', story);
     this.setState((prevState) => ({ open: !prevState.open, story }));
   }
   setRef = function (refObject = 'userRefs', refName, ref) {
     this[refObject][refName] = ref;
-    console.log('setting', ref);
   }
   getRef = (refObject = 'userRefs', refName) => {
     return this[refObject][refName];

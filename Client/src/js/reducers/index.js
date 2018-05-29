@@ -68,7 +68,11 @@ function pokerReducer(state = {}, action) {
         case pokerActions.JOINED_AS_ADMIN:
                         return Object.assign(newState,state,action.payload); 
         case pokerActions.CLEAR_POINTS:
-                        return Object.assign(newState,state,{from:action.payload.from}); 
+                        return Object.assign(newState,state,{from:action.payload.from});
+        case pokerActions.RESET_ROOM:
+                        tempState = Object.assign({},state.playerInfo,{score:""});
+                        return Object.assign(newState,state,{pointList:action.payload.rd.pointList
+                        ,storyInfo:action.payload.rd.storyInfo,playerInfo:tempState},{from:action.payload.from});
         default:
             return state;
     }

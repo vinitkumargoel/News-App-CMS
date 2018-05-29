@@ -52,6 +52,9 @@ const wsHelper = {
             case 'local4':
                             this.socket.emit('clear',"clear point list");
                             break;
+            case 'local5':
+                            this.socket.emit('stories',this.currentState.poker.storyList);
+                            break;
         } 
     },
     serverListener : function(store){
@@ -77,9 +80,12 @@ const wsHelper = {
             store.dispatch({type:pokerActions.P_M,payload});
         });
         this.socket.on('store',(ns)=>{
-            console.log("admin store ===> ",ns);
             ns.from = 'server';
             store.dispatch({type:pokerActions.JOINED_AS_ADMIN,payload:ns});
+        });
+        this.socket.on('reset',(rd)=>{
+            let payload = {rd,from:'server'};
+            store.dispatch({type:pokerActions.RESET_ROOM,payload});
         });
         this.socket.on('err',(err)=>{
             alert(err);

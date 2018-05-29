@@ -17,8 +17,8 @@ class Parent extends React.Component{
         this.state = {showPublish:false}
     }
     componentDidMount(){
-        window.setTimeout(function(){console.log(this.state);this.setState({showPublish:true})}.bind(this),4000)
-        window.setTimeout(function(){console.log(this.state);this.setState({showPublish:false})}.bind(this),8000)
+        window.setTimeout(function(){this.setState({showPublish:true})}.bind(this),4000)
+        window.setTimeout(function(){this.setState({showPublish:false})}.bind(this),8000)
     }
     closePublish(){
         this.setState({showPublish:false})

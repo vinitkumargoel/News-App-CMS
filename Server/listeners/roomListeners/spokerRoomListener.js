@@ -5,6 +5,17 @@ module.exports = function(ns,socket,session){
         ns.to(session.id).emit('story',si);
     });
 
+    socket.on('stories',(ss)=>{
+        console.log(ss);
+        session.storyList = ss;
+        ns.to(session.id).emit('reset',{pointList:[],storyInfo : {
+            storyID: "",
+            epic: "",
+            desc: "",
+            storyflag: ""
+        }});
+    });
+
     socket.on('point',(p)=>{
         console.log(p);
         let points = [];
