@@ -16,7 +16,8 @@ const spokerListener = function(spokerNS,socket){
         console.log(pi);
         if(pi.room){
             let session = sessions[pi.room];
-            if(session.roomInfo.pwd === pi.password){
+            if(session.roomInfo.pwd === pi.password && session.roomInfo.adminName === pi.usrname){
+                session.playerList.set(socket.id,pi.usrname);
                 let sessionCopy = Object.assign({},session);
                 sessionCopy.playerList = Array.from(session.playerList.values());
                 sessionCopy.pointList = Array.from(session.pointList.values());
