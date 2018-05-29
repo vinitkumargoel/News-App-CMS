@@ -71,6 +71,11 @@ class StatisticalView extends Component {
         let highMiddle = Math.ceil((values.length - 1) / 2);
         let median = Math.ceil((parseInt(values[lowMiddle]) + parseInt(values[highMiddle])) / 2);
         
+        let r=Object.keys(pointsCount).reduce((a, b) => pointsCount[a] > pointsCount[b] ? a : b);
+        let result = [];
+        Object.keys(pointsCount).forEach((key)=>{
+        	pointsCount[key] === pointsCount[r]&& result.push(key)
+        })
         votingDetails.peopleVoted=values.length;
         votingDetails.peopleNotVoted=(this.props.playerList.length-1)-this.props.pointList.length;
         votingDetails.averageStoryPoint=median;
@@ -114,6 +119,12 @@ class StatisticalView extends Component {
         let highMiddle = Math.ceil((values.length - 1) / 2);
         let median = Math.ceil((parseInt(values[lowMiddle]) + parseInt(values[highMiddle])) / 2);
         
+        let r=Object.keys(pointsCount).reduce((a, b) => pointsCount[a] > pointsCount[b] ? a : b);
+        let result = [];
+        Object.keys(pointsCount).forEach((key)=>{
+        	pointsCount[key] === pointsCount[r]&& result.push(key)
+        })
+        votingDetails.topVotedPoint=result;
         votingDetails.peopleVoted=values.length;
         votingDetails.peopleNotVoted=(this.props.playerList.length-1)-newProps.pointList.length;
         votingDetails.averageStoryPoint=median;
