@@ -15,7 +15,7 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 import { TempModal } from './common/customComponents';
 
 //semantic-ui imports
-import { Grid, Button,Divider, Card, Modal, List, Segment, Header, Icon } from 'semantic-ui-react';
+import { Grid, Button, Divider, Card, Modal, List, Segment, Header, Icon } from 'semantic-ui-react';
 
 //component
 class StoryCards extends Component {
@@ -24,124 +24,73 @@ class StoryCards extends Component {
     this.state = {
       open: false,
       story: {},
-      storyList: [{
-        storyID: '221',
-        epic: 'MBNA',
-        storyflag: 'Medium',
-        desc: 'This is regarding the blah blah blah ipsem lorem',
-        size: 'L',
-        highestStoryPoint: 4,
-        leastStoryPoint: 5,
-        topVotedPoint:3,
-        averageStoryPoint: 6,
-        peopleVoted: 4,
-        peopleNotVoted: 2,
-    }, {
-        storyID: '222',
-        epic: 'MBNA',
-        storyflag: 'Medium',
-        desc: 'This issdf regarding the blah blah blah ipsem lorem',
-        size: 'M',
-        highestStoryPoint: 4,
-        leastStoryPoint: 5,
-        topVotedPoint:3,
-        averageStoryPoint: 6,
-        peopleVoted: 4,
-        peopleNotVoted: 2,
-    }, {
-        storyID: '223',
-        epic: 'MBNA',
-        storyflag: 'Medium',
-        desc: 'This is fdgregarding the blah blah blah ipsem lorem',
-        size: 'XL',
-        highestStoryPoint: 4,
-        leastStoryPoint: 5,
-        averageStoryPoint: 6,
-        topVotedPoint:3,
-        peopleVoted: 4,
-        peopleNotVoted: 2,
-    
-    }, {
-        storyID: '224',
-        epic: 'MBNA',
-        storyflag: 'Medium',
-        desc: 'This issdf regarding the blah blah blah ipsem lorem',
-        size: 'XXL',
-        highestStoryPoint: 4,
-        leastStoryPoint: 5,
-        topVotedPoint:3,
-        averageStoryPoint: 6,
-        peopleVoted: 4,
-        peopleNotVoted: 2,
-    
-    }]
     };
     this.userRefs = {};
-    
+
   }
-  closeModal=()=>{
-    this.setState((prevState)=>({open:!prevState.open}));
+  closeModal = () => {
+    this.setState((prevState) => ({ open: !prevState.open }));
   }
-  openModal=function(story){
-    console.log('wokring',story);
-    this.setState((prevState)=>({open:!prevState.open,story}));
+  openModal = function (story) {
+    console.log('wokring', story);
+    this.setState((prevState) => ({ open: !prevState.open, story }));
   }
-  setRef=function(refObject='userRefs',refName,ref){
+  setRef = function (refObject = 'userRefs', refName, ref) {
     this[refObject][refName] = ref;
-    console.log('setting',ref);
+    console.log('setting', ref);
   }
-  getRef=(refObject='userRefs',refName)=>{
+  getRef = (refObject = 'userRefs', refName) => {
     return this[refObject][refName];
   }
-  scrollHandler=(e)=>{
-    if(e.target.scrollTop){
-      this.setState({raise:true});
+  scrollHandler = (e) => {
+    if (e.target.scrollTop) {
+      this.setState({ raise: true });
     }
-    else{
-      this.setState({raise:false})
+    else {
+      this.setState({ raise: false })
     }
   }
-  componentDidMount(){
-    
+  componentDidMount() {
+
   }
   render() {
     return (
       <Segment>
         <Grid textAlign='center'>
-          <Grid.Row style={{borderBottom:'1px solid #ded2d2',zIndex:10,boxShadow:this.state.raise?'0 8px 6px -6px grey':''}}>
+          <Grid.Row style={{ borderBottom: '1px solid #ded2d2', zIndex: 10, boxShadow: this.state.raise ? '0 8px 6px -6px grey' : '' }}>
 
-            <Header  padded="true" as='h3' >Stories Estimated</Header>
-     
+            <Header padded="true" as='h3' >Stories Estimated</Header>
+
           </Grid.Row>
-          <Grid.Row onScroll={this.scrollHandler} style={{overflowY:'auto', minHeight: '600px', maxHeight: '600px'}}>
-          {/* {this.props.storyList.length == undefined} ? (
+          <Grid.Row onScroll={this.scrollHandler} style={{ overflowY: 'auto', minHeight: '600px', maxHeight: '600px' }}>
+            {this.props.storyList.length <= 0 ?
               <p>No Stories discussed yet</p>
-            ) : ( */}
-          {this.state.storyList.map((story,index) => (
-            <Card fluid key={index} style={{marginRight:'1%',marginLeft:'1%'}}>
-              <Card.Content>
-                <Card.Header>
-                  Story {` - ${story.storyID}`}
-                </Card.Header>
-                <Card.Meta>
-                  <strong>{` ${story.storyflag} `}</strong> priority
-              </Card.Meta>
-                <Card.Description>
-                <strong>{` ${story.epic} `} </strong>Epic<br />
-                <strong>{` ${story.size} `} </strong> Size
-                  {/* <strong>{` - ${story.desc} `}</strong> has been published for voting. */}
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui one buttons'>
-                  <Button basic onClick={this.openModal.bind(this,story)} color='green'>Details</Button>
-                </div>
-              </Card.Content>
-            </Card>))}
-            {/* ); */}
-            </Grid.Row>
+              :
+              this.props.storyList.map((story, index) => (
+                <Card fluid key={index} style={{ marginRight: '1%', marginLeft: '1%' }}>
+                  <Card.Content>
+                    <Card.Header>
+                      Story {` - ${story.storyID}`}
+                    </Card.Header>
+                    <Card.Meta>
+                      <strong>{` ${story.storyflag} `}</strong> priority
+                </Card.Meta>
+                    <Card.Description>
+                      <strong>{` ${story.epic} `} </strong>Epic<br />
+                      <strong>{` ${story.size} `} </strong> Size
+                    {/* <strong>{` - ${story.desc} `}</strong> has been published for voting. */}
+                    </Card.Description>
+                  </Card.Content>
+                  <Card.Content extra>
+                    <div className='ui one buttons'>
+                      <Button basic onClick={this.openModal.bind(this, story)} color='green'>Details</Button>
+                    </div>
+                  </Card.Content>
+                </Card>))
+            }
+          </Grid.Row>
         </Grid>
-        <TempModal open={this.state.open} remainingProps={{basic:false}}>
+        <TempModal open={this.state.open} remainingProps={{ basic: false }}>
           <Header icon='info' content={`Details of the story - ${this.state.story.storyID}`} />
           <Modal.Content>
             <Header as='h3'>
@@ -152,36 +101,36 @@ class StoryCards extends Component {
                 <Grid.Column>
                   Epic <strong>{` : ${this.state.story.epic} `}</strong>
                   <br />
-                  Priority <strong>{` : ${this.state.story.storyflag} `}</strong>   
+                  Priority <strong>{` : ${this.state.story.storyflag} `}</strong>
                 </Grid.Column>
                 <Grid.Column>
                   Size <strong>{` : ${this.state.story.size} `}</strong>
                   <br />
-                  Sizing Method <strong>{` : ${this.props.sizingMethod} `}</strong>   
+                  Sizing Method <strong>{` : ${this.props.sizingMethod} `}</strong>
                 </Grid.Column>
-                
+
               </Grid.Row>
               <Grid.Row>
                 <Grid.Column>
-                Highest Story Point <strong>{` : ${this.state.story.highestStoryPoint} `}</strong>
+                  Highest Story Point <strong>{` : ${this.state.story.highestStoryPoint} `}</strong>
                   <br />
-                Least Story Point <strong>{` : ${this.state.story.leastStoryPoint} `}</strong>   
+                  Least Story Point <strong>{` : ${this.state.story.leastStoryPoint} `}</strong>
                 </Grid.Column>
                 <Grid.Column>
-                Average Story Point <strong>{` : ${this.state.story.averageStoryPoint} `}</strong>
+                  Average Story Point <strong>{` : ${this.state.story.averageStoryPoint} `}</strong>
                   <br />
-                Top Voted Point <strong>{` : ${this.state.story.topVotedPoint} `}</strong>   
+                  Top Voted Point <strong>{` : ${this.state.story.topVotedPoint} `}</strong>
                 </Grid.Column>
-                
+
               </Grid.Row>
               <Grid.Row>
                 <Grid.Column>
-                People Voted <strong>{` : ${this.state.story.peopleVoted} `}</strong>
+                  People Voted <strong>{` : ${this.state.story.peopleVoted} `}</strong>
                   <br />
-                People Not Voted <strong>{` : ${this.state.story.peopleNotVoted} `}</strong>   
+                  People Not Voted <strong>{` : ${this.state.story.peopleNotVoted} `}</strong>
                 </Grid.Column>
               </Grid.Row>
-              
+
             </Grid>
 
 
