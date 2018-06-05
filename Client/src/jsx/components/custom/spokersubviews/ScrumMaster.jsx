@@ -71,7 +71,7 @@ export class ScrumMaster extends Component {
                   <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} actions={{clearPoints:this.props.actions.clearPoints}}/>
                   {this.state.showVotes === 'true' ? <StatisticalView initStoryInfo={this.props.initStoryInfo} 
                   pointList={this.props.pointList} roomInfo={this.props.roomInfo}
-                  submitStory={this.props.submitStory} playerList={this.props.playerList} 
+                  submitStory={this.props.submitStory} toggleShowVotes={this.toggleShowVotes} playerList={this.props.playerList }  
                   /> : null}
                 </div>
               </Grid.Column>

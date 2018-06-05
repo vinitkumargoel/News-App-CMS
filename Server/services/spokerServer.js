@@ -8,11 +8,11 @@ const { config } = require('../utils');
 
 /* --------- WEBSOCKET API --------- */
 //socket server config
-const redisAdapter = socketRedis({
-									key : 'spoker',
-									host : config.globalConfig.hosts.REDIS,
-									port : config.globalConfig.ports.REDIS
-								});
+// const redisAdapter = socketRedis({
+// 									key : 'spoker',
+// 									host : config.globalConfig.hosts.REDIS,
+// 									port : config.globalConfig.ports.REDIS
+// 								});
 
 const io = sockServer(httpServer,{
 	serveClient : true,
@@ -20,7 +20,7 @@ const io = sockServer(httpServer,{
 	pingTimeout : 5000,
 	cookie : false,
 	transports : ['websocket'],
-	adapter : redisAdapter
+	// adapter : redisAdapter
 });
 
 //listener imports
