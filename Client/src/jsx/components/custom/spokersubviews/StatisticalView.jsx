@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Table, Grid, Header, Button, Message, Icon, Modal,Dropdown } from 'semantic-ui-react'
+import { Input, Table, Grid, Header, Button, Message, Icon, Modal, Dropdown } from 'semantic-ui-react'
 import { TempModal } from './common/customComponents';
 import { pmData } from './common/commonData';
 import update from 'immutability-helper';
@@ -8,131 +8,136 @@ import { updateStoreInput, validate } from './common/utils';
 class StatisticalView extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.pointList);
         this.state = {
             inputFields: {
                 pointInput: { value: '', type: 'select', required: false, error: false, show: true },
             },
-            pointsCount:[],
-            lowestStoryPoint:0,
-            votingDetailsMetadata:{
+            pointsCount: [],
+            lowestStoryPoint: 0,
+            votingDetailsMetadata: {
                 highestStoryPoint: "Highest story point",
-                lowestStoryPoint:"Least story Point",
-                averageStoryPoint:"Average story Point",
-                peopleVoted:"People voted",
-                peopleNotVoted:"People who didn't vote"
+                lowestStoryPoint: "Least story Point",
+                averageStoryPoint: "Average story Point",
+                peopleVoted: "People voted",
+                peopleNotVoted: "People who didn't vote"
             },
             votingDetails: {
-                highestStoryPoint:0,
-                lowestStoryPoint:0,
-                averageStoryPoint:0,
-                peopleVoted:0,
-                peopleNotVoted:0
+                highestStoryPoint: 0,
+                lowestStoryPoint: 0,
+                averageStoryPoint: 0,
+                peopleVoted: 0,
+                peopleNotVoted: 0,
+                topVotedPoint:0
             },
             open: false,
-            formError:true
+            formError: true
         }
-        console.log(this.state.pointsCount);
     }
 
 
     //this is to be changed
-    componentDidMount(){
-        alert("hedhbjbj")
-        console.log(this.props.pointList);
-        let pointsCount=[];
+    componentDidMount() {
+        let pointsCount={};
         this.props.pointList.forEach((element) => {
-            console.log("element is", element);
-            if(pointsCount[element.score] ==undefined){
-                pointsCount[element.score]=1;
+            if (pointsCount[element.score] == undefined) {
+                pointsCount[element.score] = 1;
             }
-            else{
-                pointsCount[element.score]=pointsCount[element.score]+1;
-            } 
-               
-            
+            else {
+                pointsCount[element.score] = pointsCount[element.score] + 1;
+            }
+
+
         });
-        console.log("points count is", pointsCount);
-        
+        if(Object.getOwnPropertyNames(pointsCount).length !== 0){
         let values=[];
         for(let point in pointsCount){
             values.push(point);
         }
 
-        console.log("valuesfffcvf",values);
-
-        let votingDetails=this.state.votingDetails;
-        votingDetails.highestStoryPoint=Math.max(...values);
-        votingDetails.lowestStoryPoint=Math.min(...values);
+        let votingDetails = this.state.votingDetails;
+        votingDetails.highestStoryPoint = Math.max(...values);
+        votingDetails.lowestStoryPoint = Math.min(...values);
 
         values.sort((a, b) => a - b);
         let lowMiddle = Math.floor((values.length - 1) / 2);
         let highMiddle = Math.ceil((values.length - 1) / 2);
         let median = Math.ceil((parseInt(values[lowMiddle]) + parseInt(values[highMiddle])) / 2);
         
+        let r=Object.keys(pointsCount).reduce((a, b) => pointsCount[a] > pointsCount[b] ? a : b);
+        let result = [];
+        Object.keys(pointsCount).forEach((key)=>{
+        	pointsCount[key] === pointsCount[r]&& result.push(key)
+        })
+        votingDetails.topVotedPoint=result;        
         votingDetails.peopleVoted=values.length;
         votingDetails.peopleNotVoted=(this.props.playerList.length-1)-this.props.pointList.length;
         votingDetails.averageStoryPoint=median;
         this.setState({pointsCount,votingDetails});
+    }
 
     }
 
-    
-    
-    
-    //this should be removed
-    componentWillReceiveßßProps(newProps,prevState){
-        console.log(newProps.pointList);
-        let pointsCount={};
+    //this should be removed --badcode
+    componentWillReceiveProps(newProps,prevState){
+        let pointsCount = {};
         newProps.pointList.forEach((element) => {
-            console.log("element is", element);
-            if(pointsCount[element.score] ==undefined){
-                pointsCount[element.score]=1;
+            if (pointsCount[element.score] == undefined) {
+                pointsCount[element.score] = 1;
             }
-            else{
-                pointsCount[element.score]=pointsCount[element.score]+1;
-            } 
-               
-            
+            else {
+                pointsCount[element.score] = pointsCount[element.score] + 1;
+            }
         });
-        console.log("points count is", pointsCount);
-        
+
+        if(Object.getOwnPropertyNames(pointsCount).length !== 0){
         let values=[];
-        for(let point in pointsCount.values()){
+        for(let point in pointsCount){
             values.push(point);
         }
 
-        console.log("valuesfffcvf",values);
-
-        let votingDetails=this.state.votingDetails;
-        votingDetails.highestStoryPoint=Math.max(...values);
-        votingDetails.lowestStoryPoint=Math.min(...values);
+        let votingDetails = this.state.votingDetails;
+        votingDetails.highestStoryPoint = Math.max(...values);
+        votingDetails.lowestStoryPoint = Math.min(...values);
 
         values.sort((a, b) => a - b);
         let lowMiddle = Math.floor((values.length - 1) / 2);
         let highMiddle = Math.ceil((values.length - 1) / 2);
         let median = Math.ceil((parseInt(values[lowMiddle]) + parseInt(values[highMiddle])) / 2);
         
+        let r=Object.keys(pointsCount).reduce((a, b) => pointsCount[a] > pointsCount[b] ? a : b);
+        let result = [];
+        Object.keys(pointsCount).forEach((key)=>{
+        	pointsCount[key] === pointsCount[r]&& result.push(key)
+        })
+        votingDetails.topVotedPoint=result;
         votingDetails.peopleVoted=values.length;
         votingDetails.peopleNotVoted=(this.props.playerList.length-1)-newProps.pointList.length;
         votingDetails.averageStoryPoint=median;
         this.setState({pointsCount,votingDetails});
-
+    }
     }
 
     handleClick = (e, data) => {
+        let votingDetails = this.state.votingDetails;
+
         if (e.target.innerText.trim() === 'Cancel') {
             this.setState({ open: false });
         }
-        else if(e.target.innerText.trim()==='Submit'){
-
-            this.setState({ open: false, averageStoryPoint: this.state.inputFields.pointInput.value });
+        else if (e.target.innerText.trim() === 'Submit') {
+            votingDetails.averageStoryPoint = this.state.inputFields.pointInput.value;
+            this.setState({ open: false, votingDetails });
         }
-        else{
+        else {
             this.setState({ open: true });
-            
+
         }
 
+    }
+    submitStory = () => {
+        let storyDetails = (({ storyID, storyflag, epic, desc }) => ({ storyID, storyflag, epic, desc }))(this.props.initStoryInfo)
+        storyDetails = Object.assign({}, storyDetails, this.state.votingDetails);
+        this.props.toggleShowVotes('false');
+        this.props.submitStory(storyDetails);
     }
     handleChange = (e, data) => {
 
@@ -143,7 +148,7 @@ class StatisticalView extends Component {
                 inputFields: {
                     [key]: {
                         value:
-                        { $set: srcElem.value }
+                            { $set: srcElem.value }
                     }
                 }
             });
@@ -175,11 +180,11 @@ class StatisticalView extends Component {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                {this.state.pointsCount.map((val,i) => {
+                                {Object.getOwnPropertyNames(this.state.pointsCount).map((val,i) => {
                                     return (
                                         <Table.Row key={i}>
                                             <Table.Cell>{val}</Table.Cell>
-                                            <Table.Cell>{this.state.pointsCount[i]}</Table.Cell>
+                                            <Table.Cell>{this.state.pointsCount[val]}</Table.Cell>
                                         </Table.Row>)
                                 })}
                             </Table.Body>
@@ -188,7 +193,8 @@ class StatisticalView extends Component {
                     <Grid.Column width="8">
                         <Table celled size="small">
                             <Table.Body>
-                                {Object.keys(this.state.votingDetails).map((key) => {
+                                {Object.keys(this.state.votingDetails).filter((key)=>{
+                                    return this.state.votingDetailsMetadata.hasOwnProperty(key)}).map((key) => {
                                     return (
                                         <Table.Row key={key}>
                                             <Table.Cell><b>{this.state.votingDetailsMetadata[key]}</b></Table.Cell>
@@ -201,7 +207,7 @@ class StatisticalView extends Component {
                     <Grid.Row>
                         <Grid.Column width={11}></Grid.Column>
                         <Grid.Column floated='right' width={5}>
-                            <Button primary>Submit story</Button>
+                            <Button onClick={this.submitStory} primary>Submit story</Button>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

@@ -21,6 +21,7 @@ class PointCardList extends Component {
   handleClearVotes() {
     this.setState({ 'showVotes': 'false' });
     this.props.toggleShowVotes('false');
+    this.props.actions.clearPoints({msg:'clearPoints'});
   }
   render() {
     return (

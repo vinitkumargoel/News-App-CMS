@@ -5,6 +5,7 @@ import StoryCards from '../src/jsx/components/custom/spokersubviews/StoryCards.j
 // let actions = {
 //     selectPoint:(obj)=>{action('Clicked')(obj)}
 // };
+
 let StoryList = [{
     storyID: '221',
     epic: 'MBNA',
@@ -12,8 +13,8 @@ let StoryList = [{
     desc: 'This is regarding the blah blah blah ipsem lorem',
     size: 'L',
     highestStoryPoint: 4,
-    leastStoryPoint: 5,
-    topVotedPoint:3,
+    lowestStoryPoint: 5,
+    topVotedPoint:[3,4],
     averageStoryPoint: 6,
     peopleVoted: 4,
     peopleNotVoted: 2,
@@ -24,8 +25,8 @@ let StoryList = [{
     desc: 'This issdf regarding the blah blah blah ipsem lorem',
     size: 'M',
     highestStoryPoint: 4,
-    leastStoryPoint: 5,
-    topVotedPoint:3,
+    lowestStoryPoint: 5,
+    topVotedPoint:[3,4],
     averageStoryPoint: 6,
     peopleVoted: 4,
     peopleNotVoted: 2,
@@ -36,9 +37,9 @@ let StoryList = [{
     desc: 'This is fdgregarding the blah blah blah ipsem lorem',
     size: 'XL',
     highestStoryPoint: 4,
-    leastStoryPoint: 5,
+    lowestStoryPoint: 5,
     averageStoryPoint: 6,
-    topVotedPoint:3,
+    topVotedPoint:[3,4],
     peopleVoted: 4,
     peopleNotVoted: 2,
 
@@ -49,8 +50,8 @@ let StoryList = [{
     desc: 'This issdf regarding the blah blah blah ipsem lorem',
     size: 'XXL',
     highestStoryPoint: 4,
-    leastStoryPoint: 5,
-    topVotedPoint:3,
+    lowestStoryPoint: 5,
+    topVotedPoint:[3],
     averageStoryPoint: 6,
     peopleVoted: 4,
     peopleNotVoted: 2,

@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 
 //container imports
-import { setPublish } from '../../../../js/actions/actionCreators/index';
+import { setPublish,submitStory } from '../../../../js/actions/actionCreators/index';
 import { spokerAction } from '../../../../js/actions/actionCreators';
 
 
@@ -47,14 +47,15 @@ export class ScrumMaster extends Component {
     }
 
   }
-
   render() {
     return (
       <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
           <Segment>
-            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname + ' Room'}</Header>
+            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname}
+              <Header.Subheader>Room Number: {this.props.roomInfo.roomnum}</Header.Subheader>
+            </Header>
             <Grid columns="equal">
               <Grid.Column width={12}>
                 <StoryDetails
@@ -67,14 +68,17 @@ export class ScrumMaster extends Component {
                 {this.props.publish && (<PublishStoryCard closeAction={this.closePublish.bind(this)}
                   initStoryInfo={this.props.initStoryInfo} />)}
                 <div>
-                  <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} />
-                  {this.state.showVotes === 'true' ? <StatisticalView pointList={this.props.pointList} roomInfo={this.props.roomInfo} playerList={this.props.playerList} /> : null}
+                  <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} actions={{clearPoints:this.props.actions.clearPoints}}/>
+                  {this.state.showVotes === 'true' ? <StatisticalView initStoryInfo={this.props.initStoryInfo} 
+                  pointList={this.props.pointList} roomInfo={this.props.roomInfo}
+                  submitStory={this.props.submitStory} toggleShowVotes={this.toggleShowVotes} playerList={this.props.playerList }  
+                  /> : null}
                 </div>
               </Grid.Column>
 
               <Grid.Column width={4}>
                 <PlayerList playerList={this.props.playerList} />
-                <StoryCards />
+                <StoryCards sizingMethod={this.props.roomInfo.pointingMethod} storyList={this.props.storyList} />
               </Grid.Column>
             </Grid>
           </Segment>
@@ -96,7 +100,7 @@ const mapStateToProps = state => {
     roomInfo: state.poker.roomInfo,
     pointList: state.poker.pointList,
     playerList: state.poker.playerList,
-
+    storyList: state.poker.storyList
   }
 }
 
@@ -106,7 +110,8 @@ const mapDispatchToProps = dispatch => ({
     pl.id = 2;
     pl.from = "local2";
     dispatch(spokerAction(pl));
-  }
+  },
+  submitStory:storyDetails => dispatch(submitStory(storyDetails))
 })
 
 export default connect(

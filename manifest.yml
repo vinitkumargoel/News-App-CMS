@@ -1,0 +1,7 @@
+applications:
+- name: scrum-poker
+  memory: 512M
+  instances: 1
+  buildpack: sdk-for-nodejs
+  hostname: lbg
+  disk_quota: 1024M

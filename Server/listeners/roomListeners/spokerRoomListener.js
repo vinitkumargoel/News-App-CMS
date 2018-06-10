@@ -5,6 +5,17 @@ module.exports = function(ns,socket,session){
         ns.to(session.id).emit('story',si);
     });
 
+    socket.on('stories',(ss)=>{
+        console.log(ss);
+        session.storyList = ss;
+        ns.to(session.id).emit('reset',{pointList:[],storyInfo : {
+            storyID: "",
+            epic: "",
+            desc: "",
+            storyflag: ""
+        }});
+    });
+
     socket.on('point',(p)=>{
         console.log(p);
         let points = [];
@@ -17,13 +28,14 @@ module.exports = function(ns,socket,session){
 
     socket.on('clear',(ri)=>{
         session.pointList = new Map();
+        ns.to(session.id).emit('points',Array.from(session.pointList.values()));
     });
 
     socket.on('disconnect',()=>{
         session.pointList.delete(socket.id);
         session.playerList.delete(socket.id);
         ns.emit('players',Array.from(session.playerList.values()));
-        ns.emit('points',session.pointList);
+        ns.emit('points',Array.from(session.pointList.values()));
     });
 
 }

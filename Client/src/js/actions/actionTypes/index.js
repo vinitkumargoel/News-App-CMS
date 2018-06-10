@@ -3,6 +3,7 @@ export const pokerActions = {
     JOIN_ROOM : "JOIN_ROOM",
     CREATE_ROOM : "CREATE_ROOM",
     PUBLISH_STORY : "PUBLISH_STORY",
+    SUBMIT_STORY : "SUBMIT_STORY",
     SELECT_POINT : "SELECT_POINT",
     PLAYER_LIST : "PLAYER_LIST",
     STORY_DETAILS : "STORY_DETAILS",
@@ -10,7 +11,9 @@ export const pokerActions = {
     STORY_LIST : "STORY_LIST",
     ROOM_NUM : "ROOM_NUM",
     P_M : "P_M",
-    JOINED_AS_ADMIN : "JOINED_AS_ADMIN"
+    JOINED_AS_ADMIN : "JOINED_AS_ADMIN",
+    CLEAR_POINTS : "CLEAR_POINTS",
+    RESET_ROOM : "RESET_ROOM"
 };
 export const configDataActions = {
     SET_PUBLISH:"SET_PUBLISH_STORY_CARD_VISIBILITY",

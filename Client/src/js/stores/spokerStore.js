@@ -18,9 +18,9 @@ export default {
         pointingMethod : "Normal"
     },
     storyInfo : {
-        storyid: "",
+        storyID: "",
         epic: "",
-        description: "",
+        desc: "",
         storyflag: ""
     },
     playerList : [],

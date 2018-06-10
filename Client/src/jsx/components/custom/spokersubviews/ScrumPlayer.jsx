@@ -47,13 +47,13 @@ class ScrumPlayer extends Component {
         <Grid.Column width={1} />
         <Grid.Column width={14}>
           <Segment>
-            <Header textAlign='center' padded="true" as='h2'>Room name: Security & Fraud</Header>
+            <Header textAlign='center' padded="true" as='h2'>Room name: {this.props.initRoomInfo.roomname}</Header>
             <Grid columns="equal">
               <Grid.Column width={12}>
                 <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} />
                 <hr/>
                 <Header textAlign='center' padded="true" as='h3'>Story pointing</Header>
-                <SelectPointCardList pointingMethod={pmData[this.props.initRoomInfo.pointingMethod]} actions={this.props.actions}/>
+                <SelectPointCardList playerInfo = {this.props.playerInfo} pointingMethod={pmData[this.props.initRoomInfo.pointingMethod]} actions={this.props.actions}/>
               </Grid.Column>
 
               <Grid.Column width={4}>
