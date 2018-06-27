@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import SelectPointCardList from '../src/jsx/components/custom/spokersubviews/SelectPointCardList.jsx'
 import selectVote from '../src/img/jpg/angry.jpg';
+import update from 'immutability-helper'
 let actions = {
     selectPoint:(obj)=>{action('Clicked')(obj)}
 };
@@ -20,6 +21,8 @@ let pointingMethod = [
     'XS', 'S', 'M', 'L', 'XL', 'XXL',
     '?'
 ];
+let votesOpen = true;
+let initial = Object.assign({},{playerInfo},{votesOpen},{pointingMethod},{actions});
 
 
 
@@ -33,12 +36,16 @@ let pointingMethod = [
         </div>
     ))
     .add('initial', () => (
-
-        <SelectPointCardList playerInfo = {playerInfo}
-         pointingMethod={pointingMethod} actions={actions}/>
+        <SelectPointCardList 
+         {...initial}/>
     ))
     .add('selected', () => (
-
-        <SelectPointCardList playerInfo = {Object.assign({},playerInfo,{'score':'M'})}
-         pointingMethod={pointingMethod} actions={actions}/>
+        <SelectPointCardList
+         {...update(initial,{playerInfo:{score:{$set:'M'}}})}
+         />
+    ))
+    .add('Votes not open', () => (
+        <SelectPointCardList
+         {...update(initial,{votesOpen:{$set:false}})}
+         />
     ));

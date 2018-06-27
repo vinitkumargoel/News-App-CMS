@@ -15,7 +15,7 @@ class SelectPointCard extends Component {
     }
     handleClick = (e)=>{
         if(this.props.selected===null)
-        this.props.actions.selectPoint({score:e.target.parentNode.id});
+        this.props.handleClick({score:e.target.parentNode.id});
     }
     setRef=(refName,ref,objName='userRefs')=>{
         this[objName]=this[objName] === null?{}:this[objName];

@@ -62,8 +62,8 @@
     "compile-less-help": "node scripts/lessbatchcompiler.js --help"
   },
   "proxy": {
-    "/api": {
-      "target": "http://localhost:3002/"
+    "/spoker": {
+      "target": "http://localhost:3003/spoker"
     }
   },
   "devDependencies": {

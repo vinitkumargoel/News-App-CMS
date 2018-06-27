@@ -52,7 +52,6 @@ export class ScrumMaster extends Component {
       <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
-          <Segment>
             <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname}
               <Header.Subheader>Room Number: {this.props.roomInfo.roomnum}</Header.Subheader>
             </Header>
@@ -81,7 +80,6 @@ export class ScrumMaster extends Component {
                 <StoryCards sizingMethod={this.props.roomInfo.pointingMethod} storyList={this.props.storyList} />
               </Grid.Column>
             </Grid>
-          </Segment>
         </Grid.Column>
         <Grid.Column width={1} />
       </Grid>
@@ -91,10 +89,9 @@ export class ScrumMaster extends Component {
 
 
 const mapStateToProps = state => {
-  let ScrumMaster = state.configData.ScrumMaster;
 
   return {
-    publish: ScrumMaster.showPublish,
+    publish: state.poker.configData.ScrumMaster.showPublish,
     isMaster: state.poker.playerInfo.isMaster,
     initStoryInfo: state.poker.storyInfo,
     roomInfo: state.poker.roomInfo,

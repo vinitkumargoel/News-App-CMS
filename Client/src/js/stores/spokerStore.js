@@ -23,6 +23,11 @@ export default {
         desc: "",
         storyflag: ""
     },
+    configData: {
+        ScrumMaster: {
+            showPublish: false,
+        }
+    },
     playerList : [],
     storyList : [],
     pointList : []

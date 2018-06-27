@@ -37,6 +37,9 @@ module.exports = function(ns,socket,session){
         ns.emit('players',Array.from(session.playerList.values()));
         ns.emit('points',Array.from(session.pointList.values()));
     });
+    socket.on('published',(obj)=>{
+        ns.broadcast.emit('published',obj);
+    });
 
 }
     
