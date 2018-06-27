@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { NAV_ACTION, pokerActions } from '../actions/actionTypes';
+import { NAV_ACTION, pokerActions,configDataActions } from '../actions/actionTypes';
 // import globalConfig from '../../symlinks/globalConfig.json';
 const getRandomNumber = function () {
     let x = Date.now().toString();
@@ -56,6 +56,9 @@ const wsHelper = {
             case 'local5':
                             this.socket.emit('stories',this.currentState.poker.storyList);
                             break;
+            case 'local6':{let showPublish =this.currentState.configData.ScrumMaster.showPublish;
+                            showPublish&&this.socket.emit('published',{showPublish});
+                        }
         } 
     },
     serverListener: function (store) {
@@ -87,6 +90,10 @@ const wsHelper = {
         this.socket.on('reset',(rd)=>{
             let payload = {rd,from:'server'};
             store.dispatch({type:pokerActions.RESET_ROOM,payload});
+        });        
+        this.socket.on('published',(obj)=>{
+            let payload = {showPublish:obj.showPublish,from:'server'};
+            store.dispatch({type: configDataActions.SET_PUBLISH,payload});
         });
         this.socket.on('err',(err)=>{
             alert(err);

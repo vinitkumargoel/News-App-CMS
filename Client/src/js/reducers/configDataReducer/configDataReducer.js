@@ -3,16 +3,22 @@ import { configDataActions } from '../../actions/actionTypes/index';
 
 
 const initialState = {
-    ScrumMaster:{
-        showPublish:false,
+    ScrumMaster: {
+        showPublish: false,
     }
 }
 
-export function configDataReducer(state=initialState,action){
-    switch(action.type){
+export function configDataReducer(state = initialState, action) {
+    switch (action.type) {
         case configDataActions.SET_PUBLISH:
-            return update(state,{ ScrumMaster:{
-                showPublish:{$set:action.payload}
+        console.log(state);
+            return update(state, {
+                ScrumMaster: {
+                    showPublish: { $set: action.payload.showPublish },
+                // },
+                // poker: {
+                //     from: { $set: action.payload.from }
+                // }
             }});
         default:
             return state;

@@ -30,7 +30,7 @@ export function spokerAction(payload) {
                 default :
         }
 }
-export const setPublish = (bool) => ({ type: configDataActions.SET_PUBLISH, payload: bool });
+export const setPublish = (bool) => ({ type: configDataActions.SET_PUBLISH, payload: {showPublish:bool,from:'local6'} });
 export const submitStory = (storyDetails) => {
         storyDetails.from = 'local5';
         return { type: pokerActions.SUBMIT_STORY, payload: storyDetails }
