@@ -89,10 +89,9 @@ export class ScrumMaster extends Component {
 
 
 const mapStateToProps = state => {
-  let ScrumMaster = state.configData.ScrumMaster;
 
   return {
-    publish: ScrumMaster.showPublish,
+    publish: state.poker.configData.ScrumMaster.showPublish,
     isMaster: state.poker.playerInfo.isMaster,
     initStoryInfo: state.poker.storyInfo,
     roomInfo: state.poker.roomInfo,

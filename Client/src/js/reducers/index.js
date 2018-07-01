@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
-import { NAV_ACTION, pokerActions } from '../actions/actionTypes';
+import { NAV_ACTION, pokerActions, configDataActions } from '../actions/actionTypes';
 import update from 'immutability-helper';
-import { configDataReducer } from './configDataReducer/configDataReducer';
 
 function welcomeReducer(state = {}, action) {
     let newState = {};
@@ -55,8 +54,8 @@ function pokerReducer(state = {}, action) {
 
             return Object.assign(newState, state, { playerList: action.payload.cls }, { from: action.payload.from });
         case pokerActions.POINT_LIST:
-                        tempState = Object.assign({},state.playerInfo,{score:""});
-                        return Object.assign(newState,state,{pointList:action.payload.ps},{from:action.payload.from},{playerInfo:tempState});
+            tempState = Object.assign({}, state.playerInfo, { score: "" });
+            return Object.assign(newState, state, { pointList: action.payload.ps }, { from: action.payload.from }, { playerInfo: tempState });
         case pokerActions.STORY_DETAILS:
             return Object.assign(newState, state, { storyInfo: action.payload.sd }, { from: action.payload.from });
         case pokerActions.ROOM_NUM:
@@ -66,13 +65,24 @@ function pokerReducer(state = {}, action) {
             tempState = Object.assign({}, state.roomInfo, action.payload.ri);
             return Object.assign(newState, state, { roomInfo: tempState }, { from: action.payload.from });
         case pokerActions.JOINED_AS_ADMIN:
-                        return Object.assign(newState,state,action.payload); 
+            return Object.assign(newState, state, action.payload);
         case pokerActions.CLEAR_POINTS:
-                        return Object.assign(newState,state,{from:action.payload.from});
+            return Object.assign(newState, state, { from: action.payload.from });
         case pokerActions.RESET_ROOM:
-                        tempState = Object.assign({},state.playerInfo,{score:""});
-                        return Object.assign(newState,state,{pointList:action.payload.rd.pointList
-                        ,storyInfo:action.payload.rd.storyInfo,playerInfo:tempState},{from:action.payload.from});
+            tempState = Object.assign({}, state.playerInfo, { score: "" });
+            return Object.assign(newState, state, {
+                pointList: action.payload.rd.pointList
+                , storyInfo: action.payload.rd.storyInfo, playerInfo: tempState
+            }, { from: action.payload.from });
+        case configDataActions.SET_PUBLISH:
+            return update(state, {
+                configData: {
+                    ScrumMaster: {
+                        showPublish: { $set: action.payload.showPublish }
+                    }
+                },
+                from: { $set: action.payload.from }
+            });
         default:
             return state;
     }
@@ -82,5 +92,4 @@ function pokerReducer(state = {}, action) {
 export default combineReducers({
     welcome: welcomeReducer,
     poker: pokerReducer,
-    configData: configDataReducer,
 });

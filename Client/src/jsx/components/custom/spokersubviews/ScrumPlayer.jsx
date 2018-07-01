@@ -6,6 +6,7 @@ import {
   Link
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 //style imports
 import styles from '../../../../css/ScrumPokerStyle.css';
@@ -15,9 +16,11 @@ import styles from '../../../../css/ScrumPokerStyle.css';
 //component imports
 import StoryDetails from './StoryDetails';
 import PlayerList from './PlayerList';
-import {pmData} from './common/commonData';
+import { pmData } from './common/commonData';
 import SelectPointCardList from './SelectPointCardList';
-
+import PublishStoryCard from './PublishStoryCard.jsx';
+import { spokerAction } from '../../../../js/actions/actionCreators';
+import { setPublish } from '../../../../js/actions/actionCreators/index';
 
 //sematic-ui imports
 import { Grid, Header, Segment } from 'semantic-ui-react';
@@ -30,6 +33,12 @@ class ScrumPlayer extends Component {
       selected: "",
     };
   }
+  componentDidUpdate(prevProps) {
+    let publish = this.props.configData.ScrumMaster.showPublish;
+    if (publish && (publish !== prevProps.configData.ScrumMaster.showPublish)) {
+      window.setTimeout(function () {  this.props.setPublish(false) }.bind(this), 8000)
+    }
+  }
 
   handleClick = (e) => {
     let srcElem = e.target;
@@ -40,27 +49,31 @@ class ScrumPlayer extends Component {
       default:
     }
   }
+  closePublish() {
+    this.props.setPublish(false);
+  }
 
   render() {
+    let configData = this.props.configData;
     return (
       <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
-          <Segment>
             <Header textAlign='center' padded="true" as='h2'>Room name: {this.props.initRoomInfo.roomname}</Header>
             <Grid columns="equal">
               <Grid.Column width={12}>
                 <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} />
-                <hr/>
+                <hr />
+                {configData.ScrumMaster.showPublish && (<PublishStoryCard closeAction={this.closePublish.bind(this)}
+                  initStoryInfo={this.props.initStoryInfo} />)}
                 <Header textAlign='center' padded="true" as='h3'>Story pointing</Header>
-                <SelectPointCardList playerInfo = {this.props.playerInfo} pointingMethod={pmData[this.props.initRoomInfo.pointingMethod]} actions={this.props.actions}/>
+                <SelectPointCardList votesOpen={this.props.initStoryInfo.storyID} playerInfo={this.props.playerInfo} pointingMethod={pmData[this.props.initRoomInfo.pointingMethod]} actions={this.props.actions} />
               </Grid.Column>
 
               <Grid.Column width={4}>
                 <PlayerList playerList={this.props.playerList} />
               </Grid.Column>
             </Grid>
-          </Segment>
         </Grid.Column>
         <Grid.Column width={1} />
       </Grid>
@@ -68,4 +81,36 @@ class ScrumPlayer extends Component {
   }
 }
 
-export default ScrumPlayer;
+
+const mapStateToProps = state => {
+
+  return {
+    configData: state.poker.configData,
+    isMaster: state.poker.playerInfo.isMaster,
+    initStoryInfo: state.poker.storyInfo,
+    initRoomInfo: state.poker.roomInfo,
+    playerList: state.poker.playerList,
+    playerInfo: state.poker.playerInfo,
+
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  setPublish: bool => dispatch(setPublish(bool)),
+  actions: {
+    selectPoint: (pl) => {
+      pl.id = 3;
+      pl.from = "local3";
+      dispatch(spokerAction(pl));
+    }
+  }
+
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScrumPlayer);
+
+
+

@@ -17,7 +17,7 @@ const spokerListener = function(spokerNS,socket){
         if(pi.room){
             let session = sessions[pi.room];
             if(session.roomInfo.pwd === pi.password && session.roomInfo.adminName === pi.usrname){
-                session.playerList.set(socket.id,pi.usrname);
+                session.playerList.set(socket.id,{usrid:pi.usrname,isMaster:pi.isMaster});
                 let sessionCopy = Object.assign({},session);
                 sessionCopy.playerList = Array.from(session.playerList.values());
                 sessionCopy.pointList = Array.from(session.pointList.values());
@@ -34,7 +34,7 @@ const spokerListener = function(spokerNS,socket){
         else if(sessions[pi.roomid]){
             socket.join(pi.roomid,()=>{
                 let session = sessions[pi.roomid];
-                session.playerList.set(socket.id,pi.usrid);
+                session.playerList.set(socket.id,{usrid:pi.usrid,isMaster:pi.isMaster});
                 spokerNS.to(session.id).emit('players',Array.from(session.playerList.values()));
                 socket.emit('roominfo',Object.assign({},session.roomInfo,{adminName:"",pwd:""}));
                 socket.emit('story',session.storyInfo);
@@ -46,7 +46,7 @@ const spokerListener = function(spokerNS,socket){
                 let session = sessions[pi.roomnum];
                 session.master = socket.id;
                 session.roomInfo = pi;
-                session.playerList.set(socket.id,pi.adminName);
+                session.playerList.set(socket.id,{usrid:pi.adminName,isMaster:true});
                 spokerNS.to(session.id).emit('players',Array.from(session.playerList.values()));
                 spokerRoomListener(spokerNS,socket,session);
             });
