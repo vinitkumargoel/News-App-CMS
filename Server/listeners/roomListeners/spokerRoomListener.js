@@ -38,7 +38,7 @@ module.exports = function(ns,socket,session){
         ns.emit('points',Array.from(session.pointList.values()));
     });
     socket.on('published',(obj)=>{
-        ns.to(session.id).broadcast('published',obj);
+        ns.emit('published',obj);
     });
 
 }

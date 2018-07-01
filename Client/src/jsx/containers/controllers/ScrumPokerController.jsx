@@ -61,11 +61,6 @@ const mapActionsToProps = (dispatch,ownProps)=>{
           pl.from = "local1";
           dispatch(spokerAction(pl));
         },
-        selectPoint : (pl) => {
-          pl.id = 3;
-          pl.from = "local3";
-          dispatch(spokerAction(pl));
-        },
         clearPoints : (pl)=>{
           pl.id = 4;
           pl.from = "local4";

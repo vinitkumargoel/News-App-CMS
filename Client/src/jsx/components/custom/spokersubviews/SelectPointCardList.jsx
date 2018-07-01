@@ -10,6 +10,7 @@ class SelectPointCardList extends Component {
     super(props);
     this.state = {open: false,selectedScore:null};
   }
+  
   handleClick = (e,score) => {
 
     if (e.target.innerText.trim() === 'Cancel') {
@@ -17,7 +18,7 @@ class SelectPointCardList extends Component {
     }
     else if (e.target.innerText.trim() === 'Submit') {
         this.setState({ open: false });
-        this.props.actions.selectPoint({score});
+        this.props.actions.selectPoint({score:this.state.selectedScore});
     }
 }
 selectScore=({score})=>{
@@ -44,7 +45,7 @@ selectScore=({score})=>{
         <TempModal open={this.state.open}>
                 <Header icon='pin' content='Please confirm' />
                 <Modal.Content>
-                    <p>You are about to choose the story point{this.state.selectedScore}. Are you sure of this action?</p>
+                    <p>You are about to choose the story point {this.state.selectedScore}. Are you sure of this action?</p>
                     <p>Please be aware the choice cannot be changed once confirmed</p>
                 </Modal.Content>
                 <Modal.Actions floated='left'>
