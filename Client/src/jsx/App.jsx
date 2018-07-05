@@ -39,14 +39,13 @@ class AppView extends Component {
 
 const mapStoreToProps = (context,ownProps)=>{
     return {
-        isFirstVisit : context.welcome.isFirstVisit
     }
 }
 
 const mapActionsToProps = (dispatch,ownProps)=>{
     return {
         onClick : (e)=>{
-            //dispatch(testAction({}));
+            
         }
     }
 }

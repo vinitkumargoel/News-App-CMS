@@ -4,6 +4,7 @@ const sessions = {};
 
 const spokerListener = function(spokerNS,socket){ 
     socket.on('createroom',(room)=>{
+        console.log(room);
         socket.join(room,()=>{
             spokerNS.to(room).emit('roomid',room);
             let session = new Session();

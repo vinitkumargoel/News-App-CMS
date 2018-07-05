@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { configDataActions } from '../../actions/actionTypes/index';
+import { configDataActions } from '../actions/actionTypes/index';
 
 
 const initialState = {
