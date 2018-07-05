@@ -22,10 +22,6 @@ import PublishStoryCard from './PublishStoryCard.jsx';
 import { spokerAction } from '../../../../js/actions/actionCreators';
 import { setPublish } from '../../../../js/actions/actionCreators/index';
 
-
-
-
-
 //sematic-ui imports
 import { Grid, Header, Segment } from 'semantic-ui-react';
 
@@ -63,7 +59,6 @@ class ScrumPlayer extends Component {
       <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
-          <Segment>
             <Header textAlign='center' padded="true" as='h2'>Room name: {this.props.initRoomInfo.roomname}</Header>
             <Grid columns="equal">
               <Grid.Column width={12}>
@@ -79,7 +74,6 @@ class ScrumPlayer extends Component {
                 <PlayerList playerList={this.props.playerList} />
               </Grid.Column>
             </Grid>
-          </Segment>
         </Grid.Column>
         <Grid.Column width={1} />
       </Grid>

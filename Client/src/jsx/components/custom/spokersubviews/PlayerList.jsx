@@ -35,11 +35,11 @@ class PlayerList extends Component {
                   <List.Content >
                     <Grid>
                       <Grid.Column width={8} verticalAlign='middle'>
-                        <Icon name='user' />
-                        {user}
+                        <Icon name={user.isMaster?'user circle':'user'} size={user.isMaster?'big':'large'}/>
+                        
                       </Grid.Column>
                       <Grid.Column width={8}>
-                        <Button >Chat</Button>
+                      {user.usrid}
                       </Grid.Column>
                     </Grid>
                   </List.Content>
