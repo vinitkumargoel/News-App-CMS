@@ -13,14 +13,13 @@ import update from 'immutability-helper';
 
 
 //style imports
-import styles from '../../../../css/ScrumPokerStyle.css';
 
 //container imports
 
 //component imports
 
 //semantic-ui components
-import { Message, Container, Header, Segment, Grid, Input, Icon, Checkbox, List, Label, Radio, Form, Divider, Button } from 'semantic-ui-react';
+import { Message, Container, Header, Grid, Input, Icon, Label, Radio, Form, Divider, Button } from 'semantic-ui-react';
 
 //component
 class RoomConfig extends Component {

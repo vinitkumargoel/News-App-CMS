@@ -1,43 +1,28 @@
 //core imports
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+  BrowserRouter as Router,  
 } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import io from 'socket.io-client';
 import { connect } from 'react-redux';
 
 
 //container imports
-import { setPublish,submitStory } from '../../../../js/actions/actionCreators/index';
+import { setPublish,submitStory, setShowVotes, setVoting } from '../../../../js/actions/actionCreators/index';
 import { spokerAction } from '../../../../js/actions/actionCreators';
 
 
 //semantic-ui imports
-import { Grid, Segment, Header, GridColumn, Divider, Button } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 
 //component imports
 import StoryDetails from './StoryDetails';
 import PlayerList from './PlayerList';
-import StoryPointsList from './StoryPointsList';
 import PointCardList from './PointCardList';
 import StoryCards from './StoryCards';
 import PublishStoryCard from './PublishStoryCard.jsx';
 import StatisticalView from "./StatisticalView";
 //component
 export class ScrumMaster extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showVotes: 'false' //put to store
-    }
-    this.toggleShowVotes = this.toggleShowVotes.bind(this);
-  }
-  toggleShowVotes(value) {
-    this.setState({ showVotes: value })
-  }
   closePublish() {
     this.props.setPublish(false);
   }
@@ -52,7 +37,7 @@ export class ScrumMaster extends Component {
       <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
-            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname}
+            <Header textAlign='center' padded="true" as='h2'>{this.props.roomInfo.roomname+' Room'}
               <Header.Subheader>Room Number: {this.props.roomInfo.roomnum}</Header.Subheader>
             </Header>
             <Grid columns="equal">
@@ -60,6 +45,7 @@ export class ScrumMaster extends Component {
                 <StoryDetails
                   isMaster={this.props.isMaster}
                   setPublish={this.props.setPublish}
+                  setVoting={this.props.setVoting}
                   initStoryInfo={this.props.initStoryInfo}
                   actions={{ publishStory: this.props.publishStory }}
                 />
@@ -67,10 +53,11 @@ export class ScrumMaster extends Component {
                 {this.props.publish && (<PublishStoryCard closeAction={this.closePublish.bind(this)}
                   initStoryInfo={this.props.initStoryInfo} />)}
                 <div>
-                  <PointCardList pointList={this.props.pointList} toggleShowVotes={this.toggleShowVotes} actions={{clearPoints:this.props.actions.clearPoints}}/>
-                  {this.state.showVotes === 'true' ? <StatisticalView initStoryInfo={this.props.initStoryInfo} 
+                  <PointCardList pointList={this.props.pointList}
+                  showVotes={this.props.showVotes} toggleShowVotes={this.props.setShowVotes} actions={{clearPoints:this.props.actions.clearPoints}}/>
+                  {this.props.showVotes ? <StatisticalView initStoryInfo={this.props.initStoryInfo} 
                   pointList={this.props.pointList} roomInfo={this.props.roomInfo}
-                  submitStory={this.props.submitStory} toggleShowVotes={this.toggleShowVotes} playerList={this.props.playerList }  
+                  submitStory={this.props.submitStory} toggleShowVotes={this.props.setShowVotes} playerList={this.props.playerList }  
                   /> : null}
                 </div>
               </Grid.Column>
@@ -92,6 +79,7 @@ const mapStateToProps = state => {
 
   return {
     publish: state.poker.configData.ScrumMaster.showPublish,
+    showVotes: state.poker.configData.ScrumMaster.showVotes,
     isMaster: state.poker.playerInfo.isMaster,
     initStoryInfo: state.poker.storyInfo,
     roomInfo: state.poker.roomInfo,
@@ -108,7 +96,9 @@ const mapDispatchToProps = dispatch => ({
     pl.from = "local2";
     dispatch(spokerAction(pl));
   },
-  submitStory:storyDetails => dispatch(submitStory(storyDetails))
+  submitStory:storyDetails => dispatch(submitStory(storyDetails)),
+  setShowVotes:bool => dispatch(setShowVotes(bool)),
+  setVoting:bool => dispatch(setVoting(bool))
 })
 
 export default connect(

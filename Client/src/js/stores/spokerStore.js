@@ -26,6 +26,8 @@ export default {
     configData: {
         ScrumMaster: {
             showPublish: false,
+            showVotes:false,
+            voting:false
         }
     },
     playerList : [],

@@ -136,7 +136,7 @@ class StatisticalView extends Component {
     submitStory = () => {
         let storyDetails = (({ storyID, storyflag, epic, desc }) => ({ storyID, storyflag, epic, desc }))(this.props.initStoryInfo)
         storyDetails = Object.assign({}, storyDetails, this.state.votingDetails);
-        this.props.toggleShowVotes('false');
+        this.props.toggleShowVotes(false);
         this.props.submitStory(storyDetails);
     }
     handleChange = (e, data) => {

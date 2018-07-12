@@ -17,5 +17,7 @@ export const pokerActions = {
 };
 export const configDataActions = {
     SET_PUBLISH:"SET_PUBLISH_STORY_CARD_VISIBILITY",
+    SET_SHOWVOTES:"SET_SHOWVOTES_VISIBILITY",
+    SET_VOTING:"SET_VOTING_STATUS",
 }
 

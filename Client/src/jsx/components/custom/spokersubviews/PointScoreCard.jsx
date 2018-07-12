@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Image } from 'semantic-ui-react'
-// import CardImg from '../../../../img/jpg/Penguins.jpg';
 class PointScoreCard extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

@@ -10,5 +10,8 @@
     "start": "node Server/index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^1.17.5"
+  }
 }

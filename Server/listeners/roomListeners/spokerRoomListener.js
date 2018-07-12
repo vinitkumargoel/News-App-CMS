@@ -40,6 +40,9 @@ module.exports = function(ns,socket,session){
     socket.on('published',(obj)=>{
         ns.emit('published',obj);
     });
+    socket.on('votingStart',(obj)=>{
+        ns.emit('votingStart',obj);
+    });
 
 }
     

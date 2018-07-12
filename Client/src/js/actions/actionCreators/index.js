@@ -1,5 +1,4 @@
 import { NAV_ACTION, pokerActions, configDataActions } from '../actionTypes';
-import wsHelper from '../../helpers/websocketHelper';
 
 export function navAction(payload) {
         return { type: NAV_ACTION, payload };
@@ -35,3 +34,5 @@ export const submitStory = (storyDetails) => {
         storyDetails.from = 'local5';
         return { type: pokerActions.SUBMIT_STORY, payload: storyDetails }
 };
+export const setShowVotes = (bool) =>({type: configDataActions.SET_SHOWVOTES,payload:{showVotes:bool,from:'toLocal'}});
+export const setVoting = (bool) =>({type: configDataActions.SET_VOTING,payload:{voting:bool,from:'local7'}});

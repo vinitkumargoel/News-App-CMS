@@ -1,15 +1,15 @@
 {
-  "name": "scrumpoker",
+  "name": "scrumpoker_server",
   "version": "0.1.0",
-  "private": "true",
+  "private": true,
   "description": "A scrum pointing application for agile teams",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "build": "node scripts/build/index.js"
   },
-  "author": "Ravikiran B S",
+  "author": "Poker_core",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "mocha": "^5.1.1",
+    "nodemon": "^1.17.5",
     "standard": "^11.0.1"
   }
 }

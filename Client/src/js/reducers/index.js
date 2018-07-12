@@ -83,6 +83,24 @@ function pokerReducer(state = {}, action) {
                 },
                 from: { $set: action.payload.from }
             });
+        case configDataActions.SET_SHOWVOTES:
+            return update(state, {
+                configData: {
+                    ScrumMaster: {
+                        showVotes: { $set: action.payload.showVotes }
+                    }
+                },
+                from: { $set: action.payload.from }
+            });
+        case configDataActions.SET_VOTING:
+            return update(state, {
+                configData: {
+                    ScrumMaster: {
+                        voting: { $set: action.payload.voting }
+                    }
+                },
+                from: { $set: action.payload.from }
+            });
         default:
             return state;
     }

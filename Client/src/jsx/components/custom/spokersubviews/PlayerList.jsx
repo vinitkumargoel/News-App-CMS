@@ -7,15 +7,12 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-//style imports
-import styles from '../../../../css/ScrumPokerStyle.css';
-
 //container imports
 
 //component imports
 
 //semantic-ui imports
-import { Grid, Button, Image, List, Segment, Header, Icon } from 'semantic-ui-react';
+import { Grid, List, Segment, Header, Icon } from 'semantic-ui-react';
 
 //component
 class PlayerList extends Component {

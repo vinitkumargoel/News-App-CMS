@@ -63,6 +63,10 @@ const wsHelper = {
                     this.socket.emit('published', { showPublish });
                 }
             }
+            case 'local7': {
+                let voting = this.currentState.poker.configData.ScrumMaster.voting;
+                    this.socket.emit('votingStart', { voting });
+            }
         }
     },
     serverListener: function (store) {
@@ -98,6 +102,10 @@ const wsHelper = {
         this.socket.on('published', (obj) => {
             let payload = { showPublish: obj.showPublish, from: 'server' };
             store.dispatch({ type: configDataActions.SET_PUBLISH, payload });
+        });
+        this.socket.on('votingStart', (obj) => {
+            let payload = { voting: obj.voting, from: 'server' };
+            store.dispatch({ type: configDataActions.SET_VOTING, payload });
         });
         this.socket.on('err', (err) => {
             alert(err);

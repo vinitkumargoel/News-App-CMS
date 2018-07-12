@@ -59,15 +59,15 @@ class ScrumPlayer extends Component {
       <Grid columns="equal">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
-            <Header textAlign='center' padded="true" as='h2'>Room name: {this.props.initRoomInfo.roomname}</Header>
+            <Header textAlign='center' padded="true" as='h2'>{this.props.initRoomInfo.roomname+' Room'}</Header>
             <Grid columns="equal">
               <Grid.Column width={12}>
-                <StoryDetails isMaster={this.props.isMaster} initStoryInfo={this.props.initStoryInfo} />
+                <StoryDetails isMaster={this.props.isMaster}  initStoryInfo={this.props.initStoryInfo} />
                 <hr />
                 {configData.ScrumMaster.showPublish && (<PublishStoryCard closeAction={this.closePublish.bind(this)}
                   initStoryInfo={this.props.initStoryInfo} />)}
                 <Header textAlign='center' padded="true" as='h3'>Story pointing</Header>
-                <SelectPointCardList votesOpen={this.props.initStoryInfo.storyID} playerInfo={this.props.playerInfo} pointingMethod={pmData[this.props.initRoomInfo.pointingMethod]} actions={this.props.actions} />
+                <SelectPointCardList votesOpen={configData.ScrumMaster.voting} playerInfo={this.props.playerInfo} pointingMethod={pmData[this.props.initRoomInfo.pointingMethod]} actions={this.props.actions} />
               </Grid.Column>
 
               <Grid.Column width={4}>

@@ -77,6 +77,7 @@ class StoryDetails extends Component {
         Object.keys(state.inputFields).forEach((item) => { data[item] = state.inputFields[item].value });
         this.props.actions.publishStory(data);
         this.props.setPublish(true);
+        this.props.setVoting(true);
         break;
       default:
 

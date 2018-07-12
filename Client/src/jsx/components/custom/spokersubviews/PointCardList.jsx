@@ -8,19 +8,14 @@ import PointScoreCard from './PointScoreCard';
 class PointCardList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      'showVotes': 'false'
-    }
     this.handleShowVotes = this.handleShowVotes.bind(this);
     this.handleClearVotes = this.handleClearVotes.bind(this);
   }
   handleShowVotes() {
-    this.setState({ 'showVotes': 'true' });
-    this.props.toggleShowVotes('true');
+    this.props.toggleShowVotes(true);
   }
   handleClearVotes() {
-    this.setState({ 'showVotes': 'false' });
-    this.props.toggleShowVotes('false');
+    this.props.toggleShowVotes(false);
     this.props.actions.clearPoints({msg:'clearPoints'});
   }
   render() {
@@ -41,7 +36,7 @@ class PointCardList extends Component {
                         transition: '0.6s',
                         transformStyle: 'preserve-3d',
                         position: 'relative',
-                        transform: this.state.showVotes == "false" ? 'rotateY(0deg)' : 'rotateY(180deg)'
+                        transform: this.props.showVotes? 'rotateY(180deg)':'rotateY(0deg)'
                       }}>
                         <div className="front" style={{
                           width: '80px',
