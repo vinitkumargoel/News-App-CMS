@@ -1,5 +1,6 @@
 import { storeHelper } from '../helpers/index';
 import spokerStore from './spokerStore';
+import {loadState} from '../../localStorage'
 
 let initState = {
     welcome:{
@@ -8,8 +9,9 @@ let initState = {
     },
     poker: spokerStore
 };
-
-let store = storeHelper.configureStore(initState);
+let persistedState = loadState();
+let state = persistedState !== undefined ? persistedState:initState;
+let store = storeHelper.configureStore(state);
 
 
 export default store;
