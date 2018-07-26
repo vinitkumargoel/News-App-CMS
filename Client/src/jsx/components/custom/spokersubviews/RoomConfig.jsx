@@ -11,6 +11,8 @@ import { pmData, typesToValidate } from './common/commonData';
 import { validate, updateStoreInput } from './common/utils';
 import update from 'immutability-helper';
 
+import urls from './../../../../js/resources/url.js';
+const fetch = window.fetch;
 
 //style imports
 
@@ -48,7 +50,7 @@ class RoomConfig extends Component {
                 inputFields: {
                     [key]: {
                         value:
-                            { $set: srcElem.value }
+                        { $set: srcElem.value }
                     }
                 }
             });
@@ -65,14 +67,22 @@ class RoomConfig extends Component {
         let srcElem = e.target;
         let storeChunk = this.props.initRoomInfo;
         let currentState = this.state;
-        switch (srcElem.id) {
-            case "join":
-                updateStoreInput(storeChunk, currentState.inputFields);
-                this.props.actions.joinRoom(storeChunk);
-                break;
-            default:
 
-        }
+        fetch(`${urls.nodeServer}${urls.jiraApi.projects}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (json) {
+                switch (srcElem.id) {
+                    case "join":
+                        updateStoreInput(storeChunk, currentState.inputFields);
+                        this.props.actions.joinRoom(storeChunk);
+                        break;
+                    default:
+
+                }
+            })
+
     }
 
     handleCopy = (refName, tag) => {
@@ -111,10 +121,16 @@ class RoomConfig extends Component {
                                     <Input id='roomname' type='text' size="mini" placeholder='Cheesy room name' onChange={this.handleInput} />
                                 </Grid.Column>
                                 <Grid.Column width={6} verticalAlign='middle'>
-                                    <label htmlFor="adminName">Name : </label>
+                                    <label htmlFor="adminName">Jira Username : </label>
                                 </Grid.Column>
                                 <Grid.Column width={8}>
                                     <Input id='adminName' type='text' size="mini" placeholder='Your name' onChange={this.handleInput} />
+                                </Grid.Column>
+                                <Grid.Column width={6} verticalAlign='middle'>
+                                    <label htmlFor="pwd">Jira Password : </label>
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <Input id='pwd' size="mini" type="password" placeholder='XXXX' onChange={this.handleInput} />
                                 </Grid.Column>
                                 <Grid.Column width={6} verticalAlign='middle'>
                                     <label htmlFor="fileID">File ID : </label>
@@ -122,12 +138,7 @@ class RoomConfig extends Component {
                                 <Grid.Column width={8}>
                                     <Input id='fileID' type="number" size="mini" placeholder='123456' onChange={this.handleInput} />
                                 </Grid.Column>
-                                <Grid.Column width={6} verticalAlign='middle'>
-                                    <label htmlFor="pwd">Password : </label>
-                                </Grid.Column>
-                                <Grid.Column width={8}>
-                                    <Input id='pwd' size="mini" type="password" placeholder='XXXX' onChange={this.handleInput} />
-                                </Grid.Column>
+
                             </Grid>
                         </Form.Field>
 
@@ -189,7 +200,7 @@ class RoomConfig extends Component {
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row centered>
-                {this.state.formError&&<Message
+                    {this.state.formError && <Message
                         error={this.state.formError}
                         content='Please make sure the values entered are correct'
                     />}

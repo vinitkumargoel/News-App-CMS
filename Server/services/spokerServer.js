@@ -5,6 +5,7 @@ const httpServer = require('http').Server(app);
 const sockServer =  require('socket.io');
 var socketRedis = require('socket.io-redis');
 const { config } = require('../utils');
+const jiraRouter = require('../routers/jiraRouter.js');
 
 /* --------- WEBSOCKET API --------- */
 //socket server config
@@ -47,6 +48,7 @@ spokerNS.on('connection', (socket)=>{
 
 //api middlewares
 app.use(express.static(path.join(config.CLIENT_ROOTPATH,'/build/'),{index:['index.html']}));
+app.use('/jira',jiraRouter);
 
 //api server config
 httpServer.listen(config.globalConfig.ports.HTTP,()=>{
