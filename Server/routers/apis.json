@@ -1,3 +1,6 @@
 {
-  "projects":"/rest/api/2/project"
+  "projects": "/rest/api/2/project",
+  "issues": "/rest/api/2/search",
+  "issue":"/rest/api/2/issue/<issueIdOrKey>",
+  "user":"/rest/api/2/user"
 }
