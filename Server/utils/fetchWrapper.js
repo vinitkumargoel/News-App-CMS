@@ -19,7 +19,7 @@ function fetchWrapper(debug = false, directory = './result') {
             }
             else {
                 debug && console.log('not okay', JSON.stringify((({ status, statusText }) => ({ status, statusText }))(response)));
-                throw new Error(`Network response was not ok. code :${response.status} message :${response.statusText}`);
+                res.status(response.status).json(data);
             }
         })
         .catch(error => {
@@ -28,7 +28,7 @@ function fetchWrapper(debug = false, directory = './result') {
                 fs.writeFile(`${directory}/error`, error, 'utf8');
             }
             else {
-                res.status(response.status).json({ errorText: response.statusText });
+                res.status(502).json(error);
             }
         })
     };

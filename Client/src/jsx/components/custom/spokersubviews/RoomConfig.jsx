@@ -4,15 +4,15 @@ import ReactDOM from 'react-dom';
 import {
     BrowserRouter as Router,
     Route,
-    Link
+    Link, Redirect
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { pmData, typesToValidate } from './common/commonData';
 import { validate, updateStoreInput } from './common/utils';
 import update from 'immutability-helper';
-
+import { Message, Modal, Header, Grid, Input, Icon, Label, Radio, Form, Divider, Button } from 'semantic-ui-react';
+import { TempModal } from './common/customComponents';
 import urls from './../../../../js/resources/url.js';
-const fetch = window.fetch;
 
 //style imports
 
@@ -21,7 +21,6 @@ const fetch = window.fetch;
 //component imports
 
 //semantic-ui components
-import { Message, Container, Header, Grid, Input, Icon, Label, Radio, Form, Divider, Button } from 'semantic-ui-react';
 
 //component
 class RoomConfig extends Component {
@@ -29,6 +28,8 @@ class RoomConfig extends Component {
         super(props);
         this.pageRefs = {};
         this.state = {
+            open: false,
+            message: '',
             hideList: false,
             isDefault: false,
             inputFields: {
@@ -41,6 +42,11 @@ class RoomConfig extends Component {
             formError: true,
         };
     }
+    handleModalClick = (e) => {
+        if (e.target.innerText.trim() === 'Okay') {
+            this.setState({ open: false });
+        }
+    }
 
     handleInput = (e, { value: nextValue }) => {
         let srcElem = e.target;
@@ -50,7 +56,7 @@ class RoomConfig extends Component {
                 inputFields: {
                     [key]: {
                         value:
-                        { $set: srcElem.value }
+                            { $set: srcElem.value }
                     }
                 }
             });
@@ -67,22 +73,40 @@ class RoomConfig extends Component {
         let srcElem = e.target;
         let storeChunk = this.props.initRoomInfo;
         let currentState = this.state;
+        const creds = 'BASIC ' + window.btoa(`${currentState.adminName}:${currentState.pwd}`);
+        const url = `${urls.nodeServer}${urls.jiraApi.user}`;
+        window.fetch(url, {
+            method: "GET",
+            headers: {
+                "Authorization": creds,
+            }
+        })
+            .then((response) => {
+                let data = response.json();
+                if (response.ok) {
+                    switch (srcElem.id) {
+                        case "join":
+                            updateStoreInput(storeChunk, currentState.inputFields);
+                            storeChunk.jiraData = data;
+                            this.props.actions.joinRoom(storeChunk);
+                            break;
+                        default:
 
-        fetch(`${urls.nodeServer}${urls.jiraApi.projects}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (json) {
-                switch (srcElem.id) {
-                    case "join":
-                        updateStoreInput(storeChunk, currentState.inputFields);
-                        this.props.actions.joinRoom(storeChunk);
-                        break;
-                    default:
-
+                    }
+                    <Redirect to="/dashboard/spoker/join" />
+                }
+                else if (response.status === 401 || response.status === 404) {
+                    response.status === 401 && this.setState({ open: true, message: 'Invalid JIRA credentials' });
+                    response.status === 404 && this.setState({ open: true, message: "User doesn't exist" });
+                }
+                else {
+                    this.setState({ open: true, message: "An Error occured. Please try again later." });
                 }
             })
-
+            .catch(error => {
+                this.setState({ open: true, message: 'An Error occured. Please try again later.' });
+                console.log(error);
+            })
     }
 
     handleCopy = (refName, tag) => {
@@ -206,12 +230,22 @@ class RoomConfig extends Component {
                     />}
                 </Grid.Row>
                 <Grid.Row centered>
-                    <Link to={"/dashboard/spoker/join"} style={{ pointerEvents: this.state.formError ? 'none' : 'auto' }}>
-                        <Button disabled={this.state.formError} id='join' color="green" onClick={this.handleClick}>
-                            <Icon name='plus' />Create
-                                    </Button>
-                    </Link>
+                    <Button style={{ pointerEvents: this.state.formError ? 'none' : 'auto' }} disabled={this.state.formError} id='join' color="green" onClick={this.handleClick}>
+                        <Icon name='plus' />Create
+                    </Button>
                 </Grid.Row>
+                <TempModal open={this.state.open} >
+                    <Header icon='exclamation' content='Oh!' />
+                    <Modal.Content>
+                        <p>{this.state.message}</p>
+                    </Modal.Content>
+                    <Modal.Actions floated='right'>
+                        <Button color='green' inverted onClick={this.handleModalClick}>
+                            <Icon name='checkmark' /> Okay
+                        </Button>
+
+                    </Modal.Actions>
+                </TempModal>
             </Grid >
 
         );

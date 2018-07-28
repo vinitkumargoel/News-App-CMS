@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { NAV_ACTION, pokerActions, configDataActions } from '../actions/actionTypes';
 import update from 'immutability-helper';
+import _ from 'lodash';
 
 function welcomeReducer(state = {}, action) {
     let newState = {};
@@ -20,7 +21,7 @@ function pokerReducer(state = {}, action) {
         case pokerActions.JOIN_ROOM:
             if (state.playerInfo.isMaster) {
                 action.payload.joined = true;
-                tempState = Object.assign({}, state.playerInfo, { roomid: action.payload.roomid });
+                tempState = Object.assign({}, state.playerInfo, { roomid: action.payload.roomid,jiraData:action.payload.jiraData });
                 return Object.assign(newState, state, { playerInfo: tempState }, { from: action.payload.from });
             }
             else {
