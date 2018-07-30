@@ -9,7 +9,7 @@ let initState = {
     },
     poker: spokerStore
 };
-let persistedState = loadState();
+let persistedState = undefined; //loadState();
 let state = persistedState !== undefined ? persistedState:initState;
 let store = storeHelper.configureStore(state);
 
