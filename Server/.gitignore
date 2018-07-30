@@ -1,3 +1,6 @@
 # dependencies
 /node_modules
+
+#debug
+/testApis/result
 npm-debug.log
