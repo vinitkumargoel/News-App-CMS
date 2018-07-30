@@ -13,6 +13,7 @@ import update from 'immutability-helper';
 import { Message, Modal, Header, Grid, Input, Icon, Label, Radio, Form, Divider, Button } from 'semantic-ui-react';
 import { TempModal } from './common/customComponents';
 import urls from './../../../../js/resources/url.js';
+import {getStatusText} from '../../../../js/resources/content.js';
 
 //style imports
 
@@ -84,11 +85,10 @@ class RoomConfig extends Component {
             .then((response) => {
                 if (response.ok)
                     return response.json();
-                else if (response.status === 401 || response.status === 404||response.status === 403) {
+                else if (getStatusText(response.status)) {
                     
-                    response.status === 401 && this.setState({ open: true, message: 'Invalid JIRA credentials' });
-                    response.status === 404 && this.setState({ open: true, message: "User doesn't exist" });
-                    response.status === 403 && this.setState({ open: true, message: "Forbidden!" });
+                  this.setState({ open: true, message: getStatusText(response.status) });
+                   
                 }
                 else {
                     this.setState({ open: true, message: "An Error occured. Please try again later." });
