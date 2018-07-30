@@ -67,11 +67,13 @@ router.get('/projects', function (req, res) {
     }, res);
 })
 
-router.get('/user', function (req, res) {
+router.get('/user/:userId', function (req, res) {
     const creds = req.get('Authorization');
+    let userId = req.params.userId;
     console.log(creds);
     let url = apis['user']
-    console.log(JIRA+url)
+    url =url+"?username="+userId;
+    console.log(JIRA+url);
     fetch(JIRA + url, {
         method: "GET",
         headers: {

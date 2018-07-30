@@ -8,7 +8,7 @@ const urls = (function () {
     }
     const jiraApi = {
         projects: "/jira/projects",
-        user: "/jira/user",
+        user: "/jira/user/<userId>",
         issues: "/jira/issues",
         issue: "/jira/issue/<issueId>"
     };

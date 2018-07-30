@@ -17,15 +17,16 @@ fs.readdir(directory, (err, files) => {
     }
 });
 
-let url = apis["projects"];
-url += '?expand=lead';
-url = JIRA + url;
+let url = apis['user'];
+url = JIRA + url + "?username=" + '9003844';
 const options = {
     method: "GET",
     headers: {
         "Authorization": `Basic OTAwMzg0NDo5NDQ5MDczOTA2bU0u`
     },
 };
+
+
 const debug = true;
 
-fetchWrapper(debug,directory)(url, options);
+fetchWrapper(debug, directory)(url, options);

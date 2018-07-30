@@ -3,4 +3,5 @@
 
 #debug
 /testApis/result
+/utils/result
 npm-debug.log
