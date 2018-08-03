@@ -1,0 +1,719 @@
+{
+    "fields": {
+        "summary": {
+            "required": true,
+            "schema": {
+                "type": "string",
+                "system": "summary"
+            },
+            "name": "Summary",
+            "operations": [
+                "set"
+            ]
+        },
+        "components": {
+            "required": false,
+            "schema": {
+                "type": "array",
+                "items": "component",
+                "system": "components"
+            },
+            "name": "Component/s",
+            "operations": [
+                "add",
+                "set",
+                "remove"
+            ],
+            "allowedValues": [
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/component/20304",
+                    "id": "20304",
+                    "name": "NextGen On-Prem"
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/component/18832",
+                    "id": "18832",
+                    "name": "NextGenStatement Team",
+                    "description": "For the Next Gent Statement team (SOLR Team)"
+                }
+            ]
+        },
+        "description": {
+            "required": false,
+            "schema": {
+                "type": "string",
+                "system": "description"
+            },
+            "name": "Description",
+            "operations": [
+                "set"
+            ]
+        },
+        "fixVersions": {
+            "required": false,
+            "schema": {
+                "type": "array",
+                "items": "version",
+                "system": "fixVersions"
+            },
+            "name": "Fix Version/s",
+            "operations": [
+                "set",
+                "add",
+                "remove"
+            ],
+            "allowedValues": [
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/13140",
+                    "id": "13140",
+                    "description": "MCA Declined Transaction",
+                    "name": "Release 17.02",
+                    "archived": false,
+                    "released": true,
+                    "releaseDate": "2017-10-03",
+                    "userReleaseDate": "03/Oct/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/13142",
+                    "id": "13142",
+                    "name": "Release 17.06",
+                    "archived": false,
+                    "released": true,
+                    "releaseDate": "2017-05-01",
+                    "userReleaseDate": "01/May/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/14004",
+                    "id": "14004",
+                    "description": "App Dynamics and bug fixes",
+                    "name": "Release 17.07",
+                    "archived": false,
+                    "released": true,
+                    "releaseDate": "2017-08-30",
+                    "userReleaseDate": "30/Aug/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/14027",
+                    "id": "14027",
+                    "description": "*No Changes*",
+                    "name": "Release 17.08",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2017-05-29",
+                    "releaseDate": "2017-06-26",
+                    "overdue": true,
+                    "userStartDate": "29/May/17",
+                    "userReleaseDate": "26/Jun/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/14732",
+                    "id": "14732",
+                    "description": "CWM > CWA fix (Telephony); Statements CWA - LIVE",
+                    "name": "Release 17.09",
+                    "archived": false,
+                    "released": true,
+                    "startDate": "2017-07-04",
+                    "releaseDate": "2017-07-31",
+                    "userStartDate": "04/Jul/17",
+                    "userReleaseDate": "31/Jul/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/14863",
+                    "id": "14863",
+                    "description": "VPT strategic fix; VTD Enhancements",
+                    "name": "Release 17.10",
+                    "archived": false,
+                    "released": true,
+                    "startDate": "2017-08-01",
+                    "releaseDate": "2017-08-31",
+                    "userStartDate": "01/Aug/17",
+                    "userReleaseDate": "31/Aug/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/15306",
+                    "id": "15306",
+                    "description": "Closed accounts",
+                    "name": "Release 18.02",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/14725",
+                    "id": "14725",
+                    "description": "CMA B5 Remedy - Closed Account Transactions",
+                    "name": "Release 17.11",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2017-07-01",
+                    "releaseDate": "2017-11-27",
+                    "overdue": true,
+                    "userStartDate": "01/Jul/17",
+                    "userReleaseDate": "27/Nov/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/15252",
+                    "id": "15252",
+                    "description": "VTD Enhancements",
+                    "name": "CWA Release - Oct",
+                    "archived": false,
+                    "released": true,
+                    "releaseDate": "2017-10-22",
+                    "userReleaseDate": "22/Oct/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/15432",
+                    "id": "15432",
+                    "description": "Statements PDF",
+                    "name": "CWA Release - Sep",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2017-09-01",
+                    "releaseDate": "2017-09-29",
+                    "overdue": true,
+                    "userStartDate": "01/Sep/17",
+                    "userReleaseDate": "29/Sep/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/14411",
+                    "id": "14411",
+                    "description": "MMC wording change",
+                    "name": "CWA Release - Aug",
+                    "archived": false,
+                    "released": true,
+                    "startDate": "2017-07-18",
+                    "releaseDate": "2017-08-02",
+                    "userStartDate": "18/Jul/17",
+                    "userReleaseDate": "02/Aug/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/14410",
+                    "id": "14410",
+                    "description": "NGB Enhancements",
+                    "name": "CWA Release v2 - July",
+                    "archived": false,
+                    "released": true,
+                    "startDate": "2017-07-04",
+                    "releaseDate": "2017-07-18",
+                    "userStartDate": "04/Jul/17",
+                    "userReleaseDate": "18/Jul/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/14409",
+                    "id": "14409",
+                    "description": "CMV1.2 + Sandbox",
+                    "name": "CWA Release - July",
+                    "archived": false,
+                    "released": true,
+                    "startDate": "2017-07-04",
+                    "releaseDate": "2017-07-24",
+                    "userStartDate": "04/Jul/17",
+                    "userReleaseDate": "24/Jul/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/15907",
+                    "id": "15907",
+                    "description": "Closed Accounts, Sort",
+                    "name": "Loki v2",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2017-12-01",
+                    "userStartDate": "01/Dec/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/15949",
+                    "id": "15949",
+                    "description": "Gordium, AB testing",
+                    "name": "CWA Release - Nov",
+                    "archived": false,
+                    "released": false,
+                    "releaseDate": "2017-11-30",
+                    "overdue": true,
+                    "userReleaseDate": "30/Nov/17",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16358",
+                    "id": "16358",
+                    "description": "CMA B5 Closed Accounts, Search",
+                    "name": "CWA Release - Feb",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16705",
+                    "id": "16705",
+                    "name": "Release 18.01",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-01-01",
+                    "userStartDate": "01/Jan/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16706",
+                    "id": "16706",
+                    "name": "Release 18.12",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16707",
+                    "id": "16707",
+                    "name": "Release 18.03",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-03-01",
+                    "userStartDate": "01/Mar/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16717",
+                    "id": "16717",
+                    "description": "PDF 1st Jan fix, export and print",
+                    "name": "Loki v1",
+                    "archived": false,
+                    "released": true,
+                    "startDate": "2017-12-25",
+                    "releaseDate": "2018-01-04",
+                    "userStartDate": "25/Dec/17",
+                    "userReleaseDate": "04/Jan/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16770",
+                    "id": "16770",
+                    "name": "TBC",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16818",
+                    "id": "16818",
+                    "name": "Nightcrawler",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16819",
+                    "id": "16819",
+                    "description": "PDF for business",
+                    "name": "Mystique",
+                    "archived": false,
+                    "released": true,
+                    "releaseDate": "2018-03-29",
+                    "userReleaseDate": "29/Mar/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16820",
+                    "id": "16820",
+                    "name": "Odin",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16821",
+                    "id": "16821",
+                    "description": "PDF for Business and Statements Search",
+                    "name": "Quicksilver",
+                    "archived": false,
+                    "released": false,
+                    "releaseDate": "2018-06-18",
+                    "overdue": true,
+                    "userReleaseDate": "18/Jun/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16822",
+                    "id": "16822",
+                    "description": "Google Pilot",
+                    "name": "Phoenix",
+                    "archived": false,
+                    "released": false,
+                    "releaseDate": "2018-06-05",
+                    "overdue": true,
+                    "userReleaseDate": "05/Jun/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16823",
+                    "id": "16823",
+                    "name": "Rogue",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16824",
+                    "id": "16824",
+                    "name": "Spiderman",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16825",
+                    "id": "16825",
+                    "name": "Thor",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16826",
+                    "id": "16826",
+                    "name": "Vixen",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16916",
+                    "id": "16916",
+                    "name": "Release 18.04",
+                    "archived": false,
+                    "released": true,
+                    "startDate": "2018-04-02",
+                    "releaseDate": "2018-04-10",
+                    "userStartDate": "02/Apr/18",
+                    "userReleaseDate": "10/Apr/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16917",
+                    "id": "16917",
+                    "name": "Release 18.05",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-05-01",
+                    "releaseDate": "2018-05-25",
+                    "overdue": true,
+                    "userStartDate": "01/May/18",
+                    "userReleaseDate": "25/May/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16918",
+                    "id": "16918",
+                    "name": "Release 18.06",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-06-01",
+                    "releaseDate": "2018-06-25",
+                    "overdue": true,
+                    "userStartDate": "01/Jun/18",
+                    "userReleaseDate": "25/Jun/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16919",
+                    "id": "16919",
+                    "name": "Release 18.07",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-07-02",
+                    "releaseDate": "2018-07-25",
+                    "overdue": true,
+                    "userStartDate": "02/Jul/18",
+                    "userReleaseDate": "25/Jul/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16920",
+                    "id": "16920",
+                    "name": "Release 18.08",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-08-01",
+                    "releaseDate": "2018-08-27",
+                    "overdue": false,
+                    "userStartDate": "01/Aug/18",
+                    "userReleaseDate": "27/Aug/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16921",
+                    "id": "16921",
+                    "name": "Release 18.09",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-09-03",
+                    "releaseDate": "2018-09-25",
+                    "overdue": false,
+                    "userStartDate": "03/Sep/18",
+                    "userReleaseDate": "25/Sep/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16922",
+                    "id": "16922",
+                    "name": "Release 18.10",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-10-01",
+                    "releaseDate": "2018-10-25",
+                    "overdue": false,
+                    "userStartDate": "01/Oct/18",
+                    "userReleaseDate": "25/Oct/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/16923",
+                    "id": "16923",
+                    "name": "Release 18.11",
+                    "archived": false,
+                    "released": false,
+                    "startDate": "2018-11-01",
+                    "releaseDate": "2018-11-26",
+                    "overdue": false,
+                    "userStartDate": "01/Nov/18",
+                    "userReleaseDate": "26/Nov/18",
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/17656",
+                    "id": "17656",
+                    "name": "NoPlanned Release",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/18527",
+                    "id": "18527",
+                    "name": "18.07",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/18745",
+                    "id": "18745",
+                    "name": "rogan",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/version/20330",
+                    "id": "20330",
+                    "description": "Google Snowdrop",
+                    "name": "Phoenix Raises Again",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 11923
+                }
+            ]
+        },
+        "customfield_10011": {
+            "required": false,
+            "schema": {
+                "type": "string",
+                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+                "customId": 10011
+            },
+            "name": "Acceptance Criteria",
+            "operations": [
+                "set"
+            ]
+        },
+        "priority": {
+            "required": false,
+            "schema": {
+                "type": "priority",
+                "system": "priority"
+            },
+            "name": "Priority",
+            "operations": [
+                "set"
+            ],
+            "allowedValues": [
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/priority/1",
+                    "iconUrl": "https://jira.devops.lloydsbanking.com/images/icons/priorities/critical.svg",
+                    "name": "Highest",
+                    "id": "1"
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/priority/2",
+                    "iconUrl": "https://jira.devops.lloydsbanking.com/images/icons/priorities/major.svg",
+                    "name": "High",
+                    "id": "2"
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/priority/3",
+                    "iconUrl": "https://jira.devops.lloydsbanking.com/images/icons/priority_major.gif",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/priority/4",
+                    "iconUrl": "https://jira.devops.lloydsbanking.com/images/icons/priorities/minor.svg",
+                    "name": "Low",
+                    "id": "4"
+                },
+                {
+                    "self": "https://jira.devops.lloydsbanking.com/rest/api/2/priority/5",
+                    "iconUrl": "https://jira.devops.lloydsbanking.com/images/icons/priorities/lowest.svg",
+                    "name": "Lowest",
+                    "id": "5"
+                }
+            ]
+        },
+        "customfield_10002": {
+            "required": false,
+            "schema": {
+                "type": "number",
+                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+                "customId": 10002
+            },
+            "name": "Story Points",
+            "operations": [
+                "set"
+            ]
+        },
+        "customfield_16008": {
+            "required": false,
+            "schema": {
+                "type": "any",
+                "custom": "com.onresolve.jira.groovy.groovyrunner:scripted-field",
+                "customId": 16008
+            },
+            "name": "Problem Issue",
+            "operations": [
+                "set"
+            ]
+        },
+        "customfield_10004": {
+            "required": false,
+            "schema": {
+                "type": "array",
+                "items": "string",
+                "custom": "com.pyxis.greenhopper.jira:gh-sprint",
+                "customId": 10004
+            },
+            "name": "Sprint",
+            "operations": [
+                "set"
+            ]
+        },
+        "labels": {
+            "required": false,
+            "schema": {
+                "type": "array",
+                "items": "string",
+                "system": "labels"
+            },
+            "name": "Labels",
+            "autoCompleteUrl": "https://jira.devops.lloydsbanking.com/rest/api/1.0/labels/suggest?query=",
+            "operations": [
+                "add",
+                "set",
+                "remove"
+            ]
+        },
+        "timetracking": {
+            "required": false,
+            "schema": {
+                "type": "timetracking",
+                "system": "timetracking"
+            },
+            "name": "Time Tracking",
+            "operations": [
+                "set",
+                "edit"
+            ]
+        },
+        "customfield_10005": {
+            "required": false,
+            "schema": {
+                "type": "any",
+                "custom": "com.pyxis.greenhopper.jira:gh-epic-link",
+                "customId": 10005
+            },
+            "name": "Epic Link",
+            "operations": [
+                "set"
+            ]
+        },
+        "customfield_10834": {
+            "required": false,
+            "schema": {
+                "type": "string",
+                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+                "customId": 10834
+            },
+            "name": "Motivation",
+            "operations": [
+                "set"
+            ]
+        },
+        "duedate": {
+            "required": false,
+            "schema": {
+                "type": "date",
+                "system": "duedate"
+            },
+            "name": "Due Date",
+            "operations": [
+                "set"
+            ]
+        },
+        "comment": {
+            "required": false,
+            "schema": {
+                "type": "comments-page",
+                "system": "comment"
+            },
+            "name": "Comment",
+            "operations": [
+                "add",
+                "edit",
+                "remove"
+            ]
+        },
+        "assignee": {
+            "required": false,
+            "schema": {
+                "type": "user",
+                "system": "assignee"
+            },
+            "name": "Assignee",
+            "autoCompleteUrl": "https://jira.devops.lloydsbanking.com/rest/api/latest/user/assignable/search?issueKey=SS-2737&username=",
+            "operations": [
+                "set"
+            ]
+        },
+        "customfield_11918": {
+            "required": false,
+            "schema": {
+                "type": "number",
+                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+                "customId": 11918
+            },
+            "name": "Business Value",
+            "operations": [
+                "set"
+            ]
+        }
+    }
+}
