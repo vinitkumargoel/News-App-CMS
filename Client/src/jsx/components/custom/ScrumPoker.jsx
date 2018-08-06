@@ -37,7 +37,8 @@ class ScrumPoker extends Component {
                           render={() => (<RoomConfig 
                                               initRoomInfo={this.props.store.roomInfo} 
                                               actions={{
-                                                  joinRoom: this.props.actions.joinRoom
+                                                  joinRoom: this.props.actions.joinRoom,
+                                                  setJiraCreds: this.props.actions.setJiraCreds
                                               }} 
                                           />)}
                   />

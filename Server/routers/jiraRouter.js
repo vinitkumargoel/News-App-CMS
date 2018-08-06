@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const _ = require('lodash');
 
 // middleware that is specific to this router
-// router.use(bodyParser.json());
+router.use(bodyParser.json());
 router.use(function timeLog(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
@@ -17,17 +17,25 @@ router.use(function timeLog(req, res, next) {
 })
 
 
-router.get('/issues', function (req, res) {
+router.post('/issues', function (req, res) {
     const creds = req.get('Authorization');
+    const content_type = req.get('Content-Type');
     let url = apis['issues'];
     let body = _.pick(req.body, ['jql', 'startAt', 'maxResults', 'fields']);
-
-    fetch(JIRA + url, {
-        method: "POST",
+    url = JIRA + url + '?';
+    Object.getOwnPropertyNames(body).forEach((key) => {
+        url = url + `${key}=${body[key]}&`
+    })
+    url = encodeURI(url);
+    console.log(url);
+    console.log('body', JSON.stringify(req.body));
+    console.log(content_type);
+    fetch(url, {
+        method: "GET",
         headers: {
-            "Authorization": creds
-        },
-        body: body
+            "Authorization": creds,
+            "Content-Type": content_type
+        }
     }, res);
 })
 router.put('/issue/:issueId', function (req, res) {
@@ -60,7 +68,7 @@ router.get('/projects', function (req, res) {
     let url = apis['projects'];
     url += '?expand=lead';
     fetch(JIRA + url, {
-        method: "POST",
+        method: "GET",
         headers: {
             "Authorization": creds
         },
@@ -72,8 +80,8 @@ router.get('/user/:userId', function (req, res) {
     let userId = req.params.userId;
     console.log(creds);
     let url = apis['user']
-    url =url+"?username="+userId;
-    console.log(JIRA+url);
+    url = url + "?username=" + userId;
+    console.log(JIRA + url);
     fetch(JIRA + url, {
         method: "GET",
         headers: {

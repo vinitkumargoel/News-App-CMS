@@ -27,9 +27,13 @@ export default {
         ScrumMaster: {
             showPublish: false,
             showVotes:false,
-            voting:false
+            voting:false,
+            project:null,
+            issue:null
         }
     },
+    projects:null,
+    issues:[],
     playerList : [],
     storyList : [],
     pointList : []

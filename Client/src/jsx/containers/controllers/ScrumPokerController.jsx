@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 
 //custom imports
-import { spokerAction } from '../../../js/actions/actionCreators';
+import { spokerAction,setJiraCreds } from '../../../js/actions/actionCreators';
 
 //component imports
 import ScrumPoker from '../../components/custom/ScrumPoker';
@@ -30,7 +30,8 @@ class SPView extends React.Component {
       createRoom : this.props.createRoom,
       publishStory : this.props.publishStory,
       selectPoint : this.props.selectPoint,
-      clearPoints : this.props.clearPoints
+      clearPoints : this.props.clearPoints,
+      setJiraCreds: this.props.setJiraCreds
     };
   }
 
@@ -65,7 +66,9 @@ const mapActionsToProps = (dispatch,ownProps)=>{
           pl.id = 4;
           pl.from = "local4";
           dispatch(spokerAction(pl));
-        }
+        },
+        setJiraCreds: creds => dispatch(setJiraCreds(creds))
+
     };
 }
 

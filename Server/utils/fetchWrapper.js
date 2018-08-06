@@ -1,19 +1,32 @@
 const fetch = require('node-fetch');
 var fs = require('fs');
 
-function fetchWrapper(debug = false, directory = __dirname + '/result') {
+function fetchWrapper(debug = false, directory = __dirname + './result') {
     return (url, options, res = null) => {
         fetch(url, options)
             .then((response) => {
+                console.log('url:', url);
+                console.log('options:', JSON.stringify(options));
+
                 if (response.ok) {
+                    console.log('okay')
                     if (debug) {
                         fs.writeFile(`${directory}/initialRes.json`, JSON.stringify(response), 'utf8');
                     }
+
                     return response.json();
                 }
                 else {
-                    res.status(response.status).json({ errorText: response.statusText });
-                    throw new Error('Network response was not ok.');
+                    console.log('not okay');
+                    if (debug) {
+                        console.log('here')
+                        fs.writeFile(`${directory}/initialRes.json`, JSON.stringify(response), 'utf8');
+                        return response.json();
+                    }
+                    else {
+                        res.status(response.status).json({ errorText: response.statusText });
+                        throw new Error('Network response was not ok.');
+                    }
                 }
             })
             .then(data => {
@@ -26,11 +39,10 @@ function fetchWrapper(debug = false, directory = __dirname + '/result') {
             })
             .catch(error => {
                 if (debug) {
-                    fs.writeFile(`${directory}/error`, error, 'utf8');
+
                 }
                 else {
-                    res.status(404).json({ errorText: "Network Error" });
-
+                    res.status(404).json({ errorText: error });
                 }
             })
     };

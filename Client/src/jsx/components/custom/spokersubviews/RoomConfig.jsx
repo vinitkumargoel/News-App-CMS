@@ -101,6 +101,7 @@ class RoomConfig extends Component {
                         updateStoreInput(storeChunk, currentState.inputFields);
                         storeChunk.jiraData = data;
                         this.props.actions.joinRoom(storeChunk);
+                        this.props.actions.setJiraCreds(creds)
                         this.setState({ goTo: "/dashboard/spoker/join" })
                         break;
                     default:

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { NAV_ACTION, pokerActions, configDataActions } from '../actions/actionTypes';
+import { NAV_ACTION, pokerActions, configDataActions, fetchActions } from '../actions/actionTypes';
 import update from 'immutability-helper';
 import _ from 'lodash';
 
@@ -21,7 +21,7 @@ function pokerReducer(state = {}, action) {
         case pokerActions.JOIN_ROOM:
             if (state.playerInfo.isMaster) {
                 action.payload.joined = true;
-                tempState = Object.assign({}, state.playerInfo, { roomid: action.payload.roomid,jiraData:action.payload.jiraData });
+                tempState = Object.assign({}, state.playerInfo, { roomid: action.payload.roomid, jiraData: action.payload.jiraData });
                 return Object.assign(newState, state, { playerInfo: tempState }, { from: action.payload.from });
             }
             else {
@@ -100,6 +100,39 @@ function pokerReducer(state = {}, action) {
                         voting: { $set: action.payload.voting }
                     }
                 },
+                from: { $set: action.payload.from }
+            });
+        case configDataActions.SET_PROJECT:
+            return update(state, {
+                configData: {
+                    ScrumMaster: {
+                        project: { $set: action.payload.id }
+                    }
+                },
+                from: { $set: action.payload.from }
+            });
+        case fetchActions.SET_PROJECTS:
+            return update(state, {
+                projects: { $set: action.payload.data },
+                from: { $set: action.payload.from }
+            });
+        case configDataActions.SET_ISSUE:
+            return update(state, {
+                configData: {
+                    ScrumMaster: {
+                        issue: { $set: action.payload.id }
+                    }
+                },
+                from: { $set: action.payload.from }
+            });
+        case fetchActions.SET_ISSUES:
+            return update(state, {
+                issues: { $push: [action.payload.data] },
+                from: { $set: action.payload.from }
+            });
+        case configDataActions.SET_JIRACREDS:
+            return update(state, {
+                creds: { $set: action.payload.creds },
                 from: { $set: action.payload.from }
             });
         default:

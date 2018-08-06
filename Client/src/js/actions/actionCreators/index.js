@@ -1,4 +1,4 @@
-import { NAV_ACTION, pokerActions, configDataActions } from '../actionTypes';
+import { NAV_ACTION, pokerActions, configDataActions,fetchActions } from '../actionTypes';
 
 export function navAction(payload) {
         return { type: NAV_ACTION, payload };
@@ -36,3 +36,8 @@ export const submitStory = (storyDetails) => {
 };
 export const setShowVotes = (bool) =>({type: configDataActions.SET_SHOWVOTES,payload:{showVotes:bool,from:'toLocal'}});
 export const setVoting = (bool) =>({type: configDataActions.SET_VOTING,payload:{voting:bool,from:'local7'}});
+export const setProject = (id) =>({type: configDataActions.SET_PROJECT,payload:{id,from:'toLocal'}});
+export const setProjects = (data) =>({type: fetchActions.SET_PROJECTS,payload:{data,from:'toLocal'}});
+export const setJiraCreds = (creds) =>({type: configDataActions.SET_JIRACREDS,payload:{creds,from:'toLocal'}});
+export const setIssue = (id) =>({type: configDataActions.SET_ISSUE,payload:{id,from:'toLocal'}});
+export const setIssues = (data) =>({type: fetchActions.SET_ISSUES,payload:{data,from:'toLocal'}});

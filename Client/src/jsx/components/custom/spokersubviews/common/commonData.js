@@ -20,6 +20,11 @@ export const pmData = {
         '1', '2', '3', '4', '5', '6',
         '7', '8', '9', '10',
     ],
-} 
-export const typesToValidate = ['text','number','password','radio','select'];
+}
+export const typesToValidate = ['text', 'number', 'password', 'radio', 'select'];
+export const CONSTANTS = {
+    maxResults: 200,
+    defaultJql:'project = <projectID> AND (issuetype=Story OR issuetype="Technical Story") AND "Story Points" is EMPTY ORDER BY createdDate DESC'
+}
+
 

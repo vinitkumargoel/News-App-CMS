@@ -10,12 +10,15 @@ export default class SearchProjects extends Component {
     //     value: 'Jenny Hess',
     //     image: { avatar: true, src: '/images/avatar/small/jenny.jpg' },
     //   }
+    onChange = (e,data)=>{
+                this.props.actions.setProject(data.value);
+    }
     getProjectOptions = (projectArray) => {
         if (!Array.isArray(projectArray) || !projectArray.length)
             return null;
 
         let resultArr = projectArray.map((project) => {
-            let result = (({ id: key, name: text, avatarUrls: { "32x32": image } }) => ({ value: `${key}:${text}`, key, text, image: { avatar: true, src: image } }))(project);
+            let result = (({ id: key, name: text, avatarUrls: { "32x32": image } }) => ({ value: `${key}`, key, text, image: { avatar: true, src: image } }))(project);
             return result;
         });
         return resultArr;
@@ -23,7 +26,8 @@ export default class SearchProjects extends Component {
     render() {
         // console.log('rendering');
         return <Dropdown placeholder='Select Project' fluid search
-            selection options={this.getProjectOptions(this.props.projectsList)} />
+            selection value={this.props.project} options={this.getProjectOptions(this.props.projectsList)}
+            onChange={this.onChange} />
     }
 }
 
